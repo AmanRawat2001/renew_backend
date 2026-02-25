@@ -57,15 +57,4 @@ class FeatureCardController extends Controller
 
         return redirect()->route('admin.feature-cards.index')->with('success', 'Feature card updated successfully');
     }
-
-    public function destroy(FeatureCard $featureCard): RedirectResponse
-    {
-        if ($featureCard->image) {
-            Storage::disk('public')->delete($featureCard->image);
-        }
-
-        $featureCard->delete();
-
-        return redirect()->route('admin.feature-cards.index')->with('success', 'Feature card deleted successfully');
-    }
 }

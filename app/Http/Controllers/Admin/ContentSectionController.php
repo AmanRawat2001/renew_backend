@@ -45,11 +45,4 @@ class ContentSectionController extends Controller
 
         return redirect()->route('admin.sections.index')->with('success', 'Content section updated successfully');
     }
-
-    public function destroy(ContentSection $section): RedirectResponse
-    {
-        $section->delete();
-
-        return redirect()->route('admin.sections.index')->with('success', 'Content section deleted successfully');
-    }
 }

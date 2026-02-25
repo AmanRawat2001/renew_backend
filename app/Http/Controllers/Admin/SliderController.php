@@ -55,11 +55,4 @@ class SliderController extends Controller
 
         return redirect()->route('admin.sliders.index')->with('success', 'Slider updated successfully');
     }
-
-    public function destroy(Slider $slider): RedirectResponse
-    {
-        $slider->delete();
-
-        return redirect()->route('admin.sliders.index')->with('success', 'Slider deleted successfully');
-    }
 }

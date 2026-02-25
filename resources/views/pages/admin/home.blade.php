@@ -14,7 +14,7 @@
                         <div class="absolute inset-0 transition-opacity duration-1000"
                             :class="currentSlide === {{ $index }} ? 'opacity-100' : 'opacity-0 pointer-events-none'">
                             <div class="h-full bg-cover bg-center flex flex-col items-center justify-center text-center px-6 py-12"
-                                style="background-image: url('{{ $slider->image }}');">
+                                style="background-image: url('{{ asset('storage/' . $slider->image) }}');">
                                 <div class="absolute inset-0 bg-black/50"></div>
                                 <div class="relative z-10">
                                     <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">{!! $slider->title !!}

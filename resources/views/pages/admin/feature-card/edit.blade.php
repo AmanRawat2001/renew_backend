@@ -138,23 +138,6 @@
                             class="px-6 py-2 text-neutral-600">
                             Cancel
                         </a>
-
-                    </form>
-
-
-                    <!-- DELETE FORM (outside) -->
-                    <form action="{{ route('admin.feature-cards.destroy', $featureCard) }}" method="POST"
-                        onsubmit="return confirm('Are you sure?')">
-
-                        @csrf
-                        @method('DELETE')
-
-                        <button type="submit"
-                            class="inline-flex items-center gap-2 px-6 py-2 text-red-600 hover:bg-red-50 rounded-lg">
-
-                            Delete
-
-                        </button>
                     </form>
                 </div>
             </form>

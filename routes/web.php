@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\ContentSectionController;
 use App\Http\Controllers\Admin\FeatureCardController;
+use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -13,19 +13,29 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::redirect('/', '/login');
+Route::redirect('/register', '/login');
+Route::redirect('/forgot-password', '/login');
 
-Route::redirect('/register', '/login')->name('register');
-Route::redirect('/forgot-password', '/login')->name('password.request');
+/*
+|--------------------------------------------------------------------------
+| Authenticated Routes
+|--------------------------------------------------------------------------
+*/
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/home', [HomeController::class, 'index'])->name('home');
-    // Admin Sliders CRUD
-    Route::resource('admin/sliders', SliderController::class)->names('admin.sliders');
-    // Admin Sections CRUD
-    Route::resource('admin/sections', ContentSectionController::class)->names('admin.sections');
-    // Admin Feature Cards CRUD
-    Route::resource('admin/feature-cards', FeatureCardController::class)->names('admin.feature-cards');
+
+    
+    Route::prefix('admin')->name('admin.')->group(function () {
+        Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+        Route::resource('sliders', SliderController::class);
+        Route::resource('sections', ContentSectionController::class);
+        Route::resource('feature-cards', FeatureCardController::class);
+
+    });
+
 });
+
 /*
 |--------------------------------------------------------------------------
 | Dashboard
