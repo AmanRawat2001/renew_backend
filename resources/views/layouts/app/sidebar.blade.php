@@ -3,6 +3,8 @@
 
 <head>
     @include('partials.head')
+    <!-- Quill Editor Stylesheet -->
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet" />
 </head>
 
 <body class="min-h-screen bg-white dark:bg-zinc-800">
@@ -25,8 +27,9 @@
                     wire:navigate>
                     {{ __('Sliders') }}
                 </flux:sidebar.item>
-                <flux:sidebar.item :href="route('home')" :current="request()->routeIs('home')" wire:navigate>
-                    {{ __('Home') }}
+                  <flux:sidebar.item :href="route('admin.sections.index')" :current="request()->routeIs('admin.sections.*')"
+                    wire:navigate>
+                    {{ __('Sections') }}
                 </flux:sidebar.item>
             </flux:sidebar.group>
         </flux:sidebar.nav>
@@ -96,7 +99,9 @@
     {{ $slot }}
 
     @fluxScripts
-     @stack('scripts')
+    <!-- Quill Editor Library -->
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    @stack('scripts')
 </body>
 
 </html>

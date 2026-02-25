@@ -1,7 +1,4 @@
 <x-layouts::app :title="__('Edit Slider')">
-    <!-- Quill Editor Stylesheet -->
-    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet" />
-
     <div class="flex h-full w-full flex-1 flex-col gap-4">
         <!-- Header -->
         <div class="flex items-center justify-between">
@@ -124,9 +121,6 @@
 
     @once
         @push('scripts')
-            <!-- Quill Editor Library -->
-            <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
-
           <script>
 document.addEventListener("livewire:navigated", initPage);
 document.addEventListener("DOMContentLoaded", initPage);
