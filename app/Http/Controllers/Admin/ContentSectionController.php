@@ -13,7 +13,7 @@ class ContentSectionController extends Controller
 {
     public function index(): View
     {
-        $sections = ContentSection::all();
+        $sections = ContentSection::ordered()->paginate(10);
 
         return view('pages.admin.content-section.index', compact('sections'));
     }
@@ -30,11 +30,6 @@ class ContentSectionController extends Controller
         ContentSection::create($validated);
 
         return redirect()->route('admin.sections.index')->with('success', 'Content section created successfully');
-    }
-
-    public function show(ContentSection $section): View
-    {
-        return view('pages.admin.content-section.show', compact('section'));
     }
 
     public function edit(ContentSection $section): View

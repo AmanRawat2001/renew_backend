@@ -12,4 +12,9 @@ class ContentSection extends Model
         'subtitle',
         'description',
     ];
+
+    public function scopeOrdered($query)
+    {
+        return $query->orderBy('created_at', 'asc');
+    }
 }
