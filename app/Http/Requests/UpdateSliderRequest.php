@@ -24,17 +24,17 @@ class UpdateSliderRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'title.required' => "Title is required",
-            'title.string' => "Title must be a string",
-            'title.max' => "Title cannot exceed 1000 characters",
-            'sub_title.required' => "Description is required",
-            'sub_title.string' => "Description must be a string",
-            'sub_title.max' => "Description cannot exceed 1000 characters",
-            'sequence.required' => "Sequence is required",
-            'sequence.integer' => "Sequence must be a number",
-            'sequence.min' => "Sequence must be at least 1",
-            'sequence.max' => "Sequence cannot exceed 999",
-            'is_active.boolean' => "Active status must be true or false",
+            'title.required' => 'Title is required',
+            'title.string' => 'Title must be a string',
+            'title.max' => 'Title cannot exceed 1000 characters',
+            'sub_title.required' => 'Description is required',
+            'sub_title.string' => 'Description must be a string',
+            'sub_title.max' => 'Description cannot exceed 1000 characters',
+            'sequence.required' => 'Sequence is required',
+            'sequence.integer' => 'Sequence must be a number',
+            'sequence.min' => 'Sequence must be at least 1',
+            'sequence.max' => 'Sequence cannot exceed 999',
+            'is_active.boolean' => 'Active status must be true or false',
         ];
     }
 }

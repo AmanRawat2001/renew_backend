@@ -14,6 +14,6 @@ class HomeController extends Controller
     {
         $sliders = Slider::active()->ordered()->get();
 
-        return view('home', compact('sliders'));
+        return view('pages.admin.home', compact('sliders'));
     }
 }
