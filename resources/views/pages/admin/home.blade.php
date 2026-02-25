@@ -96,7 +96,6 @@
                 </div>
 
 
-                <!-- Card -->
                 <div
                     class="rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-zinc-800 p-6 flex items-center gap-4 hover:shadow-lg transition">
 
@@ -107,15 +106,14 @@
                                 d="M13 10V3L4 14h7v7l9-11h-7z" />
                         </svg>
                     </div>
-
                     <div>
-                        <p class="text-sm text-neutral-500">Projects Completed</p>
-                        <p class="text-2xl font-semibold text-neutral-900 dark:text-white">156</p>
+                        <a href="{{ route('admin.feature-cards.index') }}"
+                            class="text-lg font-semibold text-neutral-900 dark:text-white hover:text-green-600">
+                            Feature Card
+                        </a>
+                        <p class="text-sm text-neutral-500">Manage feature cards</p>
                     </div>
-
                 </div>
-
-
                 <!-- Card -->
                 <div
                     class="rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-zinc-800 p-6 flex items-center gap-4 hover:shadow-lg transition">
@@ -129,32 +127,17 @@
                     </div>
 
                     <div>
-                        <p class="text-sm text-neutral-500">Community Impact</p>
-                        <p class="text-2xl font-semibold text-neutral-900 dark:text-white">45K+</p>
+                        <a href="{{ route('admin.impacts.index') }}"
+                            class="text-lg font-semibold text-neutral-900 dark:text-white hover:text-purple-600">
+                            Impact Section
+                        </a>
+                        <p class="text-sm text-neutral-500">Manage community impact data</p>
                     </div>
 
                 </div>
 
             </div>
 
-        </div>
-
-        <!-- Content Section -->
-        <div class="grid auto-rows-min gap-4 lg:grid-cols-2">
-            <div class="rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-zinc-800 p-6">
-                <h2 class="text-lg font-semibold text-neutral-900 dark:text-neutral-50 mb-4">{{ __('About Us') }}</h2>
-                <p class="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">ReNew Foundation is dedicated
-                    to empowering communities and creating sustainable positive change. Our mission is to renew futures
-                    through innovative programs and community engagement.</p>
-            </div>
-
-            <div class="rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-zinc-800 p-6">
-                <h2 class="text-lg font-semibold text-neutral-900 dark:text-neutral-50 mb-4">{{ __('Get Involved') }}
-                </h2>
-                <p class="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">Join our community and make a
-                    difference. Whether you're interested in volunteering, supporting our mission, or partnering with
-                    us, we'd love to hear from you.</p>
-            </div>
         </div>
     </div>
 </x-layouts::app>

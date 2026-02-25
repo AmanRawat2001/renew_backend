@@ -22,20 +22,23 @@
                 </flux:sidebar.item>
             </flux:sidebar.group>
 
-            <flux:sidebar.group :heading="__('Administration')" class="grid">
+            <flux:sidebar.group :heading="__('Home Page')" class="grid">
                 <flux:sidebar.item :href="route('admin.sliders.index')" :current="request()->routeIs('admin.sliders.*')"
                     wire:navigate>
-                    {{ __('Sliders') }}
+                    {{ __('Slider Section') }}
                 </flux:sidebar.item>
                   <flux:sidebar.item :href="route('admin.sections.index')" :current="request()->routeIs('admin.sections.*')"
                     wire:navigate>
-                    {{ __('Sections') }}
+                    {{ __('Details Section') }}
                 </flux:sidebar.item>
                 <flux:sidebar.item :href="route('admin.feature-cards.index')" :current="request()->routeIs('admin.feature-cards.*')"
                     wire:navigate>
                     {{ __('Feature Cards') }}
                 </flux:sidebar.item>
-                
+                <flux:sidebar.item :href="route('admin.impacts.index')" :current="request()->routeIs('admin.impacts.*')"
+                    wire:navigate>
+                    {{ __('Impact Section') }}
+                </flux:sidebar.item>
             </flux:sidebar.group>
         </flux:sidebar.nav>
 

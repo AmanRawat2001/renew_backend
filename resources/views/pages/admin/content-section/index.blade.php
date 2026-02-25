@@ -1,10 +1,10 @@
-<x-layouts::app :title="__('Content Sections')">
+<x-layouts::app :title="__('Details Sections')">
     <div class="flex h-full w-full flex-1 flex-col gap-4">
         <!-- Header -->
         <div class="flex items-center justify-between">
             <div>
-                <h1 class="text-3xl font-semibold text-neutral-900 dark:text-neutral-50">{{ __('Content Sections') }}</h1>
-                <p class="text-sm text-neutral-600 dark:text-neutral-400 mt-1">{{ __('Manage your website content sections') }}</p>
+                <h1 class="text-3xl font-semibold text-neutral-900 dark:text-neutral-50">{{ __('Details Sections') }}</h1>
+                <p class="text-sm text-neutral-600 dark:text-neutral-400 mt-1">{{ __('Manage your website Details Sections') }}</p>
             </div>
             <a href="{{ route('admin.sections.create') }}" wire:navigate class="inline-flex items-center gap-2 px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -50,7 +50,7 @@
                 </table>
             @else
                 <div class="p-8 text-center">
-                    <p class="text-neutral-600 dark:text-neutral-400">{{ __('No content sections found. ') }}</p>
+                    <p class="text-neutral-600 dark:text-neutral-400">{{ __('No Details Sections found. ') }}</p>
                     <a href="{{ route('admin.sections.create') }}" wire:navigate class="mt-4 inline-flex items-center gap-2 px-4 py-2 text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300">
                         {{ __('Create one now') }}
                     </a>
