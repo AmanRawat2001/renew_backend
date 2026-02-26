@@ -135,6 +135,25 @@
                     </div>
 
                 </div>
+                {{-- create a card for the mission slider --}}
+                <div
+                    class="rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-zinc-800 p-6 flex items-center gap-4 hover:shadow-lg transition">
+
+                    <div class="h-12 w-12 rounded-lg bg-yellow-100 dark:bg-yellow-900 flex items-center justify-center">
+                        <svg class="h-6 w-6 text-yellow-600 dark:text-yellow-400" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.498 3.498 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.39-1.754-1.118-2.385l-.548-.547z" />
+                        </svg>
+                    </div>
+
+                    <div>
+                        <a href="{{ route('admin.mission-slides.index') }}"
+                            class="text-lg font-semibold text-neutral-900 dark:text-white hover:text-yellow-600">
+                            Mission Slides
+                        </a>
+                        <p class="text-sm text-neutral-500">Manage mission statement slides</p>
+                    </div>
 
             </div>
 

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\ContentSectionController;
 use App\Http\Controllers\Admin\FeatureCardController;
 use App\Http\Controllers\Admin\ImpactController;
+use App\Http\Controllers\Admin\MissionSlideController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
@@ -32,6 +33,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::resource('sections', ContentSectionController::class);
         Route::resource('feature-cards', FeatureCardController::class);
         Route::resource('impacts', ImpactController::class);
+        Route::resource('mission-slides', MissionSlideController::class);
 
     });
 

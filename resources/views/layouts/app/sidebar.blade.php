@@ -39,6 +39,10 @@
                     wire:navigate>
                     {{ __('Impact Section') }}
                 </flux:sidebar.item>
+                    <flux:sidebar.item :href="route('admin.mission-slides.index')" :current="request()->routeIs('admin.mission-slides.*')"
+                        wire:navigate>
+                        {{ __('Mission Slides') }}
+                    </flux:sidebar.item>
             </flux:sidebar.group>
         </flux:sidebar.nav>
 

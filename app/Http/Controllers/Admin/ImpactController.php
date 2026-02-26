@@ -43,11 +43,4 @@ class ImpactController extends Controller
 
         return redirect()->route('admin.impacts.index')->with('success', __('Impact card updated successfully'));
     }
-
-    public function destroy(Impact $impact): RedirectResponse
-    {
-        $impact->delete();
-
-        return redirect()->route('admin.impacts.index')->with('success', __('Impact card deleted successfully'));
-    }
 }
