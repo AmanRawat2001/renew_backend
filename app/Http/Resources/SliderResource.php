@@ -18,10 +18,8 @@ class SliderResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'sub_title' => $this->sub_title,
-            'image' => url($this->image),
+            'image' => $this->image ? url($this->image) : null,
             'sequence' => $this->sequence,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
         ];
     }
 }

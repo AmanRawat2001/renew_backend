@@ -16,12 +16,10 @@ class MissionSlideResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'image' => url($this->image),
+            'image' => $this->image ? url($this->image) : null,
             'title' => $this->title,
             'description' => $this->description,
             'sequence' => $this->sequence,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
         ];
     }
 }
