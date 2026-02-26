@@ -166,8 +166,12 @@
                     theme: 'snow',
                     modules: {
                         toolbar: [
+                            [{ header: [1, 2, 3, false] }],
                             ['bold', 'italic', 'underline'],
-                            ['link']
+                            [{ list: 'ordered' }, { list: 'bullet' }],
+                            [{ color: [] }, { background: [] }],
+                            ['link'],
+                            ['clean']
                         ]
                     },
                     placeholder: '{{ __('Enter card title') }}'
@@ -193,10 +197,12 @@
                     theme: 'snow',
                     modules: {
                         toolbar: [
+                            [{ header: [1, 2, 3, false] }],
                             ['bold', 'italic', 'underline'],
-                            ['blockquote', 'code-block'],
-                            [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-                            ['link']
+                            [{ list: 'ordered' }, { list: 'bullet' }],
+                            [{ color: [] }, { background: [] }],
+                            ['link'],
+                            ['clean']
                         ]
                     },
                     placeholder: '{{ __('Enter detailed description') }}'
