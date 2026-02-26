@@ -17,8 +17,9 @@
                                 style="background-image: url('{{ asset('storage/' . $slider->image) }}');">
                                 <div class="absolute inset-0 bg-black/50"></div>
                                 <div class="relative z-10">
-                                    <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">{!! $slider->title !!}
-                                    </h1>
+                                    <div class="text-4xl md:text-5xl font-bold text-white space-y-2">
+                                    {!! $slider->title !!}
+                                    </div>
                                     <p class="text-lg text-gray-100">{{ $slider->sub_title }}</p>
                                 </div>
                             </div>
@@ -155,8 +156,8 @@
                         <p class="text-sm text-neutral-500">Manage mission statement slides</p>
                     </div>
 
-            </div>
+                </div>
 
+            </div>
         </div>
-    </div>
 </x-layouts::app>
