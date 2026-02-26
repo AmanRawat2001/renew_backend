@@ -31,6 +31,7 @@
                                 <th class="px-6 py-4 text-left text-sm font-semibold text-neutral-900 dark:text-neutral-50">{{ __('Title') }}</th>
                                 <th class="px-6 py-4 text-left text-sm font-semibold text-neutral-900 dark:text-neutral-50">{{ __('Image') }}</th>
                                 <th class="px-6 py-4 text-left text-sm font-semibold text-neutral-900 dark:text-neutral-50">{{ __('Button Text') }}</th>
+                                <th class="px-6 py-4 text-left text-sm font-semibold text-neutral-900 dark:text-neutral-50">{{ __('Page') }}</th>
                                 <th class="px-6 py-4 text-left text-sm font-semibold text-neutral-900 dark:text-neutral-50">{{ __('Sequence') }}</th>
                                 <th class="px-6 py-4 text-left text-sm font-semibold text-neutral-900 dark:text-neutral-50">{{ __('Status') }}</th>
                                 <th class="px-6 py-4 text-right text-sm font-semibold text-neutral-900 dark:text-neutral-50">{{ __('Actions') }}</th>
@@ -51,6 +52,11 @@
                                     <td class="px-6 py-4">
                                         <span class="text-sm text-neutral-700 dark:text-neutral-300">
                                             {{ $slider->button_text ?? '—' }}
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300">
+                                            {{ $slider->page?->label() }}
                                         </span>
                                     </td>
                                     <td class="px-6 py-4">

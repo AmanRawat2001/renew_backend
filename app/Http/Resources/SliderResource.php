@@ -21,6 +21,8 @@ class SliderResource extends JsonResource
             'button_text' => $this->button_text,
             'image' => $this->image ? url($this->image) : null,
             'sequence' => $this->sequence,
+            'page' => $this->page?->value,
+            'page_label' => $this->page?->label(),
         ];
     }
 }

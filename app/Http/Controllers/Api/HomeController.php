@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Enums\SliderPage;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ContentSectionResource;
 use App\Http\Resources\FeatureCardResource;
@@ -18,7 +19,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $slider = Slider::active()->ordered()->get();
+        $slider = Slider::where('page', SliderPage::HOME)->active()->ordered()->get();
         $sections = ContentSection::ordered()->get()->groupBy('section_key');
         $feature_cards = FeatureCard::active()->ordered()->get();
         $impact_metrics = Impact::active()->ordered()->get();
@@ -27,7 +28,6 @@ class HomeController extends Controller
         foreach ($sections as $key => $sectionGroup) {
             $groupedSections[$key] = ContentSectionResource::collection($sectionGroup);
         }
-
         return response()->json(array_merge(
             ['slider' => SliderResource::collection($slider)],
             $groupedSections,

@@ -17,7 +17,7 @@ class StoreRequest extends FormRequest
             'title' => 'required|string|max:1000',
             'sub_title' => 'required|string|max:1000',
             'button_text' => 'required|string|max:255',
-            'image' => 'image|required',
+            'image' => 'required|image',
             'sequence' => 'required|integer|min:1|max:999',
             'is_active' => 'nullable|boolean',
         ];
