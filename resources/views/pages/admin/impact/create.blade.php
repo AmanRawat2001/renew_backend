@@ -111,6 +111,24 @@
                             {{ __('Active') }}
                         </label>
                     </div>
+
+                    <!-- Down Arrow -->
+                    <div class="flex items-center gap-3">
+                        <input
+                            type="checkbox"
+                            id="down_arrow"
+                            name="down_arrow"
+                            value="1"
+                            {{ old('down_arrow', false) ? 'checked' : '' }}
+                            class="w-4 h-4 rounded border-neutral-300 text-blue-600 focus:ring-blue-500"
+                        />
+                        <label for="down_arrow" class="text-sm font-medium text-neutral-900 dark:text-neutral-50">
+                            {{ __('Show Down Arrow') }}
+                        </label>
+                        <p class="text-xs text-neutral-600 dark:text-neutral-400">
+                            {{ __('Display a down arrow indicator') }}
+                        </p>
+                    </div>
                 </div>
 
                 <!-- Actions -->

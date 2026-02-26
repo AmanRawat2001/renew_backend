@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Impact extends Model
 {
-    protected $fillable = ['metric_number', 'title', 'description', 'sequence', 'is_active'];
+    protected $fillable = ['metric_number', 'title', 'description', 'sequence', 'is_active', 'down_arrow'];
 
     protected $casts = [
         'is_active' => 'boolean',

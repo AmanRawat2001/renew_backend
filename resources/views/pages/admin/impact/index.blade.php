@@ -29,9 +29,18 @@
                         <!-- Card Content -->
                         <div class="p-6">
                             <!-- Badge -->
-                            <div class="inline-block px-3 py-1 rounded-full text-xs font-semibold 
-                                {{ $impact->is_active ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300' : 'bg-gray-100 dark:bg-gray-900/30 text-gray-700 dark:text-gray-300' }}">
-                                {{ $impact->is_active ? __('Active') : __('Inactive') }}
+                            <div class="flex items-center justify-between">
+                                <div class="inline-block px-3 py-1 rounded-full text-xs font-semibold 
+                                    {{ $impact->is_active ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300' : 'bg-gray-100 dark:bg-gray-900/30 text-gray-700 dark:text-gray-300' }}">
+                                    {{ $impact->is_active ? __('Active') : __('Inactive') }}
+                                </div>
+                                @if($impact->down_arrow)
+                                    <div class="inline-flex items-center px-2 py-1 rounded text-xs font-semibold bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                                        </svg>
+                                    </div>
+                                @endif
                             </div>
 
                             <!-- Metric -->

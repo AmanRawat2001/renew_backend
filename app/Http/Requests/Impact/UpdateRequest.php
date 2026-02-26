@@ -19,6 +19,7 @@ class UpdateRequest extends FormRequest
             'description' => 'required|string',
             'sequence' => 'required|integer|min:0',
             'is_active' => 'boolean',
+            'down_arrow' => 'nullable|boolean',
         ];
     }
 }

@@ -30,6 +30,7 @@
                             <tr class="border-b border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-zinc-900">
                                 <th class="px-6 py-4 text-left text-sm font-semibold text-neutral-900 dark:text-neutral-50">{{ __('Title') }}</th>
                                 <th class="px-6 py-4 text-left text-sm font-semibold text-neutral-900 dark:text-neutral-50">{{ __('Image') }}</th>
+                                <th class="px-6 py-4 text-left text-sm font-semibold text-neutral-900 dark:text-neutral-50">{{ __('Button Text') }}</th>
                                 <th class="px-6 py-4 text-left text-sm font-semibold text-neutral-900 dark:text-neutral-50">{{ __('Sequence') }}</th>
                                 <th class="px-6 py-4 text-left text-sm font-semibold text-neutral-900 dark:text-neutral-50">{{ __('Status') }}</th>
                                 <th class="px-6 py-4 text-right text-sm font-semibold text-neutral-900 dark:text-neutral-50">{{ __('Actions') }}</th>
@@ -46,6 +47,11 @@
                                     </td>
                                     <td class="px-6 py-4">
                                         <img src="{{ url($slider->image) }}" alt="{{ $slider->title }}" class="h-12 w-20 object-cover rounded" />
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <span class="text-sm text-neutral-700 dark:text-neutral-300">
+                                            {{ $slider->button_text ?? '—' }}
+                                        </span>
                                     </td>
                                     <td class="px-6 py-4">
                                         <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-neutral-100 dark:bg-neutral-700 text-neutral-900 dark:text-neutral-50">

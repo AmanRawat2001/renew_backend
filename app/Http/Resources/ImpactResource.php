@@ -20,6 +20,7 @@ class ImpactResource extends JsonResource
             'title' => $this->title,
             'description' => $this->description,
             'sequence' => $this->sequence,
+            'down_arrow' => $this->down_arrow ? true : false,
         ];
     }
 }

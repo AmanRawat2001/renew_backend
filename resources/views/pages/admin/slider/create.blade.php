@@ -62,6 +62,21 @@
                         @enderror
                     </div>
 
+                    <!-- Button Text Field -->
+                    <div>
+                        <label for="button_text"
+                            class="block text-sm font-semibold text-neutral-900 dark:text-neutral-50 mb-2">
+                            {{ __('Button Text') }}
+                        </label>
+                        <input type="text" id="button_text" name="button_text"
+                            class="w-full px-4 py-2 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-zinc-900 text-neutral-900 dark:text-neutral-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            placeholder="{{ __('e.g., Learn More') }}"
+                            value="{{ old('button_text') }}" />
+                        <p class="mt-1 text-xs text-neutral-600 dark:text-neutral-400">
+                            {{ __('Optional CTA button text for this slider') }}
+                        </p>
+                    </div>
+
                     <!-- Image File Upload Field -->
                     <div>
                         <label for="image"
