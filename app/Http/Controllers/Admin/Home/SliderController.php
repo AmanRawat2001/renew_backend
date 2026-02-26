@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\Home;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreSliderRequest;
-use App\Http\Requests\UpdateSliderRequest;
+use App\Http\Requests\Slider\StoreRequest;
+use App\Http\Requests\Slider\UpdateRequest;
 use App\Models\Slider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
@@ -24,7 +24,7 @@ class SliderController extends Controller
         return view('pages.admin.slider.create');
     }
 
-    public function store(StoreSliderRequest $request): RedirectResponse
+    public function store(StoreRequest $request): RedirectResponse
     {
         $validated = $request->validated();
 
@@ -41,7 +41,7 @@ class SliderController extends Controller
         return view('pages.admin.slider.edit', compact('slider'));
     }
 
-    public function update(UpdateSliderRequest $request, Slider $slider): RedirectResponse
+    public function update(UpdateRequest $request, Slider $slider): RedirectResponse
     {
         $validated = $request->validated();
         if ($request->hasFile('image')) {

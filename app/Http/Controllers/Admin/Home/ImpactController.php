@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\Home;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreImpactRequest;
-use App\Http\Requests\UpdateImpactRequest;
+use App\Http\Requests\Impact\StoreRequest;
+use App\Http\Requests\Impact\UpdateRequest;
 use App\Models\Impact;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
@@ -23,12 +23,12 @@ class ImpactController extends Controller
         return view('pages.admin.impact.create');
     }
 
-    public function store(StoreImpactRequest $request): RedirectResponse
+    public function store(StoreRequest $request): RedirectResponse
     {
         $validated = $request->validated();
         Impact::create($validated);
 
-        return redirect()->route('admin.impacts.index')->with('success', __('Impact card created successfully'));
+        return redirect()->route('admin.impacts.index')->with('success', 'Impact card created successfully');
     }
 
     public function edit(Impact $impact): View
@@ -36,11 +36,11 @@ class ImpactController extends Controller
         return view('pages.admin.impact.edit', compact('impact'));
     }
 
-    public function update(UpdateImpactRequest $request, Impact $impact): RedirectResponse
+    public function update(UpdateRequest $request, Impact $impact): RedirectResponse
     {
         $validated = $request->validated();
         $impact->update($validated);
 
-        return redirect()->route('admin.impacts.index')->with('success', __('Impact card updated successfully'));
+        return redirect()->route('admin.impacts.index')->with('success', 'Impact card updated successfully');
     }
 }

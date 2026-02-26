@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\MissionSlider;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateMissionSlideRequest extends FormRequest
+class UpdateRequest extends FormRequest
 {
     public function authorize(): bool
     {

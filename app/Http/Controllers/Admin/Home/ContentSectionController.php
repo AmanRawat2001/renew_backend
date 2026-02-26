@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\Home;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreContentSectionRequest;
-use App\Http\Requests\UpdateContentSectionRequest;
+use App\Http\Requests\ContentSection\StoreRequest;
+use App\Http\Requests\ContentSection\UpdateRequest;
 use App\Models\ContentSection;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
@@ -23,7 +23,7 @@ class ContentSectionController extends Controller
         return view('pages.admin.content-section.create');
     }
 
-    public function store(StoreContentSectionRequest $request): RedirectResponse
+    public function store(StoreRequest $request): RedirectResponse
     {
         $validated = $request->validated();
 
@@ -37,7 +37,7 @@ class ContentSectionController extends Controller
         return view('pages.admin.content-section.edit', compact('section'));
     }
 
-    public function update(UpdateContentSectionRequest $request, ContentSection $section): RedirectResponse
+    public function update(UpdateRequest $request, ContentSection $section): RedirectResponse
     {
         $validated = $request->validated();
 

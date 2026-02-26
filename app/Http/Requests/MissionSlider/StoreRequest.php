@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\MissionSlider;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreImpactRequest extends FormRequest
+class StoreRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -14,7 +14,7 @@ class StoreImpactRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'metric_number' => 'required|string|max:255',
+            'image' => 'required|image',
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'sequence' => 'required|integer|min:0',

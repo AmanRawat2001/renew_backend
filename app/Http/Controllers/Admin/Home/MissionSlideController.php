@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\Home;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreMissionSlideRequest;
-use App\Http\Requests\UpdateMissionSlideRequest;
+use App\Http\Requests\MissionSlider\StoreRequest;
+use App\Http\Requests\MissionSlider\UpdateRequest;
 use App\Models\MissionSlide;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
@@ -24,7 +24,7 @@ class MissionSlideController extends Controller
         return view('pages.admin.mission-slide.create');
     }
 
-    public function store(StoreMissionSlideRequest $request): RedirectResponse
+    public function store(StoreRequest $request): RedirectResponse
     {
         $validated = $request->validated();
 
@@ -34,7 +34,7 @@ class MissionSlideController extends Controller
 
         MissionSlide::create($validated);
 
-        return redirect()->route('admin.mission-slides.index')->with('success', __('Mission slide created successfully'));
+        return redirect()->route('admin.mission-slides.index')->with('success', 'Mission slide created successfully');
     }
 
     public function edit(MissionSlide $missionSlide): View
@@ -42,7 +42,7 @@ class MissionSlideController extends Controller
         return view('pages.admin.mission-slide.edit', compact('missionSlide'));
     }
 
-    public function update(UpdateMissionSlideRequest $request, MissionSlide $missionSlide): RedirectResponse
+    public function update(UpdateRequest $request, MissionSlide $missionSlide): RedirectResponse
     {
         $validated = $request->validated();
 
@@ -59,6 +59,6 @@ class MissionSlideController extends Controller
 
         $missionSlide->update($validated);
 
-        return redirect()->route('admin.mission-slides.index')->with('success', __('Mission slide updated successfully'));
+        return redirect()->route('admin.mission-slides.index')->with('success', 'Mission slide updated successfully');
     }
 }

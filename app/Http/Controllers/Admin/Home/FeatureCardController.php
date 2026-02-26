@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\Home;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreFeatureCardRequest;
-use App\Http\Requests\UpdateFeatureCardRequest;
+use App\Http\Requests\FeatureCard\StoreRequest;
+use App\Http\Requests\FeatureCard\UpdateRequest;
 use App\Models\FeatureCard;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
@@ -24,7 +24,7 @@ class FeatureCardController extends Controller
         return view('pages.admin.feature-card.create');
     }
 
-    public function store(StoreFeatureCardRequest $request): RedirectResponse
+    public function store(StoreRequest $request): RedirectResponse
     {
         $validated = $request->validated();
 
@@ -42,7 +42,7 @@ class FeatureCardController extends Controller
         return view('pages.admin.feature-card.edit', compact('featureCard'));
     }
 
-    public function update(UpdateFeatureCardRequest $request, FeatureCard $featureCard): RedirectResponse
+    public function update(UpdateRequest $request, FeatureCard $featureCard): RedirectResponse
     {
         $validated = $request->validated();
 
