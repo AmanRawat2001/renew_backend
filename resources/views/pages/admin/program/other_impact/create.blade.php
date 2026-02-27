@@ -111,6 +111,30 @@
                             {{ __('Active') }}
                         </label>
                     </div>
+                    <!-- Page Selection Field -->
+                    <div>
+                        <label for="page"
+                            class="block text-sm font-semibold text-neutral-900 dark:text-neutral-50 mb-2">
+                            {{ __('Page') }} <span class="text-red-500">*</span>
+                        </label>
+                        <select id="page" name="page"
+                            class="w-full px-4 py-2 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-zinc-900 text-neutral-900 dark:text-neutral-50 focus:outline-none focus:ring-2 focus:ring-blue-500 @error('page') border-red-500 @enderror"
+                            required>
+                            <option value="">{{ __('Select a page') }}</option>
+                            @foreach (App\Enums\SitePage::cases() as $pageCase)
+                                <option value="{{ $pageCase->value }}"
+                                    {{ old('page') === $pageCase->value ? 'selected' : '' }}>
+                                    {{ $pageCase->label() }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('page')
+                            <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
+                        @enderror
+                        <p class="mt-1 text-xs text-neutral-600 dark:text-neutral-400">
+                            {{ __('Choose which page this slider appears on') }}
+                        </p>
+                    </div>
 
                     <!-- Down Arrow -->
                     <div class="flex items-center gap-3">

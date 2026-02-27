@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Home;
 
+use App\Enums\SitePage;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MissionSlider\StoreRequest;
 use App\Http\Requests\MissionSlider\UpdateRequest;
@@ -14,7 +15,7 @@ class MissionSlideController extends Controller
 {
     public function index(): View
     {
-        $slides = MissionSlide::orderBy('sequence', 'asc')->paginate(12);
+        $slides = MissionSlide::where('page', SitePage::HOME->value)->ordered()->paginate(12);
 
         return view('pages.admin.home.mission_slider.index', compact('slides'));
     }
@@ -56,7 +57,7 @@ class MissionSlideController extends Controller
             // If no new image, remove it from validated array to keep existing
             unset($validated['image']);
         }
-
+        $validated['page'] = SitePage::HOME->value;
         $mission_slider->update($validated);
 
         return redirect()->route('admin.mission_sliders.index')->with('success', 'Mission slide updated successfully');

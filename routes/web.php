@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\Program\InternalContentSectionController;
 use App\Http\Controllers\Admin\Program\InternalImpactController;
 use App\Http\Controllers\Admin\Program\InternalMainSliderController;
+use App\Http\Controllers\Admin\Program\InternalMissionSlideController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -44,6 +45,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::resource('main_sliders', InternalMainSliderController::class);
             Route::resource('other_sections', InternalContentSectionController::class);
             Route::resource('other_impacts', InternalImpactController::class);
+            Route::resource('other_mission_sliders', InternalMissionSlideController::class);
         });
     });
 
