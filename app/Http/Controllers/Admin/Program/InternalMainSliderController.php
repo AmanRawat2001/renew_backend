@@ -17,12 +17,12 @@ class InternalMainSliderController extends Controller
     {
         $sliders = Slider::where('page', '!=', SitePage::HOME->value)->ordered()->paginate(12);
 
-        return view('pages.admin.main_sliders.index', compact('sliders'));
+        return view('pages.admin.program.main_sliders.index', compact('sliders'));
     }
 
     public function create(): View
     {
-        return view('pages.admin.main_sliders.create');
+        return view('pages.admin.program.main_sliders.create');
     }
 
     public function store(StoreRequest $request): RedirectResponse
@@ -39,7 +39,7 @@ class InternalMainSliderController extends Controller
 
     public function edit(Slider $main_slider): View
     {
-        return view('pages.admin.main_sliders.edit', compact('main_slider'));
+        return view('pages.admin.program.main_sliders.edit', compact('main_slider'));
     }
 
     public function update(UpdateRequest $request, Slider $main_slider): RedirectResponse

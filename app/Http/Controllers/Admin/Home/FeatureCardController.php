@@ -16,12 +16,12 @@ class FeatureCardController extends Controller
     {
         $cards = FeatureCard::ordered()->paginate(12);
 
-        return view('pages.admin.feature-card.index', compact('cards'));
+        return view('pages.admin.home.feature-card.index', compact('cards'));
     }
 
     public function create(): View
     {
-        return view('pages.admin.feature-card.create');
+        return view('pages.admin.home.feature-card.create');
     }
 
     public function store(StoreRequest $request): RedirectResponse
@@ -39,7 +39,7 @@ class FeatureCardController extends Controller
 
     public function edit(FeatureCard $featureCard): View
     {
-        return view('pages.admin.feature-card.edit', compact('featureCard'));
+        return view('pages.admin.home.feature-card.edit', compact('featureCard'));
     }
 
     public function update(UpdateRequest $request, FeatureCard $featureCard): RedirectResponse

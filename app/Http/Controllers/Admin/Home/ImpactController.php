@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Home;
 
+use App\Enums\SitePage;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Impact\StoreRequest;
 use App\Http\Requests\Impact\UpdateRequest;
@@ -13,14 +14,14 @@ class ImpactController extends Controller
 {
     public function index(): View
     {
-        $impacts = Impact::orderBy('sequence', 'asc')->paginate(12);
+        $impacts = Impact::where('page', SitePage::HOME->value)->orderBy('sequence', 'asc')->paginate(12);
 
-        return view('pages.admin.impact.index', compact('impacts'));
+        return view('pages.admin.home.impact.index', compact('impacts'));
     }
 
     public function create(): View
     {
-        return view('pages.admin.impact.create');
+        return view('pages.admin.home.impact.create');
     }
 
     public function store(StoreRequest $request): RedirectResponse
@@ -33,7 +34,7 @@ class ImpactController extends Controller
 
     public function edit(Impact $impact): View
     {
-        return view('pages.admin.impact.edit', compact('impact'));
+        return view('pages.admin.home.impact.edit', compact('impact'));
     }
 
     public function update(UpdateRequest $request, Impact $impact): RedirectResponse

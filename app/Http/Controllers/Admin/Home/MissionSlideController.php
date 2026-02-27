@@ -16,12 +16,12 @@ class MissionSlideController extends Controller
     {
         $slides = MissionSlide::orderBy('sequence', 'asc')->paginate(12);
 
-        return view('pages.admin.mission_slider.index', compact('slides'));
+        return view('pages.admin.home.mission_slider.index', compact('slides'));
     }
 
     public function create(): View
     {
-        return view('pages.admin.mission_slider.create');
+        return view('pages.admin.home.mission_slider.create');
     }
 
     public function store(StoreRequest $request): RedirectResponse
@@ -39,7 +39,7 @@ class MissionSlideController extends Controller
 
     public function edit(MissionSlide $missionSlide): View
     {
-        return view('pages.admin.mission_slider.edit', compact('missionSlide'));
+        return view('pages.admin.home.mission_slider.edit', compact('missionSlide'));
     }
 
     public function update(UpdateRequest $request, MissionSlide $missionSlide): RedirectResponse

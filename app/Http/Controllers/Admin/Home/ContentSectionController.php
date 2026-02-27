@@ -16,12 +16,12 @@ class ContentSectionController extends Controller
     {
         $sections = ContentSection::where('page', SitePage::HOME->value)->ordered()->paginate(10);
 
-        return view('pages.admin.content-section.index', compact('sections'));
+        return view('pages.admin.home.content-section.index', compact('sections'));
     }
 
     public function create(): View
     {
-        return view('pages.admin.content-section.create');
+        return view('pages.admin.home.content-section.create');
     }
 
     public function store(StoreRequest $request): RedirectResponse
@@ -36,7 +36,7 @@ class ContentSectionController extends Controller
 
     public function edit(ContentSection $section): View
     {
-        return view('pages.admin.content-section.edit', compact('section'));
+        return view('pages.admin.home.content-section.edit', compact('section'));
     }
 
     public function update(UpdateRequest $request, ContentSection $section): RedirectResponse

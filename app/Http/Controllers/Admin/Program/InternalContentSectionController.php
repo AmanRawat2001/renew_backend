@@ -16,12 +16,12 @@ class InternalContentSectionController extends Controller
     {
         $sections = ContentSection::where('page', '!=', SitePage::HOME->value)->ordered()->paginate(10);
 
-        return view('pages.admin.other_section.index', compact('sections'));
+        return view('pages.admin.program.other_section.index', compact('sections'));
     }
 
     public function create(): View
     {
-        return view('pages.admin.other_section.create');
+        return view('pages.admin.program.other_section.create');
     }
 
     public function store(StoreRequest $request): RedirectResponse
@@ -35,7 +35,7 @@ class InternalContentSectionController extends Controller
 
     public function edit(ContentSection $other_section): View
     {
-        return view('pages.admin.other_section.edit', compact('other_section'));
+        return view('pages.admin.program.other_section.edit', compact('other_section'));
     }
 
     public function update(UpdateRequest $request, ContentSection $other_section): RedirectResponse

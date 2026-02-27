@@ -24,7 +24,7 @@ class HomeController extends Controller
         $featureCards = FeatureCard::ordered()->get();
         $contentSections = ContentSection::ordered()->get();
 
-        return view('pages.admin.home', compact(
+        return view('pages.admin.home.home', compact(
             'sliders',
             'missionSlides',
             'impacts',
