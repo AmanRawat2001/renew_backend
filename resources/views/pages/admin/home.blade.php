@@ -1,163 +1,230 @@
-<x-layouts::app :title="__('Home')">
+<x-layouts::app :title="__('Dashboard')">
     <div class="flex h-full w-full flex-1 flex-col gap-6">
-        <!-- Header Slider Section -->
-        @if ($sliders->count() > 0)
-            <h1 class="text-2xl font-bold text-neutral-900 dark:text-white mb-4">
-                Slider Section
-            </h1>
-            <div class="relative rounded-xl border border-neutral-200 dark:border-neutral-700 overflow-hidden bg-white dark:bg-zinc-800"
-                x-data="{ currentSlide: 0, maxSlides: {{ $sliders->count() }} }"
-                @keydown.left="currentSlide = currentSlide === 0 ? maxSlides - 1 : currentSlide - 1"
-                @keydown.right="currentSlide = currentSlide === maxSlides - 1 ? 0 : currentSlide + 1">
-                <div class="relative h-80 md:h-96">
-                    @foreach ($sliders as $index => $slider)
-                        <div class="absolute inset-0 transition-opacity duration-1000"
-                            :class="currentSlide === {{ $index }} ? 'opacity-100' : 'opacity-0 pointer-events-none'">
-                            <div class="h-full bg-cover bg-center flex flex-col items-center justify-center text-center px-6 py-12"
-                                style="background-image: url('{{ asset('storage/' . $slider->image) }}');">
-                                <div class="absolute inset-0 bg-black/50"></div>
-                                <div class="relative z-10">
-                                    <div class="text-4xl md:text-5xl font-bold text-white space-y-2">
-                                    {!! $slider->title !!}
-                                    </div>
-                                    <p class="text-lg text-gray-100">{{ $slider->sub_title }}</p>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-
-                <!-- Navigation Controls -->
-                <div class="absolute bottom-6 left-0 right-0 flex items-center justify-center gap-4 z-10">
-                    <!-- Previous Button -->
-                    <button @click="currentSlide = currentSlide === 0 ? maxSlides - 1 : currentSlide - 1"
-                        class="p-2 rounded-full bg-white/80 hover:bg-white dark:bg-zinc-700/80 dark:hover:bg-zinc-700 transition-colors">
-                        <svg class="w-5 h-5 text-neutral-900 dark:text-white" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                        </svg>
-                    </button>
-
-                    <!-- Slide Indicators -->
-                    <div class="flex gap-2">
-                        @foreach ($sliders as $index => $slider)
-                            <button @click="currentSlide = {{ $index }}"
-                                :class="currentSlide === {{ $index }} ? 'bg-white dark:bg-blue-400' :
-                                    'bg-white/50 dark:bg-zinc-500'"
-                                class="h-3 rounded-full transition-all"
-                                :style="currentSlide === {{ $index }} ? 'width: 24px' : 'width: 12px'" />
-                        @endforeach
-                    </div>
-
-                    <!-- Next Button -->
-                    <button @click="currentSlide = currentSlide === maxSlides - 1 ? 0 : currentSlide + 1"
-                        class="p-2 rounded-full bg-white/80 hover:bg-white dark:bg-zinc-700/80 dark:hover:bg-zinc-700 transition-colors">
-                        <svg class="w-5 h-5 text-neutral-900 dark:text-white" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                        </svg>
-                    </button>
-                </div>
-            </div>
-        @else
-            <div
-                class="rounded-xl border border-neutral-200 dark:border-neutral-700 overflow-hidden bg-gradient-to-br from-blue-500 to-blue-600 dark:from-blue-700 dark:to-blue-800 px-8 py-12 text-center">
-                <img src="/images/renew-foundation-logo.png" alt="ReNew Foundation"
-                    class="h-20 w-auto object-contain mx-auto mb-6" />
-                <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">{{ __('Welcome to ReNew Foundation') }}</h1>
-                <p class="text-lg text-blue-100">{{ __('Empowering Communities, Renewing Futures') }}</p>
-            </div>
-        @endif
-
-        <!-- Stats Section -->
-        <div class="flex justify-center">
-
-            <div class="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 max-w-6xl w-full">
-
-                <!-- Card -->
-                <div
-                    class="rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-zinc-800 p-6 flex items-center gap-4 hover:shadow-lg transition">
-
-                    <div class="h-12 w-12 rounded-lg bg-blue-100 dark:bg-blue-900 flex items-center justify-center">
-                        <svg class="h-6 w-6 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M3 10h11M3 14h11M5 19h7m-7-4h7m5-4v1a3 3 0 003 3h2M5 19a3 3 0 01-3-3v-1a3 3 0 013-3h2a3 3 0 013 3v1a3 3 0 01-3 3H5z" />
-                        </svg>
-                    </div>
-
-                    <div>
-                        <a href="{{ route('admin.sections.index') }}"
-                            class="text-lg font-semibold text-neutral-900 dark:text-white hover:text-blue-600">
-                            Details Section
-                        </a>
-                        <p class="text-sm text-neutral-500">Manage content sections</p>
-                    </div>
-
-                </div>
-
-
-                <div
-                    class="rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-zinc-800 p-6 flex items-center gap-4 hover:shadow-lg transition">
-
-                    <div class="h-12 w-12 rounded-lg bg-green-100 dark:bg-green-900 flex items-center justify-center">
-                        <svg class="h-6 w-6 text-green-600 dark:text-green-400" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M13 10V3L4 14h7v7l9-11h-7z" />
-                        </svg>
-                    </div>
-                    <div>
-                        <a href="{{ route('admin.feature-cards.index') }}"
-                            class="text-lg font-semibold text-neutral-900 dark:text-white hover:text-green-600">
-                            Feature Card
-                        </a>
-                        <p class="text-sm text-neutral-500">Manage feature cards</p>
-                    </div>
-                </div>
-                <!-- Card -->
-                <div
-                    class="rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-zinc-800 p-6 flex items-center gap-4 hover:shadow-lg transition">
-
-                    <div class="h-12 w-12 rounded-lg bg-purple-100 dark:bg-purple-900 flex items-center justify-center">
-                        <svg class="h-6 w-6 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                    </div>
-
-                    <div>
-                        <a href="{{ route('admin.impacts.index') }}"
-                            class="text-lg font-semibold text-neutral-900 dark:text-white hover:text-purple-600">
-                            Impact Section
-                        </a>
-                        <p class="text-sm text-neutral-500">Manage community impact data</p>
-                    </div>
-
-                </div>
-                {{-- create a card for the mission slider --}}
-                <div
-                    class="rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-zinc-800 p-6 flex items-center gap-4 hover:shadow-lg transition">
-
-                    <div class="h-12 w-12 rounded-lg bg-yellow-100 dark:bg-yellow-900 flex items-center justify-center">
-                        <svg class="h-6 w-6 text-yellow-600 dark:text-yellow-400" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.498 3.498 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.39-1.754-1.118-2.385l-.548-.547z" />
-                        </svg>
-                    </div>
-
-                    <div>
-                        <a href="{{ route('admin.mission-slides.index') }}"
-                            class="text-lg font-semibold text-neutral-900 dark:text-white hover:text-yellow-600">
-                            Mission Slides
-                        </a>
-                        <p class="text-sm text-neutral-500">Manage mission statement slides</p>
-                    </div>
-
-                </div>
-
+        <!-- Header -->
+        <div class="flex items-center justify-between">
+            <div>
+                <h1 class="text-3xl font-semibold text-neutral-900 dark:text-neutral-50">{{ __('Dashboard') }}</h1>
+                <p class="text-sm text-neutral-600 dark:text-neutral-400 mt-1">{{ __('Manage all your content') }}</p>
             </div>
         </div>
+
+        <!-- Sliders Section -->
+        <div class="space-y-4">
+            <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-bold text-neutral-900 dark:text-neutral-50">{{ __('Sliders') }}</h2>
+                <a href="{{ route('admin.sliders.create') }}" wire:navigate class="inline-flex items-center gap-2 px-3 py-1 text-sm bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                    </svg>
+                    {{ __('Add') }}
+                </a>
+            </div>
+            <div class="rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-zinc-800 overflow-hidden">
+                @if ($sliders->count() > 0)
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="border-b border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-zinc-900">
+                                    <th class="px-4 py-3 text-left font-semibold text-neutral-900 dark:text-neutral-50">{{ __('Title') }}</th>
+                                    <th class="px-4 py-3 text-left font-semibold text-neutral-900 dark:text-neutral-50">{{ __('Page') }}</th>
+                                    <th class="px-4 py-3 text-left font-semibold text-neutral-900 dark:text-neutral-50">{{ __('Sequence') }}</th>
+                                    <th class="px-4 py-3 text-left font-semibold text-neutral-900 dark:text-neutral-50">{{ __('Status') }}</th>
+                                    <th class="px-4 py-3 text-right font-semibold text-neutral-900 dark:text-neutral-50">{{ __('Actions') }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($sliders as $slider)
+                                    <tr class="border-b border-neutral-200 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-zinc-700/50">
+                                        <td class="px-4 py-3 text-neutral-900 dark:text-neutral-50 max-w-xs truncate">{!! Str::limit(strip_tags($slider->title), 50) !!}</td>
+                                        <td class="px-4 py-3"><span class="text-xs px-2 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded">{{ $slider->page?->label() }}</span></td>
+                                        <td class="px-4 py-3 text-neutral-600 dark:text-neutral-400">{{ $slider->sequence }}</td>
+                                        <td class="px-4 py-3">{{ $slider->is_active ? '✓' : '—' }}</td>
+                                        <td class="px-4 py-3 text-right"><a href="{{ route('admin.sliders.edit', $slider) }}" class="text-blue-600 dark:text-blue-400 hover:underline text-xs">{{ __('Edit') }}</a></td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                @else
+                    <div class="p-8 text-center text-neutral-600 dark:text-neutral-400">{{ __('No sliders yet') }}</div>
+                @endif
+            </div>
+        </div>
+
+        <!-- Mission Slides Section -->
+        <div class="space-y-4">
+            <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-bold text-neutral-900 dark:text-neutral-50">{{ __('Mission Slides') }}</h2>
+                <a href="{{ route('admin.mission-slides.create') }}" wire:navigate class="inline-flex items-center gap-2 px-3 py-1 text-sm bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                    </svg>
+                    {{ __('Add') }}
+                </a>
+            </div>
+            <div class="rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-zinc-800 overflow-hidden">
+                @if ($missionSlides->count() > 0)
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="border-b border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-zinc-900">
+                                    <th class="px-4 py-3 text-left font-semibold text-neutral-900 dark:text-neutral-50">{{ __('Title') }}</th>
+                                    <th class="px-4 py-3 text-left font-semibold text-neutral-900 dark:text-neutral-50">{{ __('Author') }}</th>
+                                    <th class="px-4 py-3 text-left font-semibold text-neutral-900 dark:text-neutral-50">{{ __('Sequence') }}</th>
+                                    <th class="px-4 py-3 text-left font-semibold text-neutral-900 dark:text-neutral-50">{{ __('Status') }}</th>
+                                    <th class="px-4 py-3 text-right font-semibold text-neutral-900 dark:text-neutral-50">{{ __('Actions') }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($missionSlides as $slide)
+                                    <tr class="border-b border-neutral-200 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-zinc-700/50">
+                                        <td class="px-4 py-3 text-neutral-900 dark:text-neutral-50 max-w-xs truncate">{!! Str::limit(strip_tags($slide->title), 50) !!}</td>
+                                        <td class="px-4 py-3 text-neutral-600 dark:text-neutral-400">{{ $slide->author_name ?? '—' }}</td>
+                                        <td class="px-4 py-3 text-neutral-600 dark:text-neutral-400">{{ $slide->sequence }}</td>
+                                        <td class="px-4 py-3">{{ $slide->is_active ? '✓' : '—' }}</td>
+                                        <td class="px-4 py-3 text-right"><a href="{{ route('admin.mission-slides.edit', $slide) }}" class="text-blue-600 dark:text-blue-400 hover:underline text-xs">{{ __('Edit') }}</a></td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                @else
+                    <div class="p-8 text-center text-neutral-600 dark:text-neutral-400">{{ __('No mission slides yet') }}</div>
+                @endif
+            </div>
+        </div>
+
+        <!-- Impact Cards Section -->
+        <div class="space-y-4">
+            <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-bold text-neutral-900 dark:text-neutral-50">{{ __('Impact Cards') }}</h2>
+                <a href="{{ route('admin.impacts.create') }}" wire:navigate class="inline-flex items-center gap-2 px-3 py-1 text-sm bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                    </svg>
+                    {{ __('Add') }}
+                </a>
+            </div>
+            <div class="rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-zinc-800 overflow-hidden">
+                @if ($impacts->count() > 0)
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="border-b border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-zinc-900">
+                                    <th class="px-4 py-3 text-left font-semibold text-neutral-900 dark:text-neutral-50">{{ __('Metric') }}</th>
+                                    <th class="px-4 py-3 text-left font-semibold text-neutral-900 dark:text-neutral-50">{{ __('Title') }}</th>
+                                    <th class="px-4 py-3 text-left font-semibold text-neutral-900 dark:text-neutral-50">{{ __('Sequence') }}</th>
+                                    <th class="px-4 py-3 text-left font-semibold text-neutral-900 dark:text-neutral-50">{{ __('Arrow') }}</th>
+                                    <th class="px-4 py-3 text-left font-semibold text-neutral-900 dark:text-neutral-50">{{ __('Status') }}</th>
+                                    <th class="px-4 py-3 text-right font-semibold text-neutral-900 dark:text-neutral-50">{{ __('Actions') }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($impacts as $impact)
+                                    <tr class="border-b border-neutral-200 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-zinc-700/50">
+                                        <td class="px-4 py-3 font-semibold text-neutral-900 dark:text-neutral-50">{{ $impact->metric_number }}</td>
+                                        <td class="px-4 py-3 text-neutral-900 dark:text-neutral-50 max-w-xs truncate">{!! Str::limit(strip_tags($impact->title), 40) !!}</td>
+                                        <td class="px-4 py-3 text-neutral-600 dark:text-neutral-400">{{ $impact->sequence }}</td>
+                                        <td class="px-4 py-3">{{ $impact->down_arrow ? '⬇️' : '—' }}</td>
+                                        <td class="px-4 py-3">{{ $impact->is_active ? '✓' : '—' }}</td>
+                                        <td class="px-4 py-3 text-right"><a href="{{ route('admin.impacts.edit', $impact) }}" class="text-blue-600 dark:text-blue-400 hover:underline text-xs">{{ __('Edit') }}</a></td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                @else
+                    <div class="p-8 text-center text-neutral-600 dark:text-neutral-400">{{ __('No impact cards yet') }}</div>
+                @endif
+            </div>
+        </div>
+
+        <!-- Feature Cards Section -->
+        <div class="space-y-4">
+            <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-bold text-neutral-900 dark:text-neutral-50">{{ __('Feature Cards') }}</h2>
+                <a href="{{ route('admin.feature-cards.create') }}" wire:navigate class="inline-flex items-center gap-2 px-3 py-1 text-sm bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                    </svg>
+                    {{ __('Add') }}
+                </a>
+            </div>
+            <div class="rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-zinc-800 overflow-hidden">
+                @if ($featureCards->count() > 0)
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="border-b border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-zinc-900">
+                                    <th class="px-4 py-3 text-left font-semibold text-neutral-900 dark:text-neutral-50">{{ __('Icon') }}</th>
+                                    <th class="px-4 py-3 text-left font-semibold text-neutral-900 dark:text-neutral-50">{{ __('Title') }}</th>
+                                    <th class="px-4 py-3 text-left font-semibold text-neutral-900 dark:text-neutral-50">{{ __('Sequence') }}</th>
+                                    <th class="px-4 py-3 text-right font-semibold text-neutral-900 dark:text-neutral-50">{{ __('Actions') }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($featureCards as $card)
+                                    <tr class="border-b border-neutral-200 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-zinc-700/50">
+                                        <td class="px-4 py-3">
+                                            @if ($card->icon)
+                                                <img src="{{ asset('storage/' . $card->icon) }}" alt="{{ $card->title }}" class="h-8 w-8" />
+                                            @else
+                                                <span class="text-neutral-400">—</span>
+                                            @endif
+                                        </td>
+                                        <td class="px-4 py-3 text-neutral-900 dark:text-neutral-50 max-w-xs truncate">{{ $card->title }}</td>
+                                        <td class="px-4 py-3 text-neutral-600 dark:text-neutral-400">{{ $card->sequence }}</td>
+                                        <td class="px-4 py-3 text-right"><a href="{{ route('admin.feature-cards.edit', $card) }}" class="text-blue-600 dark:text-blue-400 hover:underline text-xs">{{ __('Edit') }}</a></td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                @else
+                    <div class="p-8 text-center text-neutral-600 dark:text-neutral-400">{{ __('No feature cards yet') }}</div>
+                @endif
+            </div>
+        </div>
+
+        <!-- Content Sections Section -->
+        <div class="space-y-4">
+            <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-bold text-neutral-900 dark:text-neutral-50">{{ __('Content Sections') }}</h2>
+                <a href="{{ route('admin.sections.create') }}" wire:navigate class="inline-flex items-center gap-2 px-3 py-1 text-sm bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                    </svg>
+                    {{ __('Add') }}
+                </a>
+            </div>
+            <div class="rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-zinc-800 overflow-hidden">
+                @if ($contentSections->count() > 0)
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="border-b border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-zinc-900">
+                                    <th class="px-4 py-3 text-left font-semibold text-neutral-900 dark:text-neutral-50">{{ __('Title') }}</th>
+                                    <th class="px-4 py-3 text-left font-semibold text-neutral-900 dark:text-neutral-50">{{ __('Subtitle') }}</th>
+                                    <th class="px-4 py-3 text-left font-semibold text-neutral-900 dark:text-neutral-50">{{ __('Sequence') }}</th>
+                                    <th class="px-4 py-3 text-right font-semibold text-neutral-900 dark:text-neutral-50">{{ __('Actions') }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($contentSections as $section)
+                                    <tr class="border-b border-neutral-200 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-zinc-700/50">
+                                        <td class="px-4 py-3 text-neutral-900 dark:text-neutral-50 max-w-xs truncate">{!! Str::limit(strip_tags($section->title), 50) !!}</td>
+                                        <td class="px-4 py-3 text-neutral-600 dark:text-neutral-400 max-w-xs truncate">{!! Str::limit(strip_tags($section->subtitle), 50) !!}</td>
+                                        <td class="px-4 py-3 text-neutral-600 dark:text-neutral-400">{{ $section->sequence }}</td>
+                                        <td class="px-4 py-3 text-right"><a href="{{ route('admin.sections.edit', $section) }}" class="text-blue-600 dark:text-blue-400 hover:underline text-xs">{{ __('Edit') }}</a></td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                @else
+                    <div class="p-8 text-center text-neutral-600 dark:text-neutral-400">{{ __('No content sections yet') }}</div>
+                @endif
+            </div>
+        </div>
+    </div>
 </x-layouts::app>

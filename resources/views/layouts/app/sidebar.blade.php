@@ -16,56 +16,49 @@
         </flux:sidebar.header>
 
         <flux:sidebar.nav>
-            <flux:sidebar.group :heading="__('Platform')" class="grid">
-                <flux:sidebar.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')"
+            <flux:sidebar.group :heading="__('Pages')" class="grid">
+                <flux:sidebar.item icon="home" :href="route('admin.home')" :current="request()->routeIs('admin.home.*')"
                     wire:navigate>
-                    {{ __('Dashboard') }}
+                    {{ __('Home Page') }}
                 </flux:sidebar.item>
             </flux:sidebar.group>
 
-            <flux:sidebar.group :heading="__('Home Page')" collapsible>
+            <flux:sidebar.group :heading="__('Home Page Sections')" collapsible>
 
-    <flux:sidebar.item
-        icon="photo"
-        :href="route('admin.sliders.index')"
-        :current="request()->routeIs('admin.sliders.*')"
-        wire:navigate>
-        {{ __('Slider Section') }}
-    </flux:sidebar.item>
+                <flux:sidebar.item icon="photo" :href="route('admin.sliders.index')"
+                    :current="request()->routeIs('admin.sliders.*')" wire:navigate>
+                    {{ __('Slider Section') }}
+                </flux:sidebar.item>
 
-    <flux:sidebar.item
-        icon="document-text"
-        :href="route('admin.sections.index')"
-        :current="request()->routeIs('admin.sections.*')"
-        wire:navigate>
-        {{ __('Details Section') }}
-    </flux:sidebar.item>
+                <flux:sidebar.item icon="document-text" :href="route('admin.sections.index')"
+                    :current="request()->routeIs('admin.sections.*')" wire:navigate>
+                    {{ __('Details Section') }}
+                </flux:sidebar.item>
 
-    <flux:sidebar.item
-        icon="squares-2x2"
-        :href="route('admin.feature-cards.index')"
-        :current="request()->routeIs('admin.feature-cards.*')"
-        wire:navigate>
-        {{ __('Feature Cards') }}
-    </flux:sidebar.item>
+                <flux:sidebar.item icon="squares-2x2" :href="route('admin.feature-cards.index')"
+                    :current="request()->routeIs('admin.feature-cards.*')" wire:navigate>
+                    {{ __('Feature Cards') }}
+                </flux:sidebar.item>
 
-    <flux:sidebar.item
-        icon="chart-bar"
-        :href="route('admin.impacts.index')"
-        :current="request()->routeIs('admin.impacts.*')"
-        wire:navigate>
-        {{ __('Impact Section') }}
-    </flux:sidebar.item>
+                <flux:sidebar.item icon="chart-bar" :href="route('admin.impacts.index')"
+                    :current="request()->routeIs('admin.impacts.*')" wire:navigate>
+                    {{ __('Impact Section') }}
+                </flux:sidebar.item>
 
-    <flux:sidebar.item
-        icon="rocket-launch"
-        :href="route('admin.mission-slides.index')"
-        :current="request()->routeIs('admin.mission-slides.*')"
-        wire:navigate>
-        {{ __('Mission Slides') }}
-    </flux:sidebar.item>
+                <flux:sidebar.item icon="rocket-launch" :href="route('admin.mission-slides.index')"
+                    :current="request()->routeIs('admin.mission-slides.*')" wire:navigate>
+                    {{ __('Mission Slides') }}
+                </flux:sidebar.item>
 
-</flux:sidebar.group>
+            </flux:sidebar.group>
+            <flux:sidebar.group :heading="__('Empowering Lives')" collapsible>
+
+                <flux:sidebar.item icon="photo" :href="route('admin.main_sliders.index')"
+                    :current="request()->routeIs('admin.main_sliders.*')" wire:navigate>
+                    {{ __('Slider Section') }}
+                </flux:sidebar.item>
+
+            </flux:sidebar.group>
         </flux:sidebar.nav>
 
         <flux:spacer />

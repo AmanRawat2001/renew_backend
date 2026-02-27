@@ -28,6 +28,7 @@ class HomeController extends Controller
         foreach ($sections as $key => $sectionGroup) {
             $groupedSections[$key] = ContentSectionResource::collection($sectionGroup);
         }
+
         return response()->json(array_merge(
             ['slider' => SliderResource::collection($slider)],
             $groupedSections,
