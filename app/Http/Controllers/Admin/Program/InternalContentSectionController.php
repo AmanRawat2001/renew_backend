@@ -14,7 +14,7 @@ class InternalContentSectionController extends Controller
 {
     public function index(): View
     {
-        $sections = ContentSection::where('page','!=', SitePage::HOME->value)->ordered()->paginate(10);
+        $sections = ContentSection::where('page', '!=', SitePage::HOME->value)->ordered()->paginate(10);
 
         return view('pages.admin.other_section.index', compact('sections'));
     }
