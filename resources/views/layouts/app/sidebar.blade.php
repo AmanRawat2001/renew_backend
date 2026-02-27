@@ -51,7 +51,7 @@
                 </flux:sidebar.item>
 
             </flux:sidebar.group>
-            <flux:sidebar.group :heading="__('Empowering Lives')" collapsible>
+            <flux:sidebar.group :heading="__(' Program Page ')" collapsible>
 
                 <flux:sidebar.item icon="photo" :href="route('admin.main_sliders.index')"
                     :current="request()->routeIs('admin.main_sliders.*')" wire:navigate>
