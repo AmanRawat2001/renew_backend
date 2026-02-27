@@ -59,7 +59,7 @@
                         </label>
                         <input
                             type="text"
-                            id="title"
+                            id="title" disabled
                             name="title"
                             class="w-full px-4 py-2 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-zinc-900 text-neutral-900 dark:text-neutral-50 focus:outline-none focus:ring-2 focus:ring-blue-500 @error('title') border-red-500 @enderror"
                             placeholder="{{ __('Enter slide title') }}"

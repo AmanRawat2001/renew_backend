@@ -19,10 +19,10 @@ class HomeController extends Controller
     public function index(): View
     {
         $sliders = Slider::where('page', SitePage::HOME->value)->ordered()->paginate(12);
-        $missionSlides = MissionSlide::ordered()->get();
-        $impacts = Impact::active()->ordered()->get();
+        $missionSlides = MissionSlide::where('page', SitePage::HOME->value)->ordered()->get();
+        $impacts = Impact::where('page', SitePage::HOME->value)->active()->ordered()->get();
         $featureCards = FeatureCard::ordered()->get();
-        $contentSections = ContentSection::ordered()->get();
+        $contentSections = ContentSection::where('page', SitePage::HOME->value)->ordered()->get();
 
         return view('pages.admin.home.home', compact(
             'sliders',

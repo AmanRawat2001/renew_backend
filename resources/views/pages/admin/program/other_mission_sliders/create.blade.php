@@ -169,7 +169,15 @@
                 if (!editor || editor.classList.contains("ql-container")) return
                 const quillTitle = new Quill('#titleEditor', {
                     theme: 'snow',
-                    modules: { toolbar: [['bold', 'italic', 'underline'], ['link']] },
+                    modules: {  toolbar: [
+                            [{ header: [1, 2, 3, false] }],
+                            ['bold', 'italic', 'underline'],
+                            [{ list: 'ordered' }, { list: 'bullet' }],
+                            [{ color: [] }, { background: [] }],
+                            ['blockquote'],
+                            ['link'],
+                            ['clean']
+                        ] },
                     placeholder: '{{ __('Enter slide title') }}'
                 })
                 if (titleInput.value) quillTitle.root.innerHTML = titleInput.value
@@ -182,7 +190,15 @@
                 if (!editor || editor.classList.contains("ql-container")) return
                 const quillDescription = new Quill('#descriptionEditor', {
                     theme: 'snow',
-                    modules: { toolbar: [['bold', 'italic', 'underline'], ['blockquote'], [{ 'list': 'ordered'}, { 'list': 'bullet' }], ['link']] },
+                    modules: {  toolbar: [
+                            [{ header: [1, 2, 3, false] }],
+                            ['bold', 'italic', 'underline'],
+                            [{ list: 'ordered' }, { list: 'bullet' }],
+                            [{ color: [] }, { background: [] }],
+                            ['blockquote'],
+                            ['link'],
+                            ['clean']
+                        ] },
                     placeholder: '{{ __('Enter slide description') }}'
                 })
                 if (descriptionInput.value) quillDescription.root.innerHTML = descriptionInput.value

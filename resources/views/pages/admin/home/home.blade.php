@@ -203,7 +203,7 @@
                                 <tr class="border-b border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-zinc-900">
                                     <th class="px-4 py-3 text-left font-semibold text-neutral-900 dark:text-neutral-50">{{ __('Title') }}</th>
                                     <th class="px-4 py-3 text-left font-semibold text-neutral-900 dark:text-neutral-50">{{ __('Subtitle') }}</th>
-                                    <th class="px-4 py-3 text-left font-semibold text-neutral-900 dark:text-neutral-50">{{ __('Sequence') }}</th>
+                                    <th class="px-4 py-3 text-left font-semibold text-neutral-900 dark:text-neutral-50">{{ __('Section Key') }}</th>
                                     <th class="px-4 py-3 text-right font-semibold text-neutral-900 dark:text-neutral-50">{{ __('Actions') }}</th>
                                 </tr>
                             </thead>
@@ -212,7 +212,7 @@
                                     <tr class="border-b border-neutral-200 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-zinc-700/50">
                                         <td class="px-4 py-3 text-neutral-900 dark:text-neutral-50 max-w-xs truncate">{!! Str::limit(strip_tags($section->title), 50) !!}</td>
                                         <td class="px-4 py-3 text-neutral-600 dark:text-neutral-400 max-w-xs truncate">{!! Str::limit(strip_tags($section->subtitle), 50) !!}</td>
-                                        <td class="px-4 py-3 text-neutral-600 dark:text-neutral-400">{{ $section->sequence }}</td>
+                                        <td class="px-4 py-3 text-neutral-600 dark:text-neutral-400">{{ $section->section_key }}</td>
                                         <td class="px-4 py-3 text-right"><a href="{{ route('admin.sections.edit', $section) }}" class="text-blue-600 dark:text-blue-400 hover:underline text-xs">{{ __('Edit') }}</a></td>
                                     </tr>
                                 @endforeach
