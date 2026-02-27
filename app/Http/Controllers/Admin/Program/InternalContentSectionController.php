@@ -27,7 +27,7 @@ class InternalContentSectionController extends Controller
     public function store(StoreRequest $request): RedirectResponse
     {
         $validated = $request->validated();
-
+        $validated['page'] = $request->input('page', SitePage::HOME->value);
         ContentSection::create($validated);
 
         return redirect()->route('admin.other_sections.index')->with('success', 'Content section created successfully');
@@ -41,6 +41,7 @@ class InternalContentSectionController extends Controller
     public function update(UpdateRequest $request, ContentSection $other_section): RedirectResponse
     {
         $validated = $request->validated();
+        $validated['page'] = $request->input('page', SitePage::HOME->value);
         $other_section->update($validated);
 
         return redirect()->route('admin.other_sections.index')->with('success', 'Content section updated successfully');

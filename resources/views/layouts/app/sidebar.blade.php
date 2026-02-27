@@ -62,6 +62,10 @@
                     :current="request()->routeIs('admin.other_sections.*')" wire:navigate>
                     {{ __('Other Sections') }}
                 </flux:sidebar.item>
+                                <flux:sidebar.item icon="photo" :href="route('admin.other_impacts.index')"
+                    :current="request()->routeIs('admin.other_impacts.*')" wire:navigate>
+                    {{ __('Other Impacts') }}
+                </flux:sidebar.item>
 
             </flux:sidebar.group>
         </flux:sidebar.nav>

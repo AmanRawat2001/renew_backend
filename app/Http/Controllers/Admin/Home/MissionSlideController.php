@@ -37,19 +37,19 @@ class MissionSlideController extends Controller
         return redirect()->route('admin.mission_sliders.index')->with('success', 'Mission slide created successfully');
     }
 
-    public function edit(MissionSlide $missionSlide): View
+    public function edit(MissionSlide $mission_slider): View
     {
-        return view('pages.admin.home.mission_slider.edit', compact('missionSlide'));
+        return view('pages.admin.home.mission_slider.edit', compact('mission_slider'));
     }
 
-    public function update(UpdateRequest $request, MissionSlide $missionSlide): RedirectResponse
+    public function update(UpdateRequest $request, MissionSlide $mission_slider): RedirectResponse
     {
         $validated = $request->validated();
 
         if ($request->hasFile('image')) {
             // Delete old image
-            if ($missionSlide->image && Storage::disk('public')->exists($missionSlide->image)) {
-                Storage::disk('public')->delete($missionSlide->image);
+            if ($mission_slider->image && Storage::disk('public')->exists($mission_slider->image)) {
+                Storage::disk('public')->delete($mission_slider->image);
             }
             $validated['image'] = $request->file('image')->store('mission_sliders', 'public');
         } else {
@@ -57,7 +57,7 @@ class MissionSlideController extends Controller
             unset($validated['image']);
         }
 
-        $missionSlide->update($validated);
+        $mission_slider->update($validated);
 
         return redirect()->route('admin.mission_sliders.index')->with('success', 'Mission slide updated successfully');
     }
