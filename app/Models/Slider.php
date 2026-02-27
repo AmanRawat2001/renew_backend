@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Enums\SliderPage;
+use App\Enums\SitePage;
 use Illuminate\Database\Eloquent\Model;
 
 class Slider extends Model
@@ -20,7 +20,7 @@ class Slider extends Model
     protected $casts = [
         'is_active' => 'boolean',
         'sequence' => 'integer',
-        'page' => SliderPage::class,
+        'page' => SitePage::class,
     ];
 
     public function scopeActive($query)

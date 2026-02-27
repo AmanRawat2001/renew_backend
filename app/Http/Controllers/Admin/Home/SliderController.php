@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Home;
 
-use App\Enums\SliderPage;
+use App\Enums\SitePage;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Slider\StoreRequest;
 use App\Http\Requests\Slider\UpdateRequest;
@@ -15,7 +15,7 @@ class SliderController extends Controller
 {
     public function index(): View
     {
-        $sliders = Slider::where('page', SliderPage::HOME->value)->ordered()->paginate(12);
+        $sliders = Slider::where('page', SitePage::HOME->value)->ordered()->paginate(12);
 
         return view('pages.admin.slider.index', compact('sliders'));
     }
@@ -32,7 +32,7 @@ class SliderController extends Controller
         if ($request->hasFile('image')) {
             $validated['image'] = $request->file('image')->store('sliders', 'public');
         }
-        $validated['page'] = SliderPage::HOME->value;
+        $validated['page'] = SitePage::HOME->value;
         Slider::create($validated);
 
         return redirect()->route('admin.sliders.index')->with('success', 'Slider created successfully');
@@ -53,7 +53,7 @@ class SliderController extends Controller
             $validated['image'] = $request->file('image')->store('sliders', 'public');
         }
 
-        $validated['page'] = SliderPage::HOME->value;
+        $validated['page'] = SitePage::HOME->value;
         $slider->update($validated);
 
         return redirect()->route('admin.sliders.index')->with('success', 'Slider updated successfully');

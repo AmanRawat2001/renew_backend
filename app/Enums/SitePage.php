@@ -2,7 +2,7 @@
 
 namespace App\Enums;
 
-enum SliderPage: string
+enum SitePage: string
 {
     case HOME = 'home';
     case EMPOWERING_LIVES = 'empowering_lives';

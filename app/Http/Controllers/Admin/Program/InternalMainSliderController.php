@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Admin\EmpoweringLives;
+namespace App\Http\Controllers\Admin\Program;
 
-use App\Enums\SliderPage;
+use App\Enums\SitePage;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MainSlider\StoreRequest;
 use App\Http\Requests\MainSlider\UpdateRequest;
@@ -11,11 +11,11 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
-class MainSliderController extends Controller
+class InternalMainSliderController extends Controller
 {
     public function index(): View
     {
-        $sliders = Slider::where('page', SliderPage::EMPOWERING_LIVES->value)->ordered()->paginate(12);
+        $sliders = Slider::where('page', '!=', SitePage::HOME->value)->ordered()->paginate(12);
 
         return view('pages.admin.main_sliders.index', compact('sliders'));
     }
@@ -32,7 +32,6 @@ class MainSliderController extends Controller
         if ($request->hasFile('image')) {
             $validated['image'] = $request->file('image')->store('main_sliders', 'public');
         }
-        $validated['page'] = SliderPage::EMPOWERING_LIVES->value;
         Slider::create($validated);
 
         return redirect()->route('admin.main_sliders.index')->with('success', 'Slider created successfully');
@@ -53,7 +52,6 @@ class MainSliderController extends Controller
             $validated['image'] = $request->file('image')->store('main_sliders', 'public');
         }
 
-        $validated['page'] = SliderPage::EMPOWERING_LIVES->value;
         $main_slider->update($validated);
 
         return redirect()->route('admin.main_sliders.index')->with('success', 'Slider updated successfully');

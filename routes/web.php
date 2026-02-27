@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\Admin\EmpoweringLives\MainSliderController;
+use App\Http\Controllers\Admin\Program\InternalMainSliderController;
+use App\Http\Controllers\Admin\Program\InternalContentSectionController;
 use App\Http\Controllers\Admin\Home\ContentSectionController;
 use App\Http\Controllers\Admin\Home\FeatureCardController;
 use App\Http\Controllers\Admin\Home\ImpactController;
@@ -35,11 +36,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::resource('sections', ContentSectionController::class);
             Route::resource('feature-cards', FeatureCardController::class);
             Route::resource('impacts', ImpactController::class);
-            Route::resource('mission-slides', MissionSlideController::class);
+            Route::resource('mission_sliders', MissionSlideController::class);
         });
 
-        Route::prefix('empowering-lives')->group(function () {
-            Route::resource('main_sliders', MainSliderController::class);
+        Route::prefix('program')->group(function () {
+            Route::resource('main_sliders', InternalMainSliderController::class);
+            Route::resource('other_sections', InternalContentSectionController::class);
         });
     });
 

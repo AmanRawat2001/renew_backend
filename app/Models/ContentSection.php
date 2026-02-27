@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\SitePage;
 use Illuminate\Database\Eloquent\Model;
 
 class ContentSection extends Model
@@ -11,6 +12,11 @@ class ContentSection extends Model
         'title',
         'subtitle',
         'description',
+        'page',
+    ];
+
+    protected $casts = [
+        'page' => SitePage::class,
     ];
 
     public function scopeOrdered($query)

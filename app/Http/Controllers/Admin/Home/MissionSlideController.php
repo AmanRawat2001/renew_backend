@@ -16,12 +16,12 @@ class MissionSlideController extends Controller
     {
         $slides = MissionSlide::orderBy('sequence', 'asc')->paginate(12);
 
-        return view('pages.admin.mission-slide.index', compact('slides'));
+        return view('pages.admin.mission_slider.index', compact('slides'));
     }
 
     public function create(): View
     {
-        return view('pages.admin.mission-slide.create');
+        return view('pages.admin.mission_slider.create');
     }
 
     public function store(StoreRequest $request): RedirectResponse
@@ -29,17 +29,17 @@ class MissionSlideController extends Controller
         $validated = $request->validated();
 
         if ($request->hasFile('image')) {
-            $validated['image'] = $request->file('image')->store('mission-slides', 'public');
+            $validated['image'] = $request->file('image')->store('mission_sliders', 'public');
         }
 
         MissionSlide::create($validated);
 
-        return redirect()->route('admin.mission-slides.index')->with('success', 'Mission slide created successfully');
+        return redirect()->route('admin.mission_sliders.index')->with('success', 'Mission slide created successfully');
     }
 
     public function edit(MissionSlide $missionSlide): View
     {
-        return view('pages.admin.mission-slide.edit', compact('missionSlide'));
+        return view('pages.admin.mission_slider.edit', compact('missionSlide'));
     }
 
     public function update(UpdateRequest $request, MissionSlide $missionSlide): RedirectResponse
@@ -51,7 +51,7 @@ class MissionSlideController extends Controller
             if ($missionSlide->image && Storage::disk('public')->exists($missionSlide->image)) {
                 Storage::disk('public')->delete($missionSlide->image);
             }
-            $validated['image'] = $request->file('image')->store('mission-slides', 'public');
+            $validated['image'] = $request->file('image')->store('mission_sliders', 'public');
         } else {
             // If no new image, remove it from validated array to keep existing
             unset($validated['image']);
@@ -59,6 +59,6 @@ class MissionSlideController extends Controller
 
         $missionSlide->update($validated);
 
-        return redirect()->route('admin.mission-slides.index')->with('success', 'Mission slide updated successfully');
+        return redirect()->route('admin.mission_sliders.index')->with('success', 'Mission slide updated successfully');
     }
 }

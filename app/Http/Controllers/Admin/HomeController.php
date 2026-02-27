@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Enums\SliderPage;
+use App\Enums\SitePage;
 use App\Http\Controllers\Controller;
 use App\Models\ContentSection;
 use App\Models\FeatureCard;
@@ -18,7 +18,7 @@ class HomeController extends Controller
      */
     public function index(): View
     {
-        $sliders = Slider::where('page', SliderPage::HOME->value)->ordered()->paginate(12);
+        $sliders = Slider::where('page', SitePage::HOME->value)->ordered()->paginate(12);
         $missionSlides = MissionSlide::ordered()->get();
         $impacts = Impact::active()->ordered()->get();
         $featureCards = FeatureCard::ordered()->get();

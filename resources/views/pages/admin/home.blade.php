@@ -26,7 +26,6 @@
                             <thead>
                                 <tr class="border-b border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-zinc-900">
                                     <th class="px-4 py-3 text-left font-semibold text-neutral-900 dark:text-neutral-50">{{ __('Title') }}</th>
-                                    <th class="px-4 py-3 text-left font-semibold text-neutral-900 dark:text-neutral-50">{{ __('Page') }}</th>
                                     <th class="px-4 py-3 text-left font-semibold text-neutral-900 dark:text-neutral-50">{{ __('Sequence') }}</th>
                                     <th class="px-4 py-3 text-left font-semibold text-neutral-900 dark:text-neutral-50">{{ __('Status') }}</th>
                                     <th class="px-4 py-3 text-right font-semibold text-neutral-900 dark:text-neutral-50">{{ __('Actions') }}</th>
@@ -36,7 +35,6 @@
                                 @foreach ($sliders as $slider)
                                     <tr class="border-b border-neutral-200 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-zinc-700/50">
                                         <td class="px-4 py-3 text-neutral-900 dark:text-neutral-50 max-w-xs truncate">{!! Str::limit(strip_tags($slider->title), 50) !!}</td>
-                                        <td class="px-4 py-3"><span class="text-xs px-2 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded">{{ $slider->page?->label() }}</span></td>
                                         <td class="px-4 py-3 text-neutral-600 dark:text-neutral-400">{{ $slider->sequence }}</td>
                                         <td class="px-4 py-3">{{ $slider->is_active ? '✓' : '—' }}</td>
                                         <td class="px-4 py-3 text-right"><a href="{{ route('admin.sliders.edit', $slider) }}" class="text-blue-600 dark:text-blue-400 hover:underline text-xs">{{ __('Edit') }}</a></td>
@@ -55,7 +53,7 @@
         <div class="space-y-4">
             <div class="flex items-center justify-between">
                 <h2 class="text-2xl font-bold text-neutral-900 dark:text-neutral-50">{{ __('Mission Slides') }}</h2>
-                <a href="{{ route('admin.mission-slides.create') }}" wire:navigate class="inline-flex items-center gap-2 px-3 py-1 text-sm bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors">
+                <a href="{{ route('admin.mission_sliders.create') }}" wire:navigate class="inline-flex items-center gap-2 px-3 py-1 text-sm bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                     </svg>
@@ -82,7 +80,7 @@
                                         <td class="px-4 py-3 text-neutral-600 dark:text-neutral-400">{{ $slide->author_name ?? '—' }}</td>
                                         <td class="px-4 py-3 text-neutral-600 dark:text-neutral-400">{{ $slide->sequence }}</td>
                                         <td class="px-4 py-3">{{ $slide->is_active ? '✓' : '—' }}</td>
-                                        <td class="px-4 py-3 text-right"><a href="{{ route('admin.mission-slides.edit', $slide) }}" class="text-blue-600 dark:text-blue-400 hover:underline text-xs">{{ __('Edit') }}</a></td>
+                                        <td class="px-4 py-3 text-right"><a href="{{ route('admin.mission_sliders.edit', $slide) }}" class="text-blue-600 dark:text-blue-400 hover:underline text-xs">{{ __('Edit') }}</a></td>
                                     </tr>
                                 @endforeach
                             </tbody>

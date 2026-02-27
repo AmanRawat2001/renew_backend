@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Home;
 
+use App\Enums\SitePage;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ContentSection\StoreRequest;
 use App\Http\Requests\ContentSection\UpdateRequest;
@@ -13,7 +14,7 @@ class ContentSectionController extends Controller
 {
     public function index(): View
     {
-        $sections = ContentSection::ordered()->paginate(10);
+        $sections = ContentSection::where('page', SitePage::HOME->value)->ordered()->paginate(10);
 
         return view('pages.admin.content-section.index', compact('sections'));
     }
@@ -27,6 +28,7 @@ class ContentSectionController extends Controller
     {
         $validated = $request->validated();
 
+        $validated['page'] = SitePage::HOME->value;
         ContentSection::create($validated);
 
         return redirect()->route('admin.sections.index')->with('success', 'Content section created successfully');
@@ -40,7 +42,7 @@ class ContentSectionController extends Controller
     public function update(UpdateRequest $request, ContentSection $section): RedirectResponse
     {
         $validated = $request->validated();
-
+        $validated['page'] = SitePage::HOME->value;
         $section->update($validated);
 
         return redirect()->route('admin.sections.index')->with('success', 'Content section updated successfully');
