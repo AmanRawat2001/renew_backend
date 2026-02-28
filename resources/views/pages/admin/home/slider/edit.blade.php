@@ -17,7 +17,7 @@
 
         <!-- Form -->
         <div class="rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-zinc-800">
-            <form action="{{ route('admin.sliders.update', $slider) }}" method="POST" class="p-8">
+            <form action="{{ route('admin.sliders.update', $slider) }}"  enctype="multipart/form-data"  method="POST" class="p-8">
                 @csrf
                 @method('PUT')
 
