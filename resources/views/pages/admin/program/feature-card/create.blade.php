@@ -1,13 +1,13 @@
-<x-layouts::app :title="__('Edit Feature Card')">
+<x-layouts::app :title="__('Create Feature Card')">
     <div class="flex h-full w-full flex-1 flex-col gap-4">
         <!-- Header -->
         <div class="flex items-center justify-between">
             <div>
-                <h1 class="text-3xl font-semibold text-neutral-900 dark:text-neutral-50">{{ __('Edit Feature Card') }}
+                <h1 class="text-3xl font-semibold text-neutral-900 dark:text-neutral-50">{{ __('Create Feature Card') }}
                 </h1>
-                <p class="text-sm text-neutral-600 dark:text-neutral-400 mt-1">{!! $featureCard->title !!}</p>
+                <p class="text-sm text-neutral-600 dark:text-neutral-400 mt-1">{{ __('Add a new feature card') }}</p>
             </div>
-            <a href="{{ route('admin.feature-cards.index') }}" wire:navigate
+            <a href="{{ route('admin.other_feature_cards.index') }}" wire:navigate
                 class="inline-flex items-center gap-2 px-4 py-2 text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-50 transition-colors">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
@@ -18,10 +18,9 @@
 
         <!-- Form -->
         <div class="rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-zinc-800">
-            <form action="{{ route('admin.feature-cards.update', $featureCard) }}" method="POST"
-                enctype="multipart/form-data" class="p-8">
+            <form action="{{ route('admin.other_feature_cards.store') }}" method="POST" enctype="multipart/form-data"
+                class="p-8">
                 @csrf
-                @method('PUT')
 
                 <div class="space-y-8">
                     <!-- Title Field with Quill Editor -->
@@ -35,7 +34,7 @@
                                 class="w-full rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-zinc-900 @error('title') border-red-500 @enderror"
                                 style="height: 100px;"></div>
                         </div>
-                        <input type="hidden" id="title" name="title" value="{{ old('title', $featureCard->title) }}" required />
+                        <input type="hidden" id="title" name="title" value="{{ old('title') }}" required />
                         @error('title')
                             <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
                         @enderror
@@ -43,51 +42,37 @@
                             {{ __('Rich HTML editor for card title') }}</p>
                     </div>
 
-                    <!-- Description Field -->
+                    <!-- Description Field with Quill Editor -->
                     <div>
-                        <label for="descriptionEditor"
-                            class="block text-sm font-semibold text-neutral-900 dark:text-neutral-50 mb-2">
+                        <label class="block text-sm font-semibold text-neutral-900 dark:text-neutral-50 mb-2">
                             {{ __('Description') }} <span class="text-red-500">*</span>
                         </label>
                         <div wire:ignore>
                             <div id="descriptionEditor"
-                                class="bg-white dark:bg-zinc-900 border border-neutral-200 dark:border-neutral-700 rounded-lg overflow-hidden focus-within:ring-2 focus-within:ring-blue-500 @error('description') border-red-500 @enderror">
-                            </div>
+                                class="w-full rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-zinc-900 @error('description') border-red-500 @enderror"
+                                style="height: 250px;"></div>
                         </div>
-                        <input type="hidden" id="description" name="description"
-                            value="{{ old('description', $featureCard->description) }}">
+                        <input type="hidden" id="description" name="description" value="{{ old('description') }}"
+                            required />
                         @error('description')
                             <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
                         @enderror
+                        <p class="mt-1 text-xs text-neutral-600 dark:text-neutral-400">
+                            {{ __('Rich HTML editor for detailed content') }}</p>
                     </div>
 
                     <!-- Image Field -->
                     <div>
                         <label for="image"
                             class="block text-sm font-semibold text-neutral-900 dark:text-neutral-50 mb-2">
-                            {{ __('Image') }}
+                            {{ __('Image') }} <span class="text-red-500">*</span>
                         </label>
-                        <p class="text-xs text-neutral-600 dark:text-neutral-400 mb-2">
-                            {{ __('Leave empty to keep current image') }}</p>
                         <input type="file" id="image" name="image" accept="image/*"
-                            class="w-full px-4 py-2 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-zinc-900 text-neutral-900 dark:text-neutral-50 focus:outline-none focus:ring-2 focus:ring-blue-500 @error('image') border-red-500 @enderror" />
+                            class="w-full px-4 py-2 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-zinc-900 text-neutral-900 dark:text-neutral-50 focus:outline-none focus:ring-2 focus:ring-blue-500 @error('image') border-red-500 @enderror"
+                            required />
                         @error('image')
                             <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
                         @enderror
-
-                        <!-- Current Image -->
-                        @if ($featureCard->image)
-                            <div class="mt-4">
-                                <p class="text-xs font-medium text-neutral-600 dark:text-neutral-400 mb-2">
-                                    {{ __('Current Image') }}</p>
-                                <div class="rounded-lg overflow-hidden max-w-sm">
-                                    <img src="{{ asset('storage/' . $featureCard->image) }}"
-                                        alt="{{ $featureCard->title }}" class="w-full h-48 object-cover" />
-                                </div>
-                            </div>
-                        @endif
-
-                        <!-- Image Preview -->
                         <div id="imagePreview" class="mt-4 rounded-lg overflow-hidden max-w-sm" style="display: none;">
                             <img id="previewImg" src="" alt="Preview" class="w-full h-48 object-cover" />
                         </div>
@@ -101,8 +86,7 @@
                         </label>
                         <input type="number" id="sequence" name="sequence" min="0"
                             class="w-full px-4 py-2 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-zinc-900 text-neutral-900 dark:text-neutral-50 focus:outline-none focus:ring-2 focus:ring-blue-500 @error('sequence') border-red-500 @enderror"
-                            placeholder="{{ __('0') }}" value="{{ old('sequence', $featureCard->sequence) }}"
-                            required />
+                            placeholder="{{ __('0') }}" value="{{ old('sequence', 0) }}" required />
                         @error('sequence')
                             <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
                         @enderror
@@ -110,10 +94,36 @@
                             {{ __('Lower numbers appear first') }}</p>
                     </div>
 
+
+                    <!-- Page Selection Field -->
+                    <div>
+                        <label for="page"
+                            class="block text-sm font-semibold text-neutral-900 dark:text-neutral-50 mb-2">
+                            {{ __('Page') }} <span class="text-red-500">*</span>
+                        </label>
+                        <select id="page" name="page"
+                            class="w-full px-4 py-2 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-zinc-900 text-neutral-900 dark:text-neutral-50 focus:outline-none focus:ring-2 focus:ring-blue-500 @error('page') border-red-500 @enderror"
+                            required>
+                            <option value="">{{ __('Select a page') }}</option>
+                            @foreach (App\Enums\SitePage::cases() as $pageCase)
+                                <option value="{{ $pageCase->value }}"
+                                    {{ old('page') === $pageCase->value ? 'selected' : '' }}>
+                                    {{ $pageCase->label() }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('page')
+                            <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
+                        @enderror
+                        <p class="mt-1 text-xs text-neutral-600 dark:text-neutral-400">
+                            {{ __('Choose which page this slider appears on') }}
+                        </p>
+                    </div>
+
                     <!-- Active Status -->
                     <div class="flex items-center gap-3">
                         <input type="checkbox" id="is_active" name="is_active" value="1"
-                            {{ old('is_active', $featureCard->is_active) ? 'checked' : '' }}
+                            {{ old('is_active', true) ? 'checked' : '' }}
                             class="w-4 h-4 rounded border-neutral-300 text-blue-600 focus:ring-blue-500" />
                         <label for="is_active" class="text-sm font-medium text-neutral-900 dark:text-neutral-50">
                             {{ __('Active') }}
@@ -123,26 +133,17 @@
 
                 <!-- Actions -->
                 <div class="mt-8 flex items-center gap-3 pt-8 border-t border-neutral-200 dark:border-neutral-700">
-                    <form action="{{ route('admin.feature-cards.update', $featureCard) }}" method="POST"
-                        enctype="multipart/form-data">
-                        @csrf
-                        @method('PUT')
-
-                        <!-- form fields -->
-
-
-                        <!-- Update -->
-                        <button type="submit"
-                            class="inline-flex items-center gap-2 px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg">
-                            Update Card
-                        </button>
-
-                        <!-- Cancel -->
-                        <a href="{{ route('admin.feature-cards.index') }}" wire:navigate
-                            class="px-6 py-2 text-neutral-600">
-                            Cancel
-                        </a>
-                    </form>
+                    <button type="submit"
+                        class="inline-flex items-center gap-2 px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                        {{ __('Create Card') }}
+                    </button>
+                    <a href="{{ route('admin.other_feature_cards.index') }}" wire:navigate
+                        class="inline-flex items-center gap-2 px-6 py-2 text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-50 transition-colors">
+                        {{ __('Cancel') }}
+                    </a>
                 </div>
             </form>
         </div>
@@ -239,6 +240,10 @@
                 }
 
                 const form = document.querySelector('form')
+                quillDescription.on('text-change', function() {
+                    descriptionInput.value = quillDescription.root.innerHTML
+                })
+
                 if (form) {
                     form.addEventListener('submit', function() {
                         descriptionInput.value = quillDescription.root.innerHTML

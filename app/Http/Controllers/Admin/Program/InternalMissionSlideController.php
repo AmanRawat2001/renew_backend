@@ -15,7 +15,7 @@ class InternalMissionSlideController extends Controller
 {
     public function index(): View
     {
-        $slides = MissionSlide::where('page', '!=', SitePage::HOME->value)->ordered()->paginate(12);
+        $slides = MissionSlide::where('page', '!=', SitePage::HOME->value)->orderBy('title', 'asc')->paginate(3);   
 
         return view('pages.admin.program.other_mission_sliders.index', compact('slides'));
     }

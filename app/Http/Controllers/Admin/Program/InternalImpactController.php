@@ -16,12 +16,12 @@ class InternalImpactController extends Controller
     {
         $impacts = Impact::where('page', '!=', SitePage::HOME->value)->orderBy('sequence', 'asc')->paginate(12);
 
-        return view('pages.admin.program.other_impact.index', compact('impacts'));
+        return view('pages.admin.program.other_impacts.index', compact('impacts'));
     }
 
     public function create(): View
     {
-        return view('pages.admin.program.other_impact.create');
+        return view('pages.admin.program.other_impacts.create');
     }
 
     public function store(StoreRequest $request): RedirectResponse
@@ -34,7 +34,7 @@ class InternalImpactController extends Controller
 
     public function edit(Impact $other_impact): View
     {
-        return view('pages.admin.program.other_impact.edit', compact('other_impact'));
+        return view('pages.admin.program.other_impacts.edit', compact('other_impact'));
     }
 
     public function update(UpdateRequest $request, Impact $other_impact): RedirectResponse

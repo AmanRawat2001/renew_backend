@@ -41,6 +41,12 @@
                                 {{ $slide->is_active ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300' : 'bg-gray-100 dark:bg-gray-900/30 text-gray-700 dark:text-gray-300' }}">
                                 {{ $slide->is_active ? __('Active') : __('Inactive') }}
                             </div>
+                            <div class="absolute top-3 left-3">
+                                <span
+                                    class="px-3 py-1 text-xs font-semibold rounded-full  bg-white/80 dark:bg-black/50 backdrop-blur-md  text-gray-800 dark:text-white shadow">
+                                    {{ $slide->page?->label() }}
+                                </span>
+                            </div>
                         </div>
 
                         <!-- Content -->

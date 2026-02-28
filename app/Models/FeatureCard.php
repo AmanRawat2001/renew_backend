@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\SitePage;
 use Illuminate\Database\Eloquent\Model;
 
 class FeatureCard extends Model
@@ -12,10 +13,12 @@ class FeatureCard extends Model
         'image',
         'sequence',
         'is_active',
+        'page',
     ];
 
     protected $casts = [
         'is_active' => 'boolean',
+        'page' => SitePage::class,
     ];
 
     public function scopeOrdered($query)

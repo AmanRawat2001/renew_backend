@@ -70,6 +70,10 @@
                     :current="request()->routeIs('admin.other_mission_sliders.*')" wire:navigate>
                     {{ __('Other Mission Slides') }}
                 </flux:sidebar.item>
+                <flux:sidebar.item icon="photo" :href="route('admin.other_feature_cards.index')"
+                    :current="request()->routeIs('admin.other_feature_cards.*')" wire:navigate>
+                    {{ __('Other Feature Cards') }}
+                </flux:sidebar.item>
 
             </flux:sidebar.group>
         </flux:sidebar.nav>

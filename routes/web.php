@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\Home\MissionSlideController;
 use App\Http\Controllers\Admin\Home\SliderController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\Program\InternalContentSectionController;
+use App\Http\Controllers\Admin\Program\InternalFeatureCardController;
 use App\Http\Controllers\Admin\Program\InternalImpactController;
 use App\Http\Controllers\Admin\Program\InternalMainSliderController;
 use App\Http\Controllers\Admin\Program\InternalMissionSlideController;
@@ -46,6 +47,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::resource('other_sections', InternalContentSectionController::class);
             Route::resource('other_impacts', InternalImpactController::class);
             Route::resource('other_mission_sliders', InternalMissionSlideController::class);
+            Route::resource('other_feature_cards', InternalFeatureCardController::class);
         });
     });
 

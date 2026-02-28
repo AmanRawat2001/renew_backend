@@ -164,13 +164,13 @@
                                 @foreach ($featureCards as $card)
                                     <tr class="border-b border-neutral-200 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-zinc-700/50">
                                         <td class="px-4 py-3">
-                                            @if ($card->icon)
-                                                <img src="{{ asset('storage/' . $card->icon) }}" alt="{{ $card->title }}" class="h-8 w-8" />
+                                            @if ($card->image)
+                                                <img src="{{ asset('storage/' . $card->image) }}" alt="{!! $card->title !!}" class="h-8 w-8" />
                                             @else
                                                 <span class="text-neutral-400">—</span>
                                             @endif
                                         </td>
-                                        <td class="px-4 py-3 text-neutral-900 dark:text-neutral-50 max-w-xs truncate">{{ $card->title }}</td>
+                                        <td class="px-4 py-3 text-neutral-900 dark:text-neutral-50 max-w-xs truncate">{!! $card->title !!}</td>
                                         <td class="px-4 py-3 text-neutral-600 dark:text-neutral-400">{{ $card->sequence }}</td>
                                         <td class="px-4 py-3 text-right"><a href="{{ route('admin.feature-cards.edit', $card) }}" class="text-blue-600 dark:text-blue-400 hover:underline text-xs">{{ __('Edit') }}</a></td>
                                     </tr>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Home;
 
+use App\Enums\SitePage;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\FeatureCard\StoreRequest;
 use App\Http\Requests\FeatureCard\UpdateRequest;
@@ -14,7 +15,7 @@ class FeatureCardController extends Controller
 {
     public function index(): View
     {
-        $cards = FeatureCard::ordered()->paginate(12);
+        $cards = FeatureCard::where('page', SitePage::HOME->value)->orderBy('sequence', 'asc')->paginate(12);
 
         return view('pages.admin.home.feature-card.index', compact('cards'));
     }

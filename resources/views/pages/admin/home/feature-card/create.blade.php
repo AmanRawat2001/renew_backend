@@ -23,18 +23,23 @@
                 @csrf
 
                 <div class="space-y-8">
-                    <!-- Title Field -->
+                    <!-- Title Field with Quill Editor -->
                     <div>
-                        <label for="title"
+                        <label for="titleEditor"
                             class="block text-sm font-semibold text-neutral-900 dark:text-neutral-50 mb-2">
                             {{ __('Title') }} <span class="text-red-500">*</span>
                         </label>
-                        <input type="text" id="title" name="title"
-                            class="w-full px-4 py-2 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-zinc-900 text-neutral-900 dark:text-neutral-50 focus:outline-none focus:ring-2 focus:ring-blue-500 @error('title') border-red-500 @enderror"
-                            placeholder="{{ __('Enter card title') }}" value="{{ old('title') }}" required />
+                        <div wire:ignore>
+                            <div id="titleEditor"
+                                class="w-full rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-zinc-900 @error('title') border-red-500 @enderror"
+                                style="height: 100px;"></div>
+                        </div>
+                        <input type="hidden" id="title" name="title" value="{{ old('title') }}" required />
                         @error('title')
                             <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
                         @enderror
+                        <p class="mt-1 text-xs text-neutral-600 dark:text-neutral-400">
+                            {{ __('Rich HTML editor for card title') }}</p>
                     </div>
 
                     <!-- Description Field with Quill Editor -->
@@ -120,10 +125,54 @@
 
     @push('scripts')
         <script>
+            document.addEventListener("livewire:navigated", initTitleEditor)
             document.addEventListener("livewire:navigated", initDescriptionEditor)
             document.addEventListener("livewire:navigated", initImagePreview)
+            document.addEventListener("DOMContentLoaded", initTitleEditor)
             document.addEventListener("DOMContentLoaded", initDescriptionEditor)
             document.addEventListener("DOMContentLoaded", initImagePreview)
+
+            function initTitleEditor() {
+                const editor = document.getElementById('titleEditor')
+                const titleInput = document.getElementById('title')
+
+                if (!editor || editor.classList.contains("ql-container")) return
+
+                const quillTitle = new Quill('#titleEditor', {
+                    theme: 'snow',
+                    modules: {
+                        toolbar: [
+                            [{
+                                'header': [1, 2, 3, false]
+                            }],
+                            ['bold', 'italic', 'underline'],
+                            [{
+                                'color': []
+                            }, {
+                                'background': []
+                            }],
+                            ['link'],
+                            ['clean']
+                        ]
+                    },
+                    placeholder: '{{ __('Enter card title') }}'
+                })
+
+                if (titleInput.value) {
+                    quillTitle.root.innerHTML = titleInput.value
+                }
+
+                quillTitle.on('text-change', function() {
+                    titleInput.value = quillTitle.root.innerHTML
+                })
+
+                const form = document.querySelector('form')
+                if (form) {
+                    form.addEventListener('submit', function() {
+                        titleInput.value = quillTitle.root.innerHTML
+                    })
+                }
+            }
 
             function initDescriptionEditor() {
                 const editor = document.getElementById('descriptionEditor')
