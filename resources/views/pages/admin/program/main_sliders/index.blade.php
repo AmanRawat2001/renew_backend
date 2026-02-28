@@ -47,7 +47,7 @@
                                         </div>
                                     </td>
                                     <td class="px-6 py-4">
-                                        <img src="{{ url($slider->image) }}" alt="{{ $slider->title }}" class="h-12 w-20 object-cover rounded" />
+                                        <img src="{{ asset('storage/' . $slider->image) }}" alt="{{ $slider->title }}" class="h-12 w-20 object-cover rounded" />
                                     </td>
                                     <td class="px-6 py-4">
                                         <span class="text-sm text-neutral-700 dark:text-neutral-300">
