@@ -30,35 +30,30 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            script: |
             cd ${{ secrets.DEPLOY_PATH }}
-    
-            echo "📦 Syncing latest code..."
-            git fetch origin main
-            git reset --hard origin/main
-    
+            
             echo "🧹 Clearing Laravel caches..."
             php artisan optimize:clear || true
-    
+
             echo "📦 Installing composer dependencies..."
             composer install --no-dev --optimize-autoloader --no-interaction
-    
+
             echo "📦 Installing npm packages..."
             npm ci
-    
+
             echo "🏗️ Building frontend assets..."
             npm run build
-    
+
             echo "🧾 Fixing permissions..."
             sudo chown -R www-data:www-data storage bootstrap/cache database
             sudo chmod -R 775 storage bootstrap/cache database
             sudo chmod 664 database/database.sqlite
-    
+
             echo "🛠️ Running migrations..."
             php artisan migrate --force
-    
+
             echo "🚀 Restarting Apache..."
             sudo systemctl daemon-reload
             sudo systemctl restart apache2
-    
+
             echo "✅ Deployment completed successfully!"
