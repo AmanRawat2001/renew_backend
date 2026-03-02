@@ -20,10 +20,10 @@ class HomeController extends Controller
     public function index()
     {
         $slider = Slider::where('page', SitePage::HOME->value)->active()->ordered()->get();
-        $sections = ContentSection::ordered()->get()->groupBy('section_key');
-        $feature_cards = FeatureCard::active()->ordered()->get();
-        $impact_metrics = Impact::active()->ordered()->get();
-        $mission_slider = MissionSlide::active()->ordered()->get();
+        $sections = ContentSection::where('page', SitePage::HOME->value)->ordered()->get()->groupBy('section_key');
+        $feature_cards = FeatureCard::where('page', SitePage::HOME->value)->active()->ordered()->get();
+        $impact_metrics = Impact::where('page', SitePage::HOME->value)->active()->ordered()->get();
+        $mission_slider = MissionSlide::where('page', SitePage::HOME->value)->active()->ordered()->get();
         $groupedSections = [];
         foreach ($sections as $key => $sectionGroup) {
             $groupedSections[$key] = ContentSectionResource::collection($sectionGroup);
