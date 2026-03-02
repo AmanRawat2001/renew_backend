@@ -1,4 +1,4 @@
-name: Deploy Renew Backend App to AWS EC2
+name: Deploy Laravel to EC2
 
 on:
   push:
@@ -7,23 +7,10 @@ on:
 
 jobs:
   deploy:
-    name: Deploy to EC2
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Copy files to EC2
-        uses: appleboy/scp-action@v0.1.7
-        with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USER }}
-          key: ${{ secrets.EC2_SSH_KEY }}
-          source: "."
-          target: ${{ secrets.DEPLOY_PATH }}
-
-      - name: Run deployment commands on EC2
+      - name: Deploy on server
         uses: appleboy/ssh-action@v0.1.10
         with:
           host: ${{ secrets.EC2_HOST }}
@@ -32,31 +19,30 @@ jobs:
           script: |
             cd ${{ secrets.DEPLOY_PATH }}
 
-            echo "📦 Pulling latest code..."
-            git fetch origin main
-            git reset --hard origin/main
+            echo "Pulling latest code"
+            git pull origin main
 
-            echo "🧹 Clearing caches..."
-            php artisan optimize:clear || true
-
-            echo "📦 Installing composer dependencies..."
+            echo "Installing PHP dependencies"
             composer install --no-dev --optimize-autoloader
 
-            echo "📦 Installing npm packages..."
+            echo "Installing node packages"
             npm install --legacy-peer-deps
 
-            echo "🏗️ Building frontend assets..."
+            echo "Building assets"
             npm run build
 
-            echo "🧾 Setting correct permissions..."
-            sudo chown -R ubuntu:www-data storage bootstrap/cache
-            sudo chmod -R 775 storage bootstrap/cache
+            echo "Laravel optimize"
+            php artisan optimize:clear
+            php artisan config:cache
+            php artisan route:cache
+            php artisan view:cache
 
-            echo "🛠️ Running migrations..."
+            echo "Run migrations"
             php artisan migrate --force
 
-            echo "🚀 Restarting services..."
-            sudo systemctl restart nginx || true
-            sudo systemctl restart php8.2-fpm || true
+            echo "Fix permissions"
+            sudo chown -R www-data:www-data storage bootstrap/cache
+            sudo chmod -R 775 storage bootstrap/cache
 
-            echo "✅ Deployment completed successfully!"
+            echo "Restart services"
+            sudo systemctl restart apache2
