@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Storage;
 
 class FeatureCardResource extends JsonResource
 {
@@ -18,7 +19,7 @@ class FeatureCardResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'description' => $this->description,
-            'image' => $this->image ? url($this->image) : null,
+            'image' => $this->image ? url(Storage::url($this->image)) : null,
             'sequence' => $this->sequence,
         ];
     }

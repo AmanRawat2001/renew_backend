@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -19,7 +20,7 @@ class SliderResource extends JsonResource
             'title' => $this->title,
             'sub_title' => $this->sub_title,
             'button_text' => $this->button_text,
-            'image' => $this->image ? url($this->image) : null,
+            'image' => $this->image ? url(Storage::url($this->image)) : null,
             'sequence' => $this->sequence,
             'page' => $this->page?->value,
             'page_label' => $this->page?->label(),
