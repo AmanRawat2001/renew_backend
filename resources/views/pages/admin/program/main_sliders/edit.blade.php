@@ -18,7 +18,7 @@
         <!-- Form -->
         <div class="rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-zinc-800">
             <form
-                action="{{ route('admin.main_sliders.update', $main_slider) }}" method="POST" class="p-8">
+                action="{{ route('admin.main_sliders.update', $main_slider) }}" enctype="multipart/form-data"   method="POST" class="p-8">
 
                 @csrf
                 @method('PUT')
@@ -104,7 +104,7 @@
                             class="block text-sm font-semibold text-neutral-900 dark:text-neutral-50 mb-2">
                             {{ __('Page') }} <span class="text-red-500">*</span>
                         </label>
-                        <select id="page" name="page" disabled
+                        <select id="page" name="page"
                             class="w-full px-4 py-2 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-zinc-900 text-neutral-900 dark:text-neutral-50 focus:outline-none focus:ring-2 focus:ring-blue-500 @error('page') border-red-500 @enderror"
                             required>
                             <option value="">{{ __('Select a page') }}</option>

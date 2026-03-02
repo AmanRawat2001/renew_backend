@@ -13,6 +13,12 @@
                 {{ __('Add Card') }}
             </a>
         </div>
+         <!-- Success Message -->
+        @if (session('success'))
+            <div class="rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 p-4">
+                <p class="text-sm font-medium text-green-800 dark:text-green-200">{{ session('success') }}</p>
+            </div>
+        @endif
 
         <!-- Grid -->
         <div class="grid auto-rows-max gap-6 md:grid-cols-2 lg:grid-cols-3">

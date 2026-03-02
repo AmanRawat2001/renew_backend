@@ -15,7 +15,7 @@ class UpdateRequest extends FormRequest
     {
         return [
             'metric_number' => 'required|string|max:255',
-            'title' => 'required|string|max:255',
+            'title' => 'required|string',
             'description' => 'required|string',
             'sequence' => 'required|integer|min:0',
             'is_active' => 'boolean',

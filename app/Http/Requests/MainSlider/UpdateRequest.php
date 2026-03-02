@@ -10,6 +10,12 @@ class UpdateRequest extends FormRequest
     {
         return true;
     }
+    protected function prepareForValidation(): void
+    {
+        $this->merge([
+            'is_active' => $this->has('is_active') ? 1 : 0,
+        ]);
+    }
 
     public function rules(): array
     {
