@@ -1,10 +1,10 @@
-<x-layouts::app :title="__('Home Page')">
+<x-layouts::app :title="__('Empowering Lives')">
     <div class="flex h-full w-full flex-1 flex-col gap-6">
         <!-- Header -->
         <div class="flex items-center justify-between">
             <div>
-                <h1 class="text-3xl font-semibold text-neutral-900 dark:text-neutral-50">{{ __('Dashboard') }}</h1>
-                <p class="text-sm text-neutral-600 dark:text-neutral-400 mt-1">{{ __('Manage all your content') }}</p>
+                <h1 class="text-3xl font-semibold text-neutral-900 dark:text-neutral-50">{{ __('Empowering Lives') }}</h1>
+                <p class="text-sm text-neutral-600 dark:text-neutral-400 mt-1">{{ __('Manage all program content') }}</p>
             </div>
         </div>
 
@@ -39,7 +39,7 @@
                                     <tr
                                         class="border-b border-neutral-200 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-zinc-700/50">
                                         <td class="px-4 py-3 text-neutral-900 dark:text-neutral-50 max-w-xs truncate">
-                                            {!! $slider->title !!}</td>
+                                            {!!$slider->title !!}</td>
                                         <td class="px-4 py-3">
                                             @if ($slider->image)
                                                 <img src="{{ $slider->image ? asset('storage/' . $slider->image) : asset('images/default.png') }}"
@@ -51,7 +51,7 @@
                                             {{ $slider->sequence }}</td>
                                         <td class="px-4 py-3">{{ $slider->is_active ? '✓' : '—' }}</td>
                                         <td class="px-4 py-3 text-right"><a
-                                                href="{{ route('admin.sliders.edit', $slider) }}"
+                                                href="{{ route('admin.main_sliders.edit', $slider) }}"
                                                 class="text-blue-600 dark:text-blue-400 hover:underline text-xs">{{ __('Edit') }}</a>
                                         </td>
                                     </tr>
@@ -99,14 +99,13 @@
                                         <td class="px-4 py-3 text-neutral-900 dark:text-neutral-50 max-w-xs truncate">
                                             {!! Str::limit(strip_tags($slide->title), 50) !!}</td>
                                         <td class="px-4 py-3 text-neutral-600 dark:text-neutral-400">
-                                            <img src="{{ $slide->image ? asset('storage/' . $slide->image) : asset('images/default.png') }}"
-                                                alt="{{ $slide->title }}" class="h-15 object-cover rounded" />
+                                            <img src="{{ $slide->image ? asset('storage/' . $slide->image) : asset('images/default.png') }}" alt="{!! Str::limit(strip_tags($slide->title), 50) !!}" class="h-15 object-cover rounded" />
                                         </td>
                                         <td class="px-4 py-3 text-neutral-600 dark:text-neutral-400">
                                             {{ $slide->sequence }}</td>
                                         <td class="px-4 py-3">{{ $slide->is_active ? '✓' : '—' }}</td>
                                         <td class="px-4 py-3 text-right"><a
-                                                href="{{ route('admin.mission_sliders.edit', $slide) }}"
+                                                href="{{ route('admin.other_mission_sliders.edit', $slide) }}"
                                                 class="text-blue-600 dark:text-blue-400 hover:underline text-xs">{{ __('Edit') }}</a>
                                         </td>
                                     </tr>
@@ -162,7 +161,7 @@
                                         <td class="px-4 py-3">{{ $impact->down_arrow ? '⬇️' : '—' }}</td>
                                         <td class="px-4 py-3">{{ $impact->is_active ? '✓' : '—' }}</td>
                                         <td class="px-4 py-3 text-right"><a
-                                                href="{{ route('admin.impacts.edit', $impact) }}"
+                                                href="{{ route('admin.other_impacts.edit', $impact) }}"
                                                 class="text-blue-600 dark:text-blue-400 hover:underline text-xs">{{ __('Edit') }}</a>
                                         </td>
                                     </tr>
@@ -190,11 +189,14 @@
                             <thead>
                                 <tr
                                     class="border-b border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-zinc-900">
-                                    <th class="px-4 py-3 text-left font-semibold text-neutral-900 dark:text-neutral-50">
+                                    <th
+                                        class="px-4 py-3 text-left font-semibold text-neutral-900 dark:text-neutral-50">
                                         {{ __('Icon') }}</th>
-                                    <th class="px-4 py-3 text-left font-semibold text-neutral-900 dark:text-neutral-50">
+                                    <th
+                                        class="px-4 py-3 text-left font-semibold text-neutral-900 dark:text-neutral-50">
                                         {{ __('Title') }}</th>
-                                    <th class="px-4 py-3 text-left font-semibold text-neutral-900 dark:text-neutral-50">
+                                    <th
+                                        class="px-4 py-3 text-left font-semibold text-neutral-900 dark:text-neutral-50">
                                         {{ __('Sequence') }}</th>
                                     <th
                                         class="px-4 py-3 text-right font-semibold text-neutral-900 dark:text-neutral-50">
@@ -207,8 +209,7 @@
                                         class="border-b border-neutral-200 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-zinc-700/50">
                                         <td class="px-4 py-3">
                                             @if ($card->image)
-                                                <img src="{{ asset('storage/' . $card->image) }}"
-                                                    alt="{!! $card->title !!}" class="h-8 w-8" />
+                                                <img src="{{ asset('storage/' . $card->image) }}" class="h-8 w-8" />
                                             @else
                                                 <span class="text-neutral-400">—</span>
                                             @endif
@@ -218,7 +219,7 @@
                                         <td class="px-4 py-3 text-neutral-600 dark:text-neutral-400">
                                             {{ $card->sequence }}</td>
                                         <td class="px-4 py-3 text-right"><a
-                                                href="{{ route('admin.feature-cards.edit', $card) }}"
+                                                href="{{ route('admin.other_feature_cards.edit', $card) }}"
                                                 class="text-blue-600 dark:text-blue-400 hover:underline text-xs">{{ __('Edit') }}</a>
                                         </td>
                                     </tr>
@@ -271,7 +272,7 @@
                                         <td class="px-4 py-3 text-neutral-600 dark:text-neutral-400">
                                             {{ $section->section_key }}</td>
                                         <td class="px-4 py-3 text-right"><a
-                                                href="{{ route('admin.sections.edit', $section) }}"
+                                                href="{{ route('admin.other_sections.edit', $section) }}"
                                                 class="text-blue-600 dark:text-blue-400 hover:underline text-xs">{{ __('Edit') }}</a>
                                         </td>
                                     </tr>
@@ -286,4 +287,4 @@
             </div>
         </div>
     </div>
-</x-layouts::app>
+</x-layouts::app>   

@@ -11,6 +11,8 @@ use App\Http\Controllers\Admin\Program\InternalFeatureCardController;
 use App\Http\Controllers\Admin\Program\InternalImpactController;
 use App\Http\Controllers\Admin\Program\InternalMainSliderController;
 use App\Http\Controllers\Admin\Program\InternalMissionSlideController;
+use App\Http\Controllers\Admin\Program\ProgramController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -43,6 +45,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         });
 
         Route::prefix('program')->group(function () {
+            Route::get('/', [ProgramController::class, 'index'])->name('program');
             Route::resource('main_sliders', InternalMainSliderController::class);
             Route::resource('other_sections', InternalContentSectionController::class);
             Route::resource('other_impacts', InternalImpactController::class);
@@ -59,7 +62,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 |--------------------------------------------------------------------------
 */
 
-Route::view('/dashboard', 'dashboard')
+Route::get('/dashboard', [DashboardController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 

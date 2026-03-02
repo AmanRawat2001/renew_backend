@@ -17,9 +17,13 @@
 
         <flux:sidebar.nav>
             <flux:sidebar.group :heading="__('Pages')" class="grid">
-                <flux:sidebar.item icon="home" :href="route('admin.home')" :current="request()->routeIs('admin.home')"
-                    wire:navigate>
+                <flux:sidebar.item icon="home" :href="route('admin.home')"
+                    :current="request()->routeIs('admin.home')" wire:navigate>
                     {{ __('Home Page') }}
+                </flux:sidebar.item>
+                <flux:sidebar.item icon="home" :href="route('admin.program')"
+                    :current="request()->routeIs('program.*')" wire:navigate>
+                    {{ __('Empowering Lives') }}
                 </flux:sidebar.item>
             </flux:sidebar.group>
 
@@ -47,7 +51,7 @@
 
                 <flux:sidebar.item icon="rocket-launch" :href="route('admin.mission_sliders.index')"
                     :current="request()->routeIs('admin.mission_sliders.*')" wire:navigate>
-                    {{ __('Mission Slides') }}
+                    {{ __('Mission Sliders') }}
                 </flux:sidebar.item>
 
             </flux:sidebar.group>
@@ -55,24 +59,24 @@
 
                 <flux:sidebar.item icon="photo" :href="route('admin.main_sliders.index')"
                     :current="request()->routeIs('admin.main_sliders.*')" wire:navigate>
-                    {{ __('Slider Section') }}
+                    {{ __('Slider Sections') }}
                 </flux:sidebar.item>
 
-                <flux:sidebar.item icon="photo" :href="route('admin.other_sections.index')"
+                <flux:sidebar.item icon="document-text" :href="route('admin.other_sections.index')"
                     :current="request()->routeIs('admin.other_sections.*')" wire:navigate>
-                    {{ __('Other Sections') }}
+                    {{ __('Details Section') }}
                 </flux:sidebar.item>
-                <flux:sidebar.item icon="photo" :href="route('admin.other_impacts.index')"
-                    :current="request()->routeIs('admin.other_impacts.*')" wire:navigate>
-                    {{ __('Other Impacts') }}
-                </flux:sidebar.item>
-                <flux:sidebar.item icon="photo" :href="route('admin.other_mission_sliders.index')"
-                    :current="request()->routeIs('admin.other_mission_sliders.*')" wire:navigate>
-                    {{ __('Other Mission Slides') }}
-                </flux:sidebar.item>
-                <flux:sidebar.item icon="photo" :href="route('admin.other_feature_cards.index')"
+                <flux:sidebar.item icon="squares-2x2" :href="route('admin.other_feature_cards.index')"
                     :current="request()->routeIs('admin.other_feature_cards.*')" wire:navigate>
-                    {{ __('Other Feature Cards') }}
+                    {{ __('Feature Cards') }}
+                </flux:sidebar.item>
+                <flux:sidebar.item icon="chart-bar" :href="route('admin.other_impacts.index')"
+                    :current="request()->routeIs('admin.other_impacts.*')" wire:navigate>
+                    {{ __('Impact Section') }}
+                </flux:sidebar.item>
+                <flux:sidebar.item icon="rocket-launch" :href="route('admin.other_mission_sliders.index')"
+                    :current="request()->routeIs('admin.other_mission_sliders.*')" wire:navigate>
+                    {{ __('Mission Sliders') }}
                 </flux:sidebar.item>
 
             </flux:sidebar.group>

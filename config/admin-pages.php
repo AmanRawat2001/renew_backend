@@ -1,0 +1,70 @@
+<?php
+
+return [
+    'pages' => [
+        [
+            'name' => 'Home Page',
+            'route' => 'admin.home',
+            'icon' => 'M3 12l2-3m0 0l7-4 7 4M5 9v10a1 1 0 001 1h12a1 1 0 001-1V9m-9 11l4-4m0 0l4 4m-4-4V3',
+            'description' => 'Manage sliders and content',
+            'color' => 'blue',
+            'enabled' => true,
+        ],
+        [
+            'name' => 'Empowering Lives',
+            'route' => 'admin.program',
+            'icon' => 'M13 10V3L4 14h7v7l9-11h-7z',
+            'description' => 'Manage program content',
+            'color' => 'green',
+            'enabled' => true,
+        ],
+        [
+            'name' => 'Page 3',
+            'route' => null,
+            'icon' => 'M12 6V2m0 4a4 4 0 100 8 4 4 0 000-8zm0 13c-2.67 0-8 1.34-8 4v3h16v-3c0-2.66-5.33-4-8-4z',
+            'description' => 'Coming soon',
+            'color' => 'purple',
+            'enabled' => false,
+        ],
+        [
+            'name' => 'Page 4',
+            'route' => null,
+            'icon' => 'M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z',
+            'description' => 'Coming soon',
+            'color' => 'orange',
+            'enabled' => false,
+        ],
+        [
+            'name' => 'Page 5',
+            'route' => null,
+            'icon' => 'M13 10l-1 0m0-4l1 0m0 4v4m0 0l-8 0m8 0h0m-8 0V8m0 0l8 0m-8 0h0m0 4l8 0m-8 0h0',
+            'description' => 'Coming soon',
+            'color' => 'pink',
+            'enabled' => false,
+        ],
+        [
+            'name' => 'Page 6',
+            'route' => null,
+            'icon' => 'M20.354 15.354A9 9 0 008.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z',
+            'description' => 'Coming soon',
+            'color' => 'indigo',
+            'enabled' => false,
+        ],
+        [
+            'name' => 'Page 7',
+            'route' => null,
+            'icon' => 'M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
+            'description' => 'Coming soon',
+            'color' => 'cyan',
+            'enabled' => false,
+        ],
+        [
+            'name' => 'Page 8',
+            'route' => null,
+            'icon' => 'M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12a9 9 0 11-18 0 9 9 0 0118 0m-9 5h.01',
+            'description' => 'Coming soon',
+            'color' => 'amber',
+            'enabled' => false,
+        ],
+    ],
+];
