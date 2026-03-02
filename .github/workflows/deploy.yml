@@ -2,62 +2,71 @@ name: Laravel Deploy
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout
-      uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-    - name: Deploy to Server
-      uses: appleboy/ssh-action@v1.0.3
-      with:
-        host: ${{ secrets.EC2_HOST }}
-        username: ${{ secrets.EC2_USER }}
-        key: ${{ secrets.EC2_SSH_KEY }}
-        script: |
+      - name: Deploy to Server
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
 
-          set -e
+            set -e
 
-          BASE=/var/www
-          RELEASE=$BASE/renew-releases/release_$(date +%s)
+            BASE=/var/www
+            RELEASE=$BASE/renew-releases/release_$(date +%s)
+            REPO="https://github.com/AmanRawat2001/renew_backend.git"
 
-          echo "Creating release folder"
-          mkdir -p $RELEASE
+            echo "Create release folder"
+            mkdir -p $RELEASE
 
-          cd $RELEASE
+            echo "Clone repository"
+            git clone --depth 1 $REPO $RELEASE
 
-          echo "Cloning repo"
-          git clone https://github.com/AmanRawat2001/renew_backend.git .
+            cd $RELEASE
 
-          echo "Link env"
-          ln -s $BASE/renew-shared/.env .env
+            echo "Link shared .env"
+            ln -sfn $BASE/renew-shared/.env .env
 
-          echo "Link storage"
-          rm -rf storage
-          ln -s $BASE/renew-shared/storage storage
+            echo "Link shared storage"
+            rm -rf storage
+            ln -sfn $BASE/renew-shared/storage storage
 
-          echo "Install dependencies"
-          composer install --no-dev --optimize-autoloader
+            echo "Install composer dependencies"
+            composer install \
+              --no-dev \
+              --no-interaction \
+              --prefer-dist \
+              --optimize-autoloader
 
-          echo "Laravel optimize"
-          php artisan config:clear
-          php artisan cache:clear
-          php artisan config:cache
-          php artisan route:cache
-          php artisan view:cache
+            echo "Laravel optimize"
+            php artisan config:clear
+            php artisan cache:clear
 
-          echo "Run migrations"
-          php artisan migrate --force
+            echo "Run migrations"
+            php artisan migrate --force
 
-          echo "Fix permissions"
-          chown -R deploy:www-data $RELEASE
-          chmod -R 775 $RELEASE/storage
-          chmod -R 775 $RELEASE/bootstrap/cache
+            php artisan config:cache
+            php artisan route:cache
+            php artisan view:cache
 
-          echo "Switch release"
-          ln -sfn $RELEASE $BASE/renew
-          echo "Deployment successful"
+            echo "Fix permissions safely"
+            chgrp -R www-data $RELEASE || true
+            chmod -R ug+rwx $RELEASE/bootstrap/cache || true
+
+            echo "Switch current release"
+            ln -sfn $RELEASE $BASE/renew
+
+            echo "Cleanup old releases"
+            ls -dt $BASE/renew-releases/* | tail -n +6 | xargs rm -rf || true
+
+            echo "Deployment completed"
