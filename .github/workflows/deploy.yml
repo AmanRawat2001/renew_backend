@@ -60,7 +60,4 @@ jobs:
 
           echo "Switch release"
           ln -sfn $RELEASE $BASE/renew
-
-          echo "Reload PHP"
-          sudo service php8.4-fpm reload
           echo "Deployment successful"
