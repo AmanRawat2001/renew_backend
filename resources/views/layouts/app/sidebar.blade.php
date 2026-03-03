@@ -27,7 +27,8 @@
                 </flux:sidebar.item>
             </flux:sidebar.group>
 
-            <flux:sidebar.group :heading="__('Home Page Sections')" expandable>
+            <flux:sidebar.group :heading="__('Home Page Sections')" expandable
+                :expanded="request()->routeIs('admin.sliders.*', 'admin.sections.*', 'admin.feature-cards.*', 'admin.impacts.*', 'admin.mission_sliders.*')">
                 <flux:sidebar.item icon="photo" :href="route('admin.sliders.index')"
                     :current="request()->routeIs('admin.sliders.*')" wire:navigate>
                     {{ __('Slider Section') }}
@@ -54,7 +55,8 @@
                 </flux:sidebar.item>
             </flux:sidebar.group>
 
-            <flux:sidebar.group :heading="__('Program Page')" expandable>
+            <flux:sidebar.group :heading="__('Program Page')" expandable
+                :expanded="request()->routeIs('admin.main_sliders.*', 'admin.other_sections.*', 'admin.other_feature_cards.*', 'admin.other_impacts.*', 'admin.other_mission_sliders.*')">
                 <flux:sidebar.item icon="photo" :href="route('admin.main_sliders.index')"
                     :current="request()->routeIs('admin.main_sliders.*')" wire:navigate>
                     {{ __('Slider Sections') }}
