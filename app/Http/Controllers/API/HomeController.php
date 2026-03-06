@@ -17,7 +17,7 @@ use App\Models\Slider;
 
 class HomeController extends Controller
 {
-    public function index()
+    public function home()
     {
         $slider = Slider::where('page', SitePage::HOME->value)->active()->ordered()->get();
         $sections = ContentSection::where('page', SitePage::HOME->value)->ordered()->get()->groupBy('section_key');
@@ -36,6 +36,37 @@ class HomeController extends Controller
                 'feature_cards' => FeatureCardResource::collection($feature_cards),
                 'impact_metrics' => ImpactResource::collection($impact_metrics),
                 'mission_slider' => MissionSlideResource::collection($mission_slider),
+            ]
+        ));
+    }
+
+    public function empowering_lives()
+    {
+        $slider = Slider::where('page', SitePage::EMPOWERING_LIVES->value)->active()->ordered()->get();
+        $sections = ContentSection::where('page', SitePage::EMPOWERING_LIVES->value)->ordered()->get()->groupBy('section_key');
+        $feature_cards = FeatureCard::where('page', SitePage::EMPOWERING_LIVES->value)->active()->ordered()->get();
+        $impact_metrics = Impact::where('page', SitePage::EMPOWERING_LIVES->value)->active()->ordered()->get();
+        $mission_slider = MissionSlide::where('page', SitePage::EMPOWERING_LIVES->value)->active()->ordered()->get();
+        $groupedSections = [];
+        foreach ($sections as $key => $sectionGroup) {
+            $groupedSections[$key] = ContentSectionResource::collection($sectionGroup);
+        }
+        $missionGrouped = $mission_slider->groupBy('title');
+        if (isset($groupedSections['project_surya'])) {
+            $groupedSections['project_surya'] = [
+                'section' => $groupedSections['project_surya'],
+                'mission_slider' => MissionSlideResource::collection(
+                    $missionGrouped['project_surya'] ?? collect()
+                ),
+            ];
+        }
+
+        return response()->json(array_merge(
+            ['slider' => SliderResource::collection($slider)],
+            $groupedSections,
+            [
+                'feature_cards' => FeatureCardResource::collection($feature_cards),
+                'impact_metrics' => ImpactResource::collection($impact_metrics),
             ]
         ));
     }
