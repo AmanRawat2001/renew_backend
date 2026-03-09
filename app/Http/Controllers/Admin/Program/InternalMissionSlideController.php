@@ -30,7 +30,7 @@ class InternalMissionSlideController extends Controller
         $validated = $request->validated();
 
         if ($request->hasFile('image')) {
-            $validated['image'] = $request->file('image')->store('mission_sliders', 'public');
+            $validated['image'] = $request->file('image')->store('other_mission_sliders', 'public');
         }
         $validated['page'] = $request->input('page', SitePage::HOME->value);
         MissionSlide::create($validated);
