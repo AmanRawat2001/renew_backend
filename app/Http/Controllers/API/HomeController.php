@@ -153,6 +153,7 @@ class HomeController extends Controller
             ]
         ));
     }
+
     public function publications()
     {
         $slider = Slider::where('page', SitePage::PUBLICATIONS->value)->active()->ordered()->get();

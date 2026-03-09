@@ -18,7 +18,7 @@ class ProgramController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(): View
+    public function empowering(): View
     {
         $sliders = Slider::where('page', SitePage::EMPOWERING_LIVES)->orderBy('sequence')->get();
         $missionSlides = MissionSlide::where('page', SitePage::EMPOWERING_LIVES)->orderBy('sequence')->get();
@@ -26,7 +26,41 @@ class ProgramController extends Controller
         $featureCards = FeatureCard::where('page', SitePage::EMPOWERING_LIVES)->orderBy('sequence')->get();
         $contentSections = ContentSection::where('page', SitePage::EMPOWERING_LIVES)->get();
 
-        return view('pages.admin.program.index', compact(
+        return view('pages.admin.program.empowering', compact(
+            'sliders',
+            'missionSlides',
+            'impacts',
+            'featureCards',
+            'contentSections'
+        ));
+    }
+
+    public function accelerating(): View
+    {
+        $sliders = Slider::where('page', SitePage::ACCELERATING_INNOVATION)->orderBy('sequence')->get();
+        $missionSlides = MissionSlide::where('page', SitePage::ACCELERATING_INNOVATION)->orderBy('sequence')->get();
+        $impacts = Impact::where('page', SitePage::ACCELERATING_INNOVATION)->orderBy('sequence')->get();
+        $featureCards = FeatureCard::where('page', SitePage::ACCELERATING_INNOVATION)->orderBy('sequence')->get();
+        $contentSections = ContentSection::where('page', SitePage::ACCELERATING_INNOVATION)->get();
+
+        return view('pages.admin.program.accelerating', compact(
+            'sliders',
+            'missionSlides',
+            'impacts',
+            'featureCards',
+            'contentSections'
+        ));
+    }
+
+    public function powering(): View
+    {
+        $sliders = Slider::where('page', SitePage::POWERING_EDUCATION)->orderBy('sequence')->get();
+        $missionSlides = MissionSlide::where('page', SitePage::POWERING_EDUCATION)->orderBy('sequence')->get();
+        $impacts = Impact::where('page', SitePage::POWERING_EDUCATION)->orderBy('sequence')->get();
+        $featureCards = FeatureCard::where('page', SitePage::POWERING_EDUCATION)->orderBy('sequence')->get();
+        $contentSections = ContentSection::where('page', SitePage::POWERING_EDUCATION)->get();
+
+        return view('pages.admin.program.powering', compact(
             'sliders',
             'missionSlides',
             'impacts',

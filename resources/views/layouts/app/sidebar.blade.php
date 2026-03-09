@@ -21,11 +21,27 @@
                     wire:navigate>
                     {{ __('Home Page') }}
                 </flux:sidebar.item>
-                <flux:sidebar.item icon="bolt" :href="route('admin.program')"
-                    :current="request()->routeIs('admin.program')" wire:navigate>
+            </flux:sidebar.group>
+            <flux:sidebar.group :heading="__('Program Page')" class="grid">
+                <flux:sidebar.item icon="bolt" :href="route('admin.program.empowering')"
+                    :current="request()->routeIs('admin.program.empowering')" wire:navigate>
                     {{ __('Empowering Lives') }}
                 </flux:sidebar.item>
+                <flux:sidebar.item icon="device-tablet" :href="route('admin.program.innovation')"
+                    :current="request()->routeIs('admin.program.innovation')" wire:navigate>
+                    {{ __('Accelerating Innovation') }}
+                </flux:sidebar.item>
+                <flux:sidebar.item icon="book-open" :href="route('admin.program.education')"
+                    :current="request()->routeIs('admin.program.education')" wire:navigate>
+                    {{ __('Powering Education') }}
+                </flux:sidebar.item>
             </flux:sidebar.group>
+            <flux:sidebar.group :heading="__('Publications Page')" class="grid">
+                <flux:sidebar.item icon="newspaper" :href="route('admin.publications')"
+                    :current="request()->routeIs('admin.publications')" wire:navigate>
+                    {{ __('Publications') }}
+                </flux:sidebar.item>
+            </flux:sidebar.group> 
 
             <flux:sidebar.group :heading="__('Home Page Sections')" expandable
                 :expanded="request()->routeIs('admin.sliders.*', 'admin.sections.*', 'admin.feature-cards.*', 'admin.impacts.*', 'admin.mission_sliders.*')">
