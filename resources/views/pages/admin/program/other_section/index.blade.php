@@ -13,6 +13,13 @@
                 {{ __('Add Section') }}
             </a>
         </div>
+         <!-- Success Message -->
+        @if (session('success'))
+            <div
+                class="rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-900 p-4 text-green-800 dark:text-green-200">
+                {{ session('success') }}
+            </div>
+        @endif
 
         <!-- Table -->
         <div class="rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-zinc-800 overflow-hidden">

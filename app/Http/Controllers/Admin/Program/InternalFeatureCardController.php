@@ -33,6 +33,7 @@ class InternalFeatureCardController extends Controller
             $validated['image'] = $request->file('image')->store('other_feature_cards', 'public');
         }
 
+        $validated['page'] = $request->input('page', SitePage::HOME->value);
         FeatureCard::create($validated);
 
         return redirect()->route('admin.other_feature_cards.index')->with('success', 'Feature card created successfully');

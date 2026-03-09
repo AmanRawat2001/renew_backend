@@ -3,6 +3,7 @@
 namespace App\Http\Requests\ContentSection;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreRequest extends FormRequest
 {
@@ -14,7 +15,13 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'section_key' => 'required|string|unique:content_sections,section_key|max:255',
+            'section_key' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('content_sections', 'section_key')
+                    ->where(fn($query) => $query->where('page', $this->page)),
+            ],
             'title' => 'required|string|max:500',
             'subtitle' => 'nullable|string|max:500',
             'description' => 'required|string|max:5000',

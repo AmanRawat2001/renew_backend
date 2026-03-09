@@ -6,7 +6,7 @@
                 <h1 class="text-3xl font-semibold text-neutral-900 dark:text-neutral-50">{{ __('Create Impact Card') }}</h1>
                 <p class="text-sm text-neutral-600 dark:text-neutral-400 mt-1">{{ __('Add a new impact metric') }}</p>
             </div>
-            <a href="{{ route('admin.impacts.index') }}" wire:navigate class="inline-flex items-center gap-2 px-4 py-2 text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-50 transition-colors">
+            <a href="{{ route('admin.other_impacts.index') }}" wire:navigate class="inline-flex items-center gap-2 px-4 py-2 text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-50 transition-colors">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
                 </svg>
@@ -16,7 +16,7 @@
 
         <!-- Form -->
         <div class="rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-zinc-800">
-            <form action="{{ route('admin.impacts.store') }}" method="POST" class="p-8">
+            <form action="{{ route('admin.other_impacts.store') }}" method="POST" class="p-8">
                 @csrf
 
                 <div class="space-y-8">
@@ -166,7 +166,7 @@
                         </svg>
                         {{ __('Create Impact Card') }}
                     </button>
-                    <a href="{{ route('admin.impacts.index') }}" wire:navigate class="inline-flex items-center gap-2 px-6 py-2 text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-50 transition-colors">
+                    <a href="{{ route('admin.other_impacts.index') }}" wire:navigate class="inline-flex items-center gap-2 px-6 py-2 text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-50 transition-colors">
                         {{ __('Cancel') }}
                     </a>
                 </div>

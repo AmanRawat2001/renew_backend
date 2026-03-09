@@ -5,6 +5,7 @@ namespace App\Http\Requests\MainSlider;
 use App\Enums\SitePage;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Enum;
 
 class StoreRequest extends FormRequest
 {
@@ -19,7 +20,7 @@ class StoreRequest extends FormRequest
             'title' => 'required|string|max:1000',
             'sub_title' => 'required|string|max:1000',
             'image' => 'required|image',
-            'page' => 'required' | Rule::in(array_column(SitePage::cases(), 'value')),
+            'page' => ['required', new Enum(SitePage::class)],
             'sequence' => 'required|integer|min:1|max:999',
             'is_active' => 'nullable|boolean',
         ];
