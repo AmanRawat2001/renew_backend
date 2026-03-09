@@ -8,8 +8,8 @@ enum SitePage: string
     case EMPOWERING_LIVES = 'empowering_lives';
     case ACCELERATING_INNOVATION = 'accelerating_innovation';
     case POWERING_EDUCATION = 'powering_education';
-
     case PUBLICATIONS = 'publications';
+    case ABOUT_US = 'about_us';
 
     public function label(): string
     {
@@ -19,6 +19,7 @@ enum SitePage: string
             self::ACCELERATING_INNOVATION => 'Accelerating Innovation',
             self::POWERING_EDUCATION => 'Powering Education',
             self::PUBLICATIONS => 'Publications',
+            self::ABOUT_US => 'About Us',
         };
     }
 }
