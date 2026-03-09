@@ -131,8 +131,16 @@ class HomeController extends Controller
                 ),
             ];
         }
+        if (isset($groupedSections['lighting_lives'])) {
+            $groupedSections['lighting_lives'] = [
+                'section' => $groupedSections['lighting_lives'],
+                'mission_slider' => MissionSlideResource::collection(
+                    $missionGrouped['lighting_lives'] ?? collect()
+                ),
+            ];
+        }
         $mission_slider = $mission_slider->reject(function ($slide) {
-            return $slide->title === 'young_climate';
+            return $slide->title === 'young_climate' || $slide->title === 'lighting_lives';
         });
 
         return response()->json(array_merge(
