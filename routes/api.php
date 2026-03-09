@@ -12,3 +12,4 @@ Route::get('/home', [HomeController::class, 'home']);
 Route::get('/empowering-lives', [HomeController::class, 'empowering_lives']);
 Route::get('/accelerating-innovation', [HomeController::class, 'accelerating_innovation']);
 Route::get('/powering-education', [HomeController::class, 'powering_education']);
+Route::get('/publications', [HomeController::class, 'publications']);
