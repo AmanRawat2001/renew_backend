@@ -70,5 +70,12 @@
                 </div>
             @endif
         </div>
+
+        <!-- Pagination -->
+        @if ($sections->hasPages())
+            <div class="mt-6">
+                {{ $sections->links() }}
+            </div>
+        @endif
     </div>
 </x-layouts::app>
