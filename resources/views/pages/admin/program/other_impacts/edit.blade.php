@@ -4,7 +4,7 @@
         <div class="flex items-center justify-between">
             <div>
                 <h1 class="text-3xl font-semibold text-neutral-900 dark:text-neutral-50">{{ __('Edit Impact Card') }}</h1>
-                <p class="text-sm text-neutral-600 dark:text-neutral-400 mt-1">{{ $other_impact->title }}</p>
+                <p class="text-sm text-neutral-600 dark:text-neutral-400 mt-1">{!! $other_impact->title !!}</p>
             </div>
             <a href="{{ route('admin.other_impacts.index') }}" wire:navigate class="inline-flex items-center gap-2 px-4 py-2 text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-50 transition-colors">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
