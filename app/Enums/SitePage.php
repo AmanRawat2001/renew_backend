@@ -9,6 +9,8 @@ enum SitePage: string
     case ACCELERATING_INNOVATION = 'accelerating_innovation';
     case POWERING_EDUCATION = 'powering_education';
 
+    case PUBLICATIONS = 'publications';
+
     public function label(): string
     {
         return match ($this) {
@@ -16,6 +18,7 @@ enum SitePage: string
             self::EMPOWERING_LIVES => 'Empowering Lives',
             self::ACCELERATING_INNOVATION => 'Accelerating Innovation',
             self::POWERING_EDUCATION => 'Powering Education',
+            self::PUBLICATIONS => 'Publications',
         };
     }
 }
