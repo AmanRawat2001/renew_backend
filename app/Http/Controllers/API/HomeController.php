@@ -174,4 +174,23 @@ class HomeController extends Controller
             ]
         ));
     }
+    public function about_us()
+    {
+        $slider = Slider::where('page', SitePage::ABOUT_US->value)->active()->ordered()->get();
+        $sections = ContentSection::where('page', SitePage::ABOUT_US->value)->ordered()->get()->groupBy('section_key');
+        $feature_cards = FeatureCard::where('page', SitePage::ABOUT_US->value)->active()->ordered()->get();
+        $mission_slider = MissionSlide::where('page', SitePage::ABOUT_US->value)->active()->ordered()->get();
+        $groupedSections = [];
+        foreach ($sections as $key => $sectionGroup) {
+            $groupedSections[$key] = ContentSectionResource::collection($sectionGroup);
+        }
+
+        return response()->json(array_merge(
+            ['slider' => SliderResource::collection($slider)],
+            $groupedSections,
+            [
+                'feature_cards' => FeatureCardResource::collection($feature_cards),
+            ]
+        ));
+    }
 }
