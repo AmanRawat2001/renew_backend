@@ -10,3 +10,4 @@ Route::get('/user', function (Request $request) {
 
 Route::get('/home', [HomeController::class, 'home']);
 Route::get('/empowering-lives', [HomeController::class, 'empowering_lives']);
+Route::get('/accelerating-innovation', [HomeController::class, 'accelerating_innovation']);

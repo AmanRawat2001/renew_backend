@@ -20,7 +20,7 @@ class StoreRequest extends FormRequest
                 'string',
                 'max:255',
                 Rule::unique('content_sections', 'section_key')
-                    ->where(fn($query) => $query->where('page', $this->page)),
+                    ->where(fn ($query) => $query->where('page', $this->page)),
             ],
             'title' => 'required|string|max:500',
             'subtitle' => 'nullable|string|max:500',

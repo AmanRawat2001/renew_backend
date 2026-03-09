@@ -29,6 +29,7 @@ class InternalImpactController extends Controller
         $validated = $request->validated();
         $validated['page'] = $request->input('page', SitePage::HOME->value);
         Impact::create($validated);
+
         return redirect()->route('admin.other_impacts.index')->with('success', 'Impact card created successfully');
     }
 
@@ -42,6 +43,7 @@ class InternalImpactController extends Controller
         $validated = $request->validated();
         $validated['page'] = $request->input('page', SitePage::HOME->value);
         $other_impact->update($validated);
+
         return redirect()->route('admin.other_impacts.index')->with('success', 'Impact card updated successfully');
     }
 }

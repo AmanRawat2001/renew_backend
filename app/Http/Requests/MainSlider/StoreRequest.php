@@ -4,7 +4,6 @@ namespace App\Http\Requests\MainSlider;
 
 use App\Enums\SitePage;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Enum;
 
 class StoreRequest extends FormRequest
