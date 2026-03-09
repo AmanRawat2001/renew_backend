@@ -41,8 +41,10 @@
                     :current="request()->routeIs('admin.publications')" wire:navigate>
                     {{ __('Publications') }}
                 </flux:sidebar.item>
-            </flux:sidebar.group> 
+            </flux:sidebar.group>
+        </flux:sidebar.nav>
 
+        <flux:sidebar.group :heading="__('Detail Sections')">
             <flux:sidebar.group :heading="__('Home Page Sections')" expandable
                 :expanded="request()->routeIs('admin.sliders.*', 'admin.sections.*', 'admin.feature-cards.*', 'admin.impacts.*', 'admin.mission_sliders.*')">
                 <flux:sidebar.item icon="photo" :href="route('admin.sliders.index')"
@@ -98,7 +100,7 @@
                     {{ __('Mission Sliders') }}
                 </flux:sidebar.item>
             </flux:sidebar.group>
-        </flux:sidebar.nav>
+        </flux:sidebar.group>
 
         <flux:sidebar.spacer />
 
