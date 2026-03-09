@@ -15,7 +15,7 @@ class InternalFeatureCardController extends Controller
 {
     public function index(): View
     {
-        $cards = FeatureCard::where('page', '!=', SitePage::HOME->value)->orderBy('sequence', 'asc')->paginate(12);
+        $cards = FeatureCard::where('page', '!=', SitePage::HOME->value)->orderBy('page', 'asc')->paginate(12);
 
         return view('pages.admin.program.feature-card.index', compact('cards'));
     }

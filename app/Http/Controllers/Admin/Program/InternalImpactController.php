@@ -14,7 +14,7 @@ class InternalImpactController extends Controller
 {
     public function index(): View
     {
-        $impacts = Impact::where('page', '!=', SitePage::HOME->value)->orderBy('sequence', 'asc')->paginate(12);
+        $impacts = Impact::where('page', '!=', SitePage::HOME->value)->orderBy('page')->paginate(12);
 
         return view('pages.admin.program.other_impacts.index', compact('impacts'));
     }
