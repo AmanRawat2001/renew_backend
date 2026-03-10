@@ -43,12 +43,12 @@ return [
             'enabled' => true,
         ],
         [
-            'name' => 'Page 6',
-            'route' => null,
-            'icon' => 'M20.354 15.354A9 9 0 008.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z',
-            'description' => 'Coming soon',
+            'name' => 'About Us',
+            'route' => 'admin.about_us',
+            'icon' => 'M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
+            'description' => 'Manage about us content',
             'color' => 'indigo',
-            'enabled' => false,
+            'enabled' => true,
         ],
         [
             'name' => 'Page 7',

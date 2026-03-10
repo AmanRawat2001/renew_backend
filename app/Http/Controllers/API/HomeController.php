@@ -174,6 +174,7 @@ class HomeController extends Controller
             ]
         ));
     }
+
     public function about_us()
     {
         $slider = Slider::where('page', SitePage::ABOUT_US->value)->active()->ordered()->get();

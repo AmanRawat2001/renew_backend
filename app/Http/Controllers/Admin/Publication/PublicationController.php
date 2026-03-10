@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\Publication;
 
 use App\Enums\SitePage;
 use App\Http\Controllers\Controller;

@@ -21,6 +21,14 @@
                     wire:navigate>
                     {{ __('Home Page') }}
                 </flux:sidebar.item>
+                <flux:sidebar.item icon="newspaper" :href="route('admin.publications')"
+                    :current="request()->routeIs('admin.publications')" wire:navigate>
+                    {{ __('Publications') }}
+                </flux:sidebar.item>
+                                <flux:sidebar.item icon="newspaper" :href="route('admin.about_us')"
+                :current="request()->routeIs('admin.about_us')" wire:navigate>
+                {{ __('About Us') }}
+            </flux:sidebar.item>
             </flux:sidebar.group>
             <flux:sidebar.group :heading="__('Program Page')" class="grid">
                 <flux:sidebar.item icon="bolt" :href="route('admin.program.empowering')"
@@ -36,14 +44,8 @@
                     {{ __('Powering Education') }}
                 </flux:sidebar.item>
             </flux:sidebar.group>
-            <flux:sidebar.group :heading="__('Publications Page')" class="grid">
-                <flux:sidebar.item icon="newspaper" :href="route('admin.publications')"
-                    :current="request()->routeIs('admin.publications')" wire:navigate>
-                    {{ __('Publications') }}
-                </flux:sidebar.item>
-            </flux:sidebar.group>
-        </flux:sidebar.nav>
-
+    </flux:sidebar.nav>
+        
         <flux:sidebar.group :heading="__('Detail Sections')">
             <flux:sidebar.group :heading="__('Home Page Sections')" expandable
                 :expanded="request()->routeIs('admin.sliders.*', 'admin.sections.*', 'admin.feature-cards.*', 'admin.impacts.*', 'admin.mission_sliders.*')">

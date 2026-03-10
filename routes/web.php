@@ -1,19 +1,20 @@
 <?php
 
+use App\Http\Controllers\Admin\AboutUs\AboutUsController;
+use App\Http\Controllers\Admin\Dashboard\DashboardController;
 use App\Http\Controllers\Admin\Home\ContentSectionController;
 use App\Http\Controllers\Admin\Home\FeatureCardController;
+use App\Http\Controllers\Admin\Home\HomeController;
 use App\Http\Controllers\Admin\Home\ImpactController;
 use App\Http\Controllers\Admin\Home\MissionSlideController;
 use App\Http\Controllers\Admin\Home\SliderController;
-use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\Program\InternalContentSectionController;
 use App\Http\Controllers\Admin\Program\InternalFeatureCardController;
 use App\Http\Controllers\Admin\Program\InternalImpactController;
 use App\Http\Controllers\Admin\Program\InternalMainSliderController;
 use App\Http\Controllers\Admin\Program\InternalMissionSlideController;
 use App\Http\Controllers\Admin\Program\ProgramController;
-use App\Http\Controllers\Admin\PublicationController;
-use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Admin\Publication\PublicationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -55,9 +56,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::resource('other_mission_sliders', InternalMissionSlideController::class);
             Route::resource('other_feature_cards', InternalFeatureCardController::class);
         });
-        Route::prefix('publications')->group(function () {
-            Route::get('/', [PublicationController::class, 'index'])->name('publications');
-        });
+        Route::get('/publications', [PublicationController::class, 'index'])->name('publications');
+        Route::get('/about-us', [AboutUsController::class, 'index'])->name('about_us');
     });
 
 });
