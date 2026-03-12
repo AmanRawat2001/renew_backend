@@ -10,6 +10,7 @@ enum SitePage: string
     case POWERING_EDUCATION = 'powering_education';
     case PUBLICATIONS = 'publications';
     case ABOUT_US = 'about_us';
+    case GET_INVOLVED = 'get_involved';
 
     public function label(): string
     {
@@ -20,6 +21,7 @@ enum SitePage: string
             self::POWERING_EDUCATION => 'Powering Education',
             self::PUBLICATIONS => 'Publications',
             self::ABOUT_US => 'About Us',
+            self::GET_INVOLVED => 'Get Involved',
         };
     }
 }
