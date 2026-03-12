@@ -15,6 +15,9 @@ use App\Http\Controllers\Admin\Program\InternalMainSliderController;
 use App\Http\Controllers\Admin\Program\InternalMissionSlideController;
 use App\Http\Controllers\Admin\Program\ProgramController;
 use App\Http\Controllers\Admin\Publication\PublicationController;
+use App\Http\Controllers\Admin\GetInvolved\GetInvolvedController;
+;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -58,6 +61,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         });
         Route::get('/publications', [PublicationController::class, 'index'])->name('publications');
         Route::get('/about-us', [AboutUsController::class, 'index'])->name('about_us');
+        Route::get('/get-involved', [GetInvolvedController::class, 'index'])->name('get_involved');
     });
 
 });

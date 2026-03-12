@@ -29,6 +29,10 @@
                 :current="request()->routeIs('admin.about_us')" wire:navigate>
                 {{ __('About Us') }}
             </flux:sidebar.item>
+             <flux:sidebar.item icon="hand-raised" :href="route('admin.get_involved')"
+                    :current="request()->routeIs('admin.get_involved')" wire:navigate>
+                    {{ __('Get Involved') }}
+                </flux:sidebar.item>
             </flux:sidebar.group>
             <flux:sidebar.group :heading="__('Program Page')" class="grid">
                 <flux:sidebar.item icon="bolt" :href="route('admin.program.empowering')"
