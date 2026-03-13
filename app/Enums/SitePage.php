@@ -11,6 +11,7 @@ enum SitePage: string
     case PUBLICATIONS = 'publications';
     case ABOUT_US = 'about_us';
     case GET_INVOLVED = 'get_involved';
+    case ACE2026 = 'ace2026';
 
     public function label(): string
     {
@@ -22,6 +23,7 @@ enum SitePage: string
             self::PUBLICATIONS => 'Publications',
             self::ABOUT_US => 'About Us',
             self::GET_INVOLVED => 'Get Involved',
+            self::ACE2026 => 'ACE 2026',
         };
     }
 }
