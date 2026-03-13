@@ -194,6 +194,7 @@ class HomeController extends Controller
             ]
         ));
     }
+
     public function get_involved()
     {
         $slider = Slider::where('page', SitePage::GET_INVOLVED->value)->active()->ordered()->get();
@@ -218,6 +219,7 @@ class HomeController extends Controller
         $impact_metrics = $impact_metrics->reject(function ($metric) {
             return $metric->metric_number === 'partner_with_us';
         });
+
         return response()->json(array_merge(
             ['main_slider' => SliderResource::collection($slider)],
             $groupedSections,

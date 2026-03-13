@@ -47,6 +47,10 @@
                     :current="request()->routeIs('admin.program.education')" wire:navigate>
                     {{ __('Powering Education') }}
                 </flux:sidebar.item>
+                <flux:sidebar.item icon="star" :href="route('admin.program.ace_2026')"
+                    :current="request()->routeIs('admin.program.ace_2026')" wire:navigate>
+                    {{ __('ACE 2026') }}
+                </flux:sidebar.item>
             </flux:sidebar.group>
     </flux:sidebar.nav>
         
