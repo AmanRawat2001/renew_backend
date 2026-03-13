@@ -47,10 +47,21 @@
                             class="block text-sm font-semibold text-neutral-900 dark:text-neutral-50 mb-2">
                             {{ __('Title') }} <span class="text-red-500">*</span>
                         </label>
+                        <div class="mb-3 flex items-center gap-2">
+                            <input type="checkbox" id="useTitleEditor" class="w-4 h-4 rounded border-neutral-300 text-blue-600 focus:ring-blue-500" />
+                            <label for="useTitleEditor" class="text-xs text-neutral-600 dark:text-neutral-400">
+                                Use rich text editor
+                            </label>
+                        </div>
                         <input type="text" id="title" name="title"
                             class="w-full px-4 py-2 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-zinc-900 text-neutral-900 dark:text-neutral-50 focus:outline-none focus:ring-2 focus:ring-blue-500 @error('title') border-red-500 @enderror"
                             placeholder="{{ __('Enter slide title') }}"
                             value="{{ old('title') }}" required />
+                        <div id="titleEditorContainer" class="hidden" wire:ignore>
+                            <div id="titleEditor"
+                            class="w-full rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-zinc-900 @error('title') border-red-500 @enderror"
+                                style="height: 120px;"></div>
+                        </div>
                         @error('title')
                             <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
                         @enderror
@@ -146,46 +157,89 @@
 
     @push('scripts')
         <script>
-            document.addEventListener("livewire:navigated", initTitleEditor)
+            document.addEventListener("livewire:navigated", initTitleFieldMode)
             document.addEventListener("livewire:navigated", initDescriptionEditor)
             document.addEventListener("livewire:navigated", initImagePreview)
-            document.addEventListener("DOMContentLoaded", initTitleEditor)
+            document.addEventListener("DOMContentLoaded", initTitleFieldMode)
             document.addEventListener("DOMContentLoaded", initDescriptionEditor)
             document.addEventListener("DOMContentLoaded", initImagePreview)
 
-            function initTitleEditor() {
+            function initTitleFieldMode() {
                 const editor = document.getElementById('titleEditor')
+                const editorContainer = document.getElementById('titleEditorContainer')
                 const titleInput = document.getElementById('title')
-                if (!editor || editor.classList.contains("ql-container")) return
-                const quillTitle = new Quill('#titleEditor', {
-                    theme: 'snow',
-                    modules: {
-                        toolbar: [
-                            [{
-                                header: [1, 2, 3, false]
-                            }],
-                            ['bold', 'italic', 'underline'],
-                            [{
-                                list: 'ordered'
-                            }, {
-                                list: 'bullet'
-                            }],
-                            [{
-                                color: []
-                            }, {
-                                background: []
-                            }],
-                            ['blockquote'],
-                            ['link'],
-                            ['clean']
-                        ]
-                    },
-                    placeholder: '{{ __('Enter slide title') }}'
-                })
-                if (titleInput.value) quillTitle.root.innerHTML = titleInput.value
-                quillTitle.on('text-change', function() {
-                    titleInput.value = quillTitle.root.innerHTML
-                })
+                const checkbox = document.getElementById('useTitleEditor')
+
+                if (!editor || !editorContainer || !titleInput || !checkbox) return
+
+                if (!editor.dataset.initialized) {
+                    const quillTitle = new Quill('#titleEditor', {
+                        theme: 'snow',
+                        modules: {
+                            toolbar: [
+                                [{
+                                    header: [1, 2, 3, false]
+                                }],
+                                ['bold', 'italic', 'underline'],
+                                [{
+                                    list: 'ordered'
+                                }, {
+                                    list: 'bullet'
+                                }],
+                                [{
+                                    color: []
+                                }, {
+                                    background: []
+                                }],
+                                ['blockquote'],
+                                ['link'],
+                                ['clean']
+                            ]
+                        },
+                        placeholder: '{{ __('Enter slide title') }}'
+                    })
+
+                    if (titleInput.value) {
+                        quillTitle.root.innerHTML = titleInput.value
+                    }
+
+                    quillTitle.on('text-change', function() {
+                        titleInput.value = quillTitle.root.innerHTML
+                    })
+
+                    editor.dataset.initialized = "true"
+                    editor.__quill = quillTitle
+                }
+
+                if (checkbox.dataset.listener !== "true") {
+                    checkbox.addEventListener('change', function() {
+                        toggleTitleMode(checkbox, titleInput, editor, editorContainer)
+                    })
+                    checkbox.dataset.listener = "true"
+                }
+
+                toggleTitleMode(checkbox, titleInput, editor, editorContainer)
+            }
+
+            function toggleTitleMode(checkbox, titleInput, editor, editorContainer) {
+                const quillTitle = editor.__quill
+                const useRichText = checkbox.checked
+
+                if (useRichText) {
+                    editorContainer.classList.remove('hidden')
+                    titleInput.classList.add('hidden')
+
+                    if (quillTitle && titleInput.value) {
+                        quillTitle.root.innerHTML = titleInput.value
+                    }
+                } else {
+                    editorContainer.classList.add('hidden')
+                    titleInput.classList.remove('hidden')
+
+                    if (quillTitle) {
+                        titleInput.value = quillTitle.getText().trim()
+                    }
+                }
             }
 
             function initDescriptionEditor() {
