@@ -23,7 +23,7 @@ enum SitePage: string
             self::PUBLICATIONS => 'Publications',
             self::ABOUT_US => 'About Us',
             self::GET_INVOLVED => 'Get Involved',
-            self::ACE2026 => 'ACE 2026',
+            self::ACE2026 => 'ReNew Awards for Climate Entrepreneurs 2026',
         };
     }
 }

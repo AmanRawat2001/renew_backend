@@ -68,4 +68,5 @@ class ProgramController extends Controller
             'contentSections'
         ));
     }
+
 }

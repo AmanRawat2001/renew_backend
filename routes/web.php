@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AboutUs\AboutUsController;
 use App\Http\Controllers\Admin\Dashboard\DashboardController;
+use App\Http\Controllers\Admin\Program\Ace2026Controller;
 use App\Http\Controllers\Admin\Home\ContentSectionController;
 use App\Http\Controllers\Admin\Home\FeatureCardController;
 use App\Http\Controllers\Admin\Home\HomeController;
@@ -53,6 +54,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::get('empowering', [ProgramController::class, 'empowering'])->name('program.empowering');
             Route::get('accelerating-innovation', [ProgramController::class, 'accelerating'])->name('program.innovation');
             Route::get('powering-education', [ProgramController::class, 'powering'])->name('program.education');
+            Route::get('ace-2026', [Ace2026Controller::class, 'index'])->name('program.ace_2026');
             Route::resource('main_sliders', InternalMainSliderController::class);
             Route::resource('other_sections', InternalContentSectionController::class);
             Route::resource('other_impacts', InternalImpactController::class);
