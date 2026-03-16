@@ -6,12 +6,29 @@
                 <h1 class="text-3xl font-semibold text-neutral-900 dark:text-neutral-50">{{ __('Feature Cards') }}</h1>
                 <p class="text-sm text-neutral-600 dark:text-neutral-400 mt-1">{{ __('Manage your feature cards') }}</p>
             </div>
-            <a href="{{ route('admin.other_feature_cards.create') }}" wire:navigate class="inline-flex items-center gap-2 px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-                </svg>
-                {{ __('Add Card') }}
-            </a>
+            <div class="flex items-center gap-3">
+                <!-- Filter -->
+                <form method="GET">
+                    <select name="site_page" onchange="this.form.submit()"
+                        class="px-3 py-2 border rounded-lg dark:bg-zinc-800 dark:border-neutral-700">
+                        <option value="">All Pages</option>
+                        @foreach (\App\Enums\SitePage::cases() as $sitePage)
+                            @if ($sitePage->value !== \App\Enums\SitePage::HOME->value)
+                                <option value="{{ $sitePage->value }}"
+                                    {{ request('site_page') == $sitePage->value ? 'selected' : '' }}>
+                                    {{ $sitePage->label() }}
+                                </option>
+                            @endif
+                        @endforeach
+                    </select>
+                </form>
+                <a href="{{ route('admin.other_feature_cards.create') }}" wire:navigate class="inline-flex items-center gap-2 px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                    </svg>
+                    {{ __('Add Card') }}
+                </a>
+            </div>
         </div>
 
         <!-- Grid -->

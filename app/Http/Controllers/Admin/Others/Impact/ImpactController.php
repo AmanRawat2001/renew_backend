@@ -14,7 +14,11 @@ class ImpactController extends Controller
 {
     public function index(): View
     {
-        $impacts = Impact::where('page', '!=', SitePage::HOME->value)->orderBy('page')->paginate(12);
+        $query = Impact::where('page', '!=', SitePage::HOME->value);
+        if (request()->filled('site_page')) {
+            $query->where('page', request('site_page'));
+        }
+        $impacts = $query->orderBy('page')->paginate(12)->withQueryString();
 
         return view('pages.admin.program.other_impacts.index', compact('impacts'));
     }

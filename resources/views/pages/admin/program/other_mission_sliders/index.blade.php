@@ -19,7 +19,7 @@
                         @foreach (\App\Enums\SitePage::cases() as $page)
                             @if ($page->value !== \App\Enums\SitePage::HOME->value)
                                 <option value="{{ $page->value }}"
-                                    {{ request('page') == $page->value ? 'selected' : '' }}>
+                                    {{ request('site_page') == $page->value ? 'selected' : '' }}>
                                     {{ $page->label() }}
                                 </option>
                             @endif

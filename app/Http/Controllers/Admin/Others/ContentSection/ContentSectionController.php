@@ -14,7 +14,11 @@ class ContentSectionController extends Controller
 {
     public function index(): View
     {
-        $sections = ContentSection::where('page', '!=', SitePage::HOME->value)->ordered()->paginate(10);
+        $query = ContentSection::where('page', '!=', SitePage::HOME->value);
+        if (request()->filled('site_page')) {
+            $query->where('page', request('site_page'));
+        }
+        $sections = $query->ordered()->paginate(10)->withQueryString();
 
         return view('pages.admin.program.other_section.index', compact('sections'));
     }
