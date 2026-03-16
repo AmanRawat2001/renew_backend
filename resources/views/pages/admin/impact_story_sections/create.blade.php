@@ -43,14 +43,27 @@
                         class="block text-sm font-semibold text-neutral-900 dark:text-neutral-50 mb-2">
                         {{ __('Main Image') }} <span class="text-red-500">*</span>
                     </label>
-                    <input type="file" id="main_image" name="main_image" accept="image/*"
-                        class="w-full px-4 py-2 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-zinc-900 text-neutral-900 dark:text-neutral-50 focus:outline-none focus:ring-2 focus:ring-blue-500 @error('main_image') border-red-500 @enderror"
-                        required />
-                    @error('main_image')
-                        <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
-                    @enderror
-                    <div id="imagePreview" class="mt-4 rounded-lg overflow-hidden max-w-sm" style="display: none;">
-                        <img id="previewImg" src="" alt="Preview" class="w-full h-48 object-cover" />
+                    <div class="flex flex-col gap-4">
+                        <div class="flex-1">
+                            <input type="file" id="main_image" name="main_image" accept="image/*"
+                                class="w-full px-4 py-3 rounded-lg border-2 border-dashed border-neutral-300 dark:border-neutral-600 bg-neutral-50 dark:bg-zinc-900 text-neutral-900 dark:text-neutral-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('main_image') border-red-500 @enderror cursor-pointer file:mr-2 file:py-2 file:px-4 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700"
+                                required />
+                            @error('main_image')
+                                <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
+                            @enderror
+                            <p class="mt-2 text-xs text-neutral-600 dark:text-neutral-400">
+                                {{ __('Drag and drop or click to select image') }}
+                            </p>
+                        </div>
+                        <div id="imagePreview" class="hidden">
+                            <div class="rounded-lg overflow-hidden border border-neutral-200 dark:border-neutral-700">
+                                <img id="previewImg" src="" alt="Preview" class="w-full  h-40 object-cover" />
+                            </div>
+                            <button type="button" id="removeImage"
+                                class="mt-2 text-xs text-red-600 dark:text-red-400 hover:underline">
+                                {{ __('Remove Image') }}
+                            </button>
+                        </div>
                     </div>
                 </div>
 
@@ -68,28 +81,28 @@
                     @enderror
                 </div>
                 <div>
-                        <label for="page"
-                            class="block text-sm font-semibold text-neutral-900 dark:text-neutral-50 mb-2">
-                            {{ __('Page') }} <span class="text-red-500">*</span>
-                        </label>
-                        <select id="page" name="page"
-                            class="w-full px-4 py-2 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-zinc-900 text-neutral-900 dark:text-neutral-50 focus:outline-none focus:ring-2 focus:ring-blue-500 @error('page') border-red-500 @enderror"
-                            required>
-                            <option value="">{{ __('Select a page') }}</option>
-                            @foreach (App\Enums\SitePage::cases() as $pageCase)
-                                <option value="{{ $pageCase->value }}"
-                                    {{ old('page') === $pageCase->value ? 'selected' : '' }}>
-                                    {{ $pageCase->label() }}
-                                </option>
-                            @endforeach
-                        </select>
-                        @error('page')
-                            <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
-                        @enderror
-                        <p class="mt-1 text-xs text-neutral-600 dark:text-neutral-400">
-                            {{ __('Choose which page this slider appears on') }}
-                        </p>
-                    </div>
+                    <label for="page"
+                        class="block text-sm font-semibold text-neutral-900 dark:text-neutral-50 mb-2">
+                        {{ __('Page') }} <span class="text-red-500">*</span>
+                    </label>
+                    <select id="page" name="page"
+                        class="w-full px-4 py-2 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-zinc-900 text-neutral-900 dark:text-neutral-50 focus:outline-none focus:ring-2 focus:ring-blue-500 @error('page') border-red-500 @enderror"
+                        required>
+                        <option value="">{{ __('Select a page') }}</option>
+                        @foreach (App\Enums\SitePage::cases() as $pageCase)
+                            <option value="{{ $pageCase->value }}"
+                                {{ old('page') === $pageCase->value ? 'selected' : '' }}>
+                                {{ $pageCase->label() }}
+                            </option>
+                        @endforeach
+                    </select>
+                    @error('page')
+                        <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
+                    @enderror
+                    <p class="mt-1 text-xs text-neutral-600 dark:text-neutral-400">
+                        {{ __('Choose which page this slider appears on') }}
+                    </p>
+                </div>
 
                 <!-- Status Field -->
                 <div class="flex items-center gap-3">
@@ -100,7 +113,7 @@
                         {{ __('Active') }}
                     </label>
                 </div>
-                
+
 
                 <!-- Actions -->
                 <button type="submit"
@@ -124,6 +137,7 @@
                 const imageInput = document.getElementById('main_image');
                 const imagePreview = document.getElementById('imagePreview');
                 const previewImg = document.getElementById('previewImg');
+                const removeImageBtn = document.getElementById('removeImage');
 
                 imageInput.addEventListener('change', function(e) {
                     const file = e.target.files[0];
@@ -131,11 +145,42 @@
                         const reader = new FileReader();
                         reader.onload = function(event) {
                             previewImg.src = event.target.result;
-                            imagePreview.style.display = 'block';
+                            imagePreview.classList.remove('hidden');
                         }
                         reader.readAsDataURL(file);
                     } else {
-                        imagePreview.style.display = 'none';
+                        imagePreview.classList.add('hidden');
+                    }
+                });
+
+                removeImageBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    imageInput.value = '';
+                    imagePreview.classList.add('hidden');
+                });
+
+                // Drag and drop support
+                const inputWrapper = imageInput.parentElement;
+                inputWrapper.addEventListener('dragover', function(e) {
+                    e.preventDefault();
+                    inputWrapper.classList.add('bg-blue-50', 'dark:bg-blue-900/20');
+                });
+
+                inputWrapper.addEventListener('dragleave', function(e) {
+                    e.preventDefault();
+                    inputWrapper.classList.remove('bg-blue-50', 'dark:bg-blue-900/20');
+                });
+
+                inputWrapper.addEventListener('drop', function(e) {
+                    e.preventDefault();
+                    inputWrapper.classList.remove('bg-blue-50', 'dark:bg-blue-900/20');
+                    const files = e.dataTransfer.files;
+                    if (files.length > 0) {
+                        imageInput.files = files;
+                        const event = new Event('change', {
+                            bubbles: true
+                        });
+                        imageInput.dispatchEvent(event);
                     }
                 });
             });
