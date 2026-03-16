@@ -57,7 +57,7 @@
                         </div>
                         <div id="imagePreview" class="hidden">
                             <div class="rounded-lg overflow-hidden border border-neutral-200 dark:border-neutral-700">
-                                <img id="previewImg" src="" alt="Preview" class="w-full  h-40 object-cover" />
+                                <img id="previewImg" src="" alt="Preview" class="w-auto h-40 object-cover" />
                             </div>
                             <button type="button" id="removeImage"
                                 class="mt-2 text-xs text-red-600 dark:text-red-400 hover:underline">
