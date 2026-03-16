@@ -1,18 +1,20 @@
 <?php
 
+use App\Http\Controllers\API\AboutUsController;
+use App\Http\Controllers\API\AcceleratingInnovationController;
+use App\Http\Controllers\API\Ace2026Controller;
+use App\Http\Controllers\API\EmpoweringLivesController;
+use App\Http\Controllers\API\GetInvolvedController;
 use App\Http\Controllers\API\HomeController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\API\PoweringEducationController;
+use App\Http\Controllers\API\PublicationsController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
-
-Route::get('/home', [HomeController::class, 'home']);
-Route::get('/empowering-lives', [HomeController::class, 'empowering_lives']);
-Route::get('/accelerating-innovation', [HomeController::class, 'accelerating_innovation']);
-Route::get('/powering-education', [HomeController::class, 'powering_education']);
-Route::get('/publications', [HomeController::class, 'publications']);
-Route::get('/about-us', [HomeController::class, 'about_us']);
-Route::get('/get-involved', [HomeController::class, 'get_involved']);
-Route::get('/ace2026', [HomeController::class, 'ace2026']);
+Route::get('/home', [HomeController::class, 'index']);
+Route::get('/empowering-lives', [EmpoweringLivesController::class, 'index']);
+Route::get('/accelerating-innovation', [AcceleratingInnovationController::class, 'index']);
+Route::get('/powering-education', [PoweringEducationController::class, 'index']);
+Route::get('/publications', [PublicationsController::class, 'index']);
+Route::get('/about-us', [AboutUsController::class, 'index']);
+Route::get('/get-involved', [GetInvolvedController::class, 'index']);
+Route::get('/ace2026', [Ace2026Controller::class, 'index']);

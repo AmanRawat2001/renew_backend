@@ -6,24 +6,21 @@ use App\Enums\SitePage;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ContentSectionResource;
 use App\Http\Resources\FeatureCardResource;
-use App\Http\Resources\ImpactResource;
 use App\Http\Resources\MissionSlideResource;
 use App\Http\Resources\SliderResource;
 use App\Models\ContentSection;
 use App\Models\FeatureCard;
-use App\Models\Impact;
 use App\Models\MissionSlide;
 use App\Models\Slider;
 
-class HomeController extends Controller
+class PublicationsController extends Controller
 {
     public function index()
     {
-        $slider = Slider::where('page', SitePage::HOME->value)->active()->ordered()->get();
-        $sections = ContentSection::where('page', SitePage::HOME->value)->ordered()->get()->groupBy('section_key');
-        $feature_cards = FeatureCard::where('page', SitePage::HOME->value)->active()->ordered()->get();
-        $impact_metrics = Impact::where('page', SitePage::HOME->value)->active()->ordered()->get();
-        $mission_slider = MissionSlide::where('page', SitePage::HOME->value)->active()->ordered()->get();
+        $slider = Slider::where('page', SitePage::PUBLICATIONS->value)->active()->ordered()->get();
+        $sections = ContentSection::where('page', SitePage::PUBLICATIONS->value)->ordered()->get()->groupBy('section_key');
+        $feature_cards = FeatureCard::where('page', SitePage::PUBLICATIONS->value)->active()->ordered()->get();
+        $mission_slider = MissionSlide::where('page', SitePage::PUBLICATIONS->value)->active()->ordered()->get();
         $groupedSections = [];
         foreach ($sections as $key => $sectionGroup) {
             $groupedSections[$key] = ContentSectionResource::collection($sectionGroup);
@@ -34,7 +31,6 @@ class HomeController extends Controller
             $groupedSections,
             [
                 'feature_cards' => FeatureCardResource::collection($feature_cards),
-                'impact_metrics' => ImpactResource::collection($impact_metrics),
                 'mission_slider' => MissionSlideResource::collection($mission_slider),
             ]
         ));

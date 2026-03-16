@@ -1,0 +1,59 @@
+<?php
+
+namespace App\Http\Controllers\API;
+
+use App\Enums\SitePage;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\ContentSectionResource;
+use App\Http\Resources\FeatureCardResource;
+use App\Http\Resources\ImpactResource;
+use App\Http\Resources\ImpactStorySectionResource;
+use App\Http\Resources\MissionSlideResource;
+use App\Http\Resources\SliderResource;
+use App\Models\ContentSection;
+use App\Models\FeatureCard;
+use App\Models\Impact;
+use App\Models\ImpactStorySection;
+use App\Models\MissionSlide;
+use App\Models\Slider;
+
+class EmpoweringLivesController extends Controller
+{
+    public function index()
+    {
+        $slider = Slider::where('page', SitePage::EMPOWERING_LIVES->value)->active()->ordered()->get();
+        $sections = ContentSection::where('page', SitePage::EMPOWERING_LIVES->value)->ordered()->get()->groupBy('section_key');
+        $feature_cards = FeatureCard::where('page', SitePage::EMPOWERING_LIVES->value)->active()->ordered()->get();
+        $impact_story_sections = ImpactStorySection::with('stories')->where('page', SitePage::EMPOWERING_LIVES->value)->ordered()->get();
+        $impact_metrics = Impact::where('page', SitePage::EMPOWERING_LIVES->value)->active()->ordered()->get();
+        $mission_slider = MissionSlide::where('page', SitePage::EMPOWERING_LIVES->value)->active()->ordered()->get();
+
+        $groupedSections = [];
+        foreach ($sections as $key => $sectionGroup) {
+            $groupedSections[$key] = ContentSectionResource::collection($sectionGroup);
+        }
+        $missionGrouped = $mission_slider->groupBy('title');
+        if (isset($groupedSections['project_surya'])) {
+            $groupedSections['project_surya'] = [
+                'section' => $groupedSections['project_surya'],
+                'mission_slider' => MissionSlideResource::collection(
+                    $missionGrouped['project_surya'] ?? collect()
+                ),
+            ];
+        }
+        $mission_slider = $mission_slider->reject(function ($slide) {
+            return $slide->title === 'project_surya';
+        });
+
+        return response()->json(array_merge(
+            ['slider' => SliderResource::collection($slider)],
+            $groupedSections,
+            [
+                'feature_cards' => FeatureCardResource::collection($feature_cards),
+                'impact_metrics' => ImpactResource::collection($impact_metrics),
+                'impact_story_sections' => ImpactStorySectionResource::collection($impact_story_sections),
+                'mission_slider' => MissionSlideResource::collection($mission_slider),
+            ]
+        ));
+    }
+}
