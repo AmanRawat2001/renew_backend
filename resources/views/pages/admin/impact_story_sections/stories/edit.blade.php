@@ -3,8 +3,10 @@
         <!-- Header -->
         <div class="flex items-center justify-between">
             <div>
-                <h1 class="text-3xl font-semibold text-neutral-900 dark:text-neutral-50">{{ __('Edit Impact Story') }}</h1>
-                <p class="text-sm text-neutral-600 dark:text-neutral-400 mt-1">{{ __('Update impact story details') }}</p>
+                <h1 class="text-3xl font-semibold text-neutral-900 dark:text-neutral-50">{{ __('Edit Impact Story') }}
+                </h1>
+                <p class="text-sm text-neutral-600 dark:text-neutral-400 mt-1">{{ __('Update impact story details') }}
+                </p>
             </div>
             <a href="{{ route('admin.impact_stories.index') }}" wire:navigate
                 class="inline-flex items-center gap-2 px-4 py-2 text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-50 transition-colors">
@@ -23,7 +25,8 @@
 
                 <!-- Section Field -->
                 <div>
-                    <label for="section_id" class="block text-sm font-semibold text-neutral-900 dark:text-neutral-50 mb-2">
+                    <label for="section_id"
+                        class="block text-sm font-semibold text-neutral-900 dark:text-neutral-50 mb-2">
                         {{ __('Section') }} <span class="text-red-500">*</span>
                     </label>
                     <select id="section_id" name="section_id"
@@ -31,8 +34,9 @@
                         required>
                         <option value="">{{ __('Select a section') }}</option>
                         @foreach ($sections as $section)
-                            <option value="{{ $section->id }}" {{ old('section_id', $impact_story->section_id) == $section->id ? 'selected' : '' }}>
-                                {{ $section->title }}
+                            <option value="{{ $section->id }}"
+                                {{ old('section_id', $impact_story->section_id) == $section->id ? 'selected' : '' }}>
+                                {{ $section->title }} ({{ $section->page->label() }})
                             </option>
                         @endforeach
                     </select>
@@ -43,13 +47,14 @@
 
                 <!-- Name Field -->
                 <div>
-                    <label for="name" class="block text-sm font-semibold text-neutral-900 dark:text-neutral-50 mb-2">
+                    <label for="name"
+                        class="block text-sm font-semibold text-neutral-900 dark:text-neutral-50 mb-2">
                         {{ __('Name') }} <span class="text-red-500">*</span>
                     </label>
                     <input type="text" id="name" name="name"
                         class="w-full px-4 py-2 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-zinc-900 text-neutral-900 dark:text-neutral-50 focus:outline-none focus:ring-2 focus:ring-blue-500 @error('name') border-red-500 @enderror"
-                        placeholder="{{ __('Enter person name') }}"
-                        value="{{ old('name', $impact_story->name) }}" required />
+                        placeholder="{{ __('Enter person name') }}" value="{{ old('name', $impact_story->name) }}"
+                        required />
                     @error('name')
                         <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
                     @enderror
@@ -57,7 +62,8 @@
 
                 <!-- Designation Field -->
                 <div>
-                    <label for="designation" class="block text-sm font-semibold text-neutral-900 dark:text-neutral-50 mb-2">
+                    <label for="designation"
+                        class="block text-sm font-semibold text-neutral-900 dark:text-neutral-50 mb-2">
                         {{ __('Designation') }} <span class="text-red-500">*</span>
                     </label>
                     <input type="text" id="designation" name="designation"
@@ -71,7 +77,8 @@
 
                 <!-- Location Field -->
                 <div>
-                    <label for="location" class="block text-sm font-semibold text-neutral-900 dark:text-neutral-50 mb-2">
+                    <label for="location"
+                        class="block text-sm font-semibold text-neutral-900 dark:text-neutral-50 mb-2">
                         {{ __('Location') }} <span class="text-red-500">*</span>
                     </label>
                     <input type="text" id="location" name="location"
@@ -85,32 +92,34 @@
 
                 <!-- Description Field -->
                 <div>
-                        <label class="block text-sm font-semibold text-neutral-900 dark:text-neutral-50 mb-2">
-                            {{ __('Description') }} <span class="text-red-500">*</span>
-                        </label>
-                        <div wire:ignore>
-                            <div id="descriptionEditor"
-                                class="w-full rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-zinc-900 @error('description') border-red-500 @enderror"
-                                style="height: 250px;"></div>
-                        </div>
-                        <input type="hidden" id="description" name="description" value="{{ old('description', $impact_story->description) }}" />
-                        @error('description')
-                            <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
-                        @enderror
-                        <p id="descriptionError" class="mt-1 text-sm text-red-500" style="display: none;"></p>
-                        <p class="mt-1 text-xs text-neutral-600 dark:text-neutral-400">
-                            {{ __('Rich HTML editor for detailed content') }}</p>
+                    <label class="block text-sm font-semibold text-neutral-900 dark:text-neutral-50 mb-2">
+                        {{ __('Description') }} <span class="text-red-500">*</span>
+                    </label>
+                    <div wire:ignore>
+                        <div id="descriptionEditor"
+                            class="w-full rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-zinc-900 @error('description') border-red-500 @enderror"
+                            style="height: 250px;"></div>
                     </div>
+                    <input type="hidden" id="description" name="description"
+                        value="{{ old('description', $impact_story->description) }}" />
+                    @error('description')
+                        <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
+                    @enderror
+                    <p id="descriptionError" class="mt-1 text-sm text-red-500" style="display: none;"></p>
+                    <p class="mt-1 text-xs text-neutral-600 dark:text-neutral-400">
+                        {{ __('Rich HTML editor for detailed content') }}</p>
+                </div>
 
                 <!-- Sort Order Field -->
                 <div>
-                    <label for="sort_order" class="block text-sm font-semibold text-neutral-900 dark:text-neutral-50 mb-2">
+                    <label for="sort_order"
+                        class="block text-sm font-semibold text-neutral-900 dark:text-neutral-50 mb-2">
                         {{ __('Sort Order') }} <span class="text-red-500">*</span>
                     </label>
                     <input type="number" id="sort_order" name="sort_order" min="0"
                         class="w-full px-4 py-2 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-zinc-900 text-neutral-900 dark:text-neutral-50 focus:outline-none focus:ring-2 focus:ring-blue-500 @error('sort_order') border-red-500 @enderror"
-                        placeholder="{{ __('0') }}"
-                        value="{{ old('sort_order', $impact_story->sort_order) }}" required />
+                        placeholder="{{ __('0') }}" value="{{ old('sort_order', $impact_story->sort_order) }}"
+                        required />
                     @error('sort_order')
                         <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
                     @enderror
@@ -172,8 +181,16 @@
                         toolbar: [
                             ['bold', 'italic', 'underline', 'strike'],
                             ['blockquote', 'code-block'],
-                            [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-                            [{ 'header': 1 }, { 'header': 2 }],
+                            [{
+                                'list': 'ordered'
+                            }, {
+                                'list': 'bullet'
+                            }],
+                            [{
+                                'header': 1
+                            }, {
+                                'header': 2
+                            }],
                             ['link', 'image'],
                             ['clean']
                         ]
@@ -181,7 +198,7 @@
                 });
 
                 const descriptionInput = document.getElementById('description');
-                
+
                 // Set initial content if present
                 if (descriptionInput.value) {
                     quillDescriptionEditor.root.innerHTML = descriptionInput.value;
@@ -198,7 +215,7 @@
                     form.addEventListener('submit', function(e) {
                         const content = quillDescriptionEditor.root.innerHTML;
                         const errorElement = document.getElementById('descriptionError');
-                        
+
                         // Check if content is empty
                         if (!content || content === '<p><br></p>' || content.trim() === '') {
                             e.preventDefault();
@@ -206,7 +223,7 @@
                             errorElement.style.display = 'block';
                             return false;
                         }
-                        
+
                         descriptionInput.value = content;
                         errorElement.style.display = 'none';
                     });

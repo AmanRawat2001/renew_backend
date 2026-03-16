@@ -34,7 +34,7 @@
                         @foreach ($sections as $section)
                             <option value="{{ $section->id }}"
                                 @if (old('section_id') == $section->id) selected @elseif($selectedSection == $section->id) selected @endif>
-                                {{ $section->title }}
+                                {{ $section->title }} ({{ $section->page->label() }})
                             </option>
                         @endforeach
                     </select>
