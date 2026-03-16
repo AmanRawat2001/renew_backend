@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\ImpactStorySection;
+namespace App\Http\Controllers\Admin\Others\ImpactStorySection;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ImpactStory\StoreRequest;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Program;
+namespace App\Http\Controllers\Admin\Others\Impact;
 
 use App\Enums\SitePage;
 use App\Http\Controllers\Controller;
@@ -10,7 +10,7 @@ use App\Models\Impact;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
-class InternalImpactController extends Controller
+class ImpactController extends Controller
 {
     public function index(): View
     {

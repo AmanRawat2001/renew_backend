@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Program;
+namespace App\Http\Controllers\Admin\ACE2026;
 
 use App\Enums\SitePage;
 use App\Http\Controllers\Controller;

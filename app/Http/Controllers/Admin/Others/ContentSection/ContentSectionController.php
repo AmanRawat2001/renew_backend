@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Program;
+namespace App\Http\Controllers\Admin\Others\ContentSection;
 
 use App\Enums\SitePage;
 use App\Http\Controllers\Controller;
@@ -10,7 +10,7 @@ use App\Models\ContentSection;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
-class InternalContentSectionController extends Controller
+class ContentSectionController extends Controller
 {
     public function index(): View
     {

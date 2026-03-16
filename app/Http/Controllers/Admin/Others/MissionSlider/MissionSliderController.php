@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Program;
+namespace App\Http\Controllers\Admin\Others\MissionSlider;
 
 use App\Enums\SitePage;
 use App\Http\Controllers\Controller;
@@ -11,7 +11,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
-class InternalMissionSlideController extends Controller
+class MissionSliderController extends Controller
 {
     public function index(): View
     {

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AboutUs\AboutUsController;
+use App\Http\Controllers\Admin\ACE2026\Ace2026Controller;
 use App\Http\Controllers\Admin\Dashboard\DashboardController;
 use App\Http\Controllers\Admin\GetInvolved\GetInvolvedController;
 use App\Http\Controllers\Admin\Home\ContentSectionController;
@@ -9,14 +10,13 @@ use App\Http\Controllers\Admin\Home\HomeController;
 use App\Http\Controllers\Admin\Home\ImpactController;
 use App\Http\Controllers\Admin\Home\MissionSlideController;
 use App\Http\Controllers\Admin\Home\SliderController;
-use App\Http\Controllers\Admin\ImpactStorySection\ImpactStoryController;
-use App\Http\Controllers\Admin\ImpactStorySection\ImpactStorySectionController;
-use App\Http\Controllers\Admin\Program\Ace2026Controller;
-use App\Http\Controllers\Admin\Program\InternalContentSectionController;
-use App\Http\Controllers\Admin\Program\InternalFeatureCardController;
-use App\Http\Controllers\Admin\Program\InternalImpactController;
-use App\Http\Controllers\Admin\Program\InternalMainSliderController;
-use App\Http\Controllers\Admin\Program\InternalMissionSlideController;
+use App\Http\Controllers\Admin\Others\ContentSection\ContentSectionController as OthersContentSectionController;
+use App\Http\Controllers\Admin\Others\FeatureCard\FeatureCardController as OthersFeatureCardController;
+use App\Http\Controllers\Admin\Others\Impact\ImpactController as OthersImpactController;
+use App\Http\Controllers\Admin\Others\ImpactStorySection\ImpactStoryController;
+use App\Http\Controllers\Admin\Others\ImpactStorySection\ImpactStorySectionController;
+use App\Http\Controllers\Admin\Others\MainSlider\MainSliderController;
+use App\Http\Controllers\Admin\Others\MissionSlider\MissionSliderController as OtherMissionSliderController;
 use App\Http\Controllers\Admin\Program\ProgramController;
 use App\Http\Controllers\Admin\Publication\PublicationController;
 use Illuminate\Support\Facades\Route;
@@ -55,11 +55,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::get('accelerating-innovation', [ProgramController::class, 'accelerating'])->name('program.innovation');
             Route::get('powering-education', [ProgramController::class, 'powering'])->name('program.education');
             Route::get('ace-2026', [Ace2026Controller::class, 'index'])->name('program.ace_2026');
-            Route::resource('main_sliders', InternalMainSliderController::class);
-            Route::resource('other_sections', InternalContentSectionController::class);
-            Route::resource('other_impacts', InternalImpactController::class);
-            Route::resource('other_mission_sliders', InternalMissionSlideController::class);
-            Route::resource('other_feature_cards', InternalFeatureCardController::class);
+            Route::resource('main_sliders', MainSliderController::class);
+            Route::resource('other_sections', OthersContentSectionController::class);
+            Route::resource('other_impacts', OthersImpactController::class);
+            Route::resource('other_mission_sliders', OtherMissionSliderController::class);
+            Route::resource('other_feature_cards', OthersFeatureCardController::class);
             Route::resource('impact_story_sections', ImpactStorySectionController::class);
             Route::resource('impact_stories', ImpactStoryController::class);
         });
