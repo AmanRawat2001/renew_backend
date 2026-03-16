@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class MissionSlide extends Model
 {
-    protected $fillable = ['image', 'title', 'description', 'sequence', 'is_active', 'page'];
+    protected $fillable = ['image', 'title', 'description', 'external_link', 'sequence', 'is_active', 'page'];
 
     protected $casts = [
         'is_active' => 'boolean',

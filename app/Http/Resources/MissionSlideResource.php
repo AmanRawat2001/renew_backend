@@ -20,6 +20,7 @@ class MissionSlideResource extends JsonResource
             'image' => $this->image ? url(Storage::url($this->image)) : null,
             'title' => $this->title,
             'description' => $this->description,
+            'external_link' => $this->external_link,
             'sequence' => $this->sequence,
         ];
     }

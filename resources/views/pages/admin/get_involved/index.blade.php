@@ -51,7 +51,7 @@
                                             {{ $slider->sequence }}</td>
                                         <td class="px-4 py-3">{{ $slider->is_active ? '✓' : '—' }}</td>
                                         <td class="px-4 py-3 text-right"><a
-                                                href="{{ route('admin.sliders.edit', $slider) }}"
+                                                href="{{ route('admin.main_sliders.edit', $slider) }}"
                                                 class="text-blue-600 dark:text-blue-400 hover:underline text-xs">{{ __('Edit') }}</a>
                                         </td>
                                     </tr>
@@ -106,7 +106,7 @@
                                             {{ $slide->sequence }}</td>
                                         <td class="px-4 py-3">{{ $slide->is_active ? '✓' : '—' }}</td>
                                         <td class="px-4 py-3 text-right"><a
-                                                href="{{ route('admin.mission_sliders.edit', $slide) }}"
+                                                href="{{ route('admin.other_mission_sliders.edit', $slide) }}"
                                                 class="text-blue-600 dark:text-blue-400 hover:underline text-xs">{{ __('Edit') }}</a>
                                         </td>
                                     </tr>
@@ -162,7 +162,7 @@
                                         <td class="px-4 py-3">{{ $impact->down_arrow ? '⬇️' : '—' }}</td>
                                         <td class="px-4 py-3">{{ $impact->is_active ? '✓' : '—' }}</td>
                                         <td class="px-4 py-3 text-right"><a
-                                                href="{{ route('admin.impacts.edit', $impact) }}"
+                                                href="{{ route('admin.other_impacts.edit', $impact) }}"
                                                 class="text-blue-600 dark:text-blue-400 hover:underline text-xs">{{ __('Edit') }}</a>
                                         </td>
                                     </tr>
@@ -218,7 +218,7 @@
                                         <td class="px-4 py-3 text-neutral-600 dark:text-neutral-400">
                                             {{ $card->sequence }}</td>
                                         <td class="px-4 py-3 text-right"><a
-                                                href="{{ route('admin.feature-cards.edit', $card) }}"
+                                                href="{{ route('admin.other_feature_cards.edit', $card) }}"
                                                 class="text-blue-600 dark:text-blue-400 hover:underline text-xs">{{ __('Edit') }}</a>
                                         </td>
                                     </tr>
@@ -271,7 +271,7 @@
                                         <td class="px-4 py-3 text-neutral-600 dark:text-neutral-400">
                                             {{ $section->section_key }}</td>
                                         <td class="px-4 py-3 text-right"><a
-                                                href="{{ route('admin.sections.edit', $section) }}"
+                                                href="{{ route('admin.other_sections.edit', $section) }}"
                                                 class="text-blue-600 dark:text-blue-400 hover:underline text-xs">{{ __('Edit') }}</a>
                                         </td>
                                     </tr>
