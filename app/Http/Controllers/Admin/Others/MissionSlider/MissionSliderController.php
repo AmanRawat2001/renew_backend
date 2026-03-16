@@ -15,7 +15,11 @@ class MissionSliderController extends Controller
 {
     public function index(): View
     {
-        $slides = MissionSlide::where('page', '!=', SitePage::HOME->value)->orderBy('page', 'asc')->paginate(6);
+        $query = MissionSlide::where('page', '!=', SitePage::HOME->value);
+        if (request()->filled('site_page')) {
+            $query->where('page', request('site_page'));
+        }
+        $slides = $query->orderBy('sort_order', 'asc')->paginate(12)->withQueryString();
 
         return view('pages.admin.program.other_mission_sliders.index', compact('slides'));
     }

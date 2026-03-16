@@ -7,13 +7,34 @@
                 <p class="text-sm text-neutral-600 dark:text-neutral-400 mt-1">
                     {{ __('Manage mission story slides with images and descriptions') }}</p>
             </div>
-            <a href="{{ route('admin.other_mission_sliders.create') }}" wire:navigate
-                class="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-                </svg>
-                {{ __('Add Slide') }}
-            </a>
+
+            <div class="flex items-center gap-3">
+                <!-- Filter -->
+                <form method="GET">
+                    <select name="site_page" onchange="this.form.submit()"
+                        class="px-3 py-2 border rounded-lg dark:bg-zinc-800 dark:border-neutral-700">
+
+                        <option value="">All Pages</option>
+
+                        @foreach (\App\Enums\SitePage::cases() as $page)
+                            @if ($page->value !== \App\Enums\SitePage::HOME->value)
+                                <option value="{{ $page->value }}"
+                                    {{ request('page') == $page->value ? 'selected' : '' }}>
+                                    {{ $page->label() }}
+                                </option>
+                            @endif
+                        @endforeach
+
+                    </select>
+                </form>
+                <a href="{{ route('admin.other_mission_sliders.create') }}" wire:navigate
+                    class="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                    </svg>
+                    {{ __('Add Slide') }}
+                </a>
+            </div>
         </div>
 
         <!-- Success Message -->
@@ -26,7 +47,7 @@
 
         <!-- Grid Layout -->
         @if ($slides->count())
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                 @foreach ($slides as $slide)
                     <div
                         class="group rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-zinc-800 overflow-hidden hover:shadow-lg transition-all">
