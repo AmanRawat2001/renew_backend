@@ -9,6 +9,8 @@ use App\Http\Controllers\Admin\Home\HomeController;
 use App\Http\Controllers\Admin\Home\ImpactController;
 use App\Http\Controllers\Admin\Home\MissionSlideController;
 use App\Http\Controllers\Admin\Home\SliderController;
+use App\Http\Controllers\Admin\ImpactStorySection\ImpactStoryController;
+use App\Http\Controllers\Admin\ImpactStorySection\ImpactStorySectionController;
 use App\Http\Controllers\Admin\Program\Ace2026Controller;
 use App\Http\Controllers\Admin\Program\InternalContentSectionController;
 use App\Http\Controllers\Admin\Program\InternalFeatureCardController;
@@ -48,7 +50,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::resource('mission_sliders', MissionSlideController::class);
         });
 
-        Route::prefix('program')->group(function () {
+        Route::prefix('other')->group(function () {
             Route::get('empowering', [ProgramController::class, 'empowering'])->name('program.empowering');
             Route::get('accelerating-innovation', [ProgramController::class, 'accelerating'])->name('program.innovation');
             Route::get('powering-education', [ProgramController::class, 'powering'])->name('program.education');
@@ -58,7 +60,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::resource('other_impacts', InternalImpactController::class);
             Route::resource('other_mission_sliders', InternalMissionSlideController::class);
             Route::resource('other_feature_cards', InternalFeatureCardController::class);
+            Route::resource('impact_story_sections', ImpactStorySectionController::class);
+            Route::resource('impact_stories', ImpactStoryController::class);
         });
+
         Route::get('/publications', [PublicationController::class, 'index'])->name('publications');
         Route::get('/about-us', [AboutUsController::class, 'index'])->name('about_us');
         Route::get('/get-involved', [GetInvolvedController::class, 'index'])->name('get_involved');

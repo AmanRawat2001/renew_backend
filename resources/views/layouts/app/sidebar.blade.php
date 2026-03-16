@@ -25,16 +25,16 @@
                     :current="request()->routeIs('admin.publications')" wire:navigate>
                     {{ __('Publications') }}
                 </flux:sidebar.item>
-                                <flux:sidebar.item icon="newspaper" :href="route('admin.about_us')"
-                :current="request()->routeIs('admin.about_us')" wire:navigate>
-                {{ __('About Us') }}
-            </flux:sidebar.item>
-             <flux:sidebar.item icon="hand-raised" :href="route('admin.get_involved')"
+                <flux:sidebar.item icon="newspaper" :href="route('admin.about_us')"
+                    :current="request()->routeIs('admin.about_us')" wire:navigate>
+                    {{ __('About Us') }}
+                </flux:sidebar.item>
+                <flux:sidebar.item icon="hand-raised" :href="route('admin.get_involved')"
                     :current="request()->routeIs('admin.get_involved')" wire:navigate>
                     {{ __('Get Involved') }}
                 </flux:sidebar.item>
             </flux:sidebar.group>
-            <flux:sidebar.group :heading="__('Program Page')" class="grid">
+            <flux:sidebar.group :heading="__('Other Page')" class="grid">
                 <flux:sidebar.item icon="bolt" :href="route('admin.program.empowering')"
                     :current="request()->routeIs('admin.program.empowering')" wire:navigate>
                     {{ __('Empowering Lives') }}
@@ -52,8 +52,8 @@
                     {{ __('ACE 2026') }}
                 </flux:sidebar.item>
             </flux:sidebar.group>
-    </flux:sidebar.nav>
-        
+        </flux:sidebar.nav>
+
         <flux:sidebar.group :heading="__('Detail Sections')">
             <flux:sidebar.group :heading="__('Home Page Sections')" expandable
                 :expanded="request()->routeIs('admin.sliders.*', 'admin.sections.*', 'admin.feature-cards.*', 'admin.impacts.*', 'admin.mission_sliders.*')">
@@ -83,8 +83,8 @@
                 </flux:sidebar.item>
             </flux:sidebar.group>
 
-            <flux:sidebar.group :heading="__('Program Page')" expandable
-                :expanded="request()->routeIs('admin.main_sliders.*', 'admin.other_sections.*', 'admin.other_feature_cards.*', 'admin.other_impacts.*', 'admin.other_mission_sliders.*')">
+            <flux:sidebar.group :heading="__('Other Page')" expandable
+                :expanded="request()->routeIs('admin.main_sliders.*', 'admin.other_sections.*', 'admin.other_feature_cards.*', 'admin.other_impacts.*', 'admin.other_mission_sliders.*', 'admin.impact_story_sections.*', 'admin.impact_stories.*')">
                 <flux:sidebar.item icon="photo" :href="route('admin.main_sliders.index')"
                     :current="request()->routeIs('admin.main_sliders.*')" wire:navigate>
                     {{ __('Slider Sections') }}
@@ -109,7 +109,20 @@
                     :current="request()->routeIs('admin.other_mission_sliders.*')" wire:navigate>
                     {{ __('Mission Sliders') }}
                 </flux:sidebar.item>
+                <flux:sidebar.group :heading="__('Impact Sections')" expandable
+                    :expanded="request()->routeIs('admin.impact_story_sections.*', 'admin.impact_stories.*')">
+                    <flux:sidebar.item icon="star" :href="route('admin.impact_story_sections.index')"
+                        :current="request()->routeIs('admin.impact_story_sections.*')" wire:navigate>
+                        {{ __('Impact Story Sections') }}
+                    </flux:sidebar.item>
+
+                    <flux:sidebar.item icon="chat-bubble-left-right" :href="route('admin.impact_stories.index')"
+                        :current="request()->routeIs('admin.impact_stories.*')" wire:navigate>
+                        {{ __('Impact Stories') }}
+                    </flux:sidebar.item>
+                </flux:sidebar.group>
             </flux:sidebar.group>
+
         </flux:sidebar.group>
 
         <flux:sidebar.spacer />
