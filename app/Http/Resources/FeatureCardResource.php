@@ -19,6 +19,7 @@ class FeatureCardResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'description' => $this->description,
+            'external_link' => $this->external_link,
             'image' => $this->image ? url(Storage::url($this->image)) : null,
             'sequence' => $this->sequence,
         ];
