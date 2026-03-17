@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AboutUs\AboutUsController;
 use App\Http\Controllers\Admin\ACE2026\Ace2026Controller;
 use App\Http\Controllers\Admin\Dashboard\DashboardController;
+use App\Http\Controllers\Admin\Footer\FooterController;
 use App\Http\Controllers\Admin\GetInvolved\GetInvolvedController;
 use App\Http\Controllers\Admin\Home\ContentSectionController;
 use App\Http\Controllers\Admin\Home\FeatureCardController;
@@ -67,6 +68,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/publications', [PublicationController::class, 'index'])->name('publications');
         Route::get('/about-us', [AboutUsController::class, 'index'])->name('about_us');
         Route::get('/get-involved', [GetInvolvedController::class, 'index'])->name('get_involved');
+        Route::resource('footers', FooterController::class);
     });
 
 });
