@@ -17,7 +17,7 @@ class ImpactStorySectionController extends Controller
      */
     public function index(): View
     {
-        $sections = ImpactStorySection::ordered()->paginate(10);
+        $sections = ImpactStorySection::orderBy('page', 'asc')->paginate(10);
 
         return view('pages.admin.impact_story_sections.index', compact('sections'));
     }

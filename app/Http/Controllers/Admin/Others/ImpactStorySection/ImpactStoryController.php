@@ -17,7 +17,7 @@ class ImpactStoryController extends Controller
      */
     public function index(): View
     {
-        $stories = ImpactStory::with('section')->ordered()->paginate(10);
+        $stories = ImpactStory::with('section')->orderBy('section_id', 'asc')->paginate(10);
 
         return view('pages.admin.impact_story_sections.stories.index', compact('stories'));
     }
@@ -27,7 +27,7 @@ class ImpactStoryController extends Controller
      */
     public function create(): View
     {
-        $sections = ImpactStorySection::ordered()->get();
+        $sections = ImpactStorySection::orderBy('page', 'asc')->get();
         $selectedSection = request('section_id');
 
         return view('pages.admin.impact_story_sections.stories.create', compact('sections', 'selectedSection'));
@@ -50,7 +50,7 @@ class ImpactStoryController extends Controller
      */
     public function edit(ImpactStory $impact_story): View
     {
-        $sections = ImpactStorySection::ordered()->get();
+        $sections = ImpactStorySection::orderBy('page', 'asc')->get();
 
         return view('pages.admin.impact_story_sections.stories.edit', compact('impact_story', 'sections'));
     }
