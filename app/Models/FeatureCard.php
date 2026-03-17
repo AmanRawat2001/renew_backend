@@ -11,6 +11,7 @@ class FeatureCard extends Model
         'title',
         'description',
         'image',
+        'external_link',
         'sequence',
         'is_active',
         'page',

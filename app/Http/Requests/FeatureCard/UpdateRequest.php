@@ -16,6 +16,7 @@ class UpdateRequest extends FormRequest
         return [
             'title' => 'required|string|max:500',
             'description' => 'required|string|max:1000',
+            'external_link' => 'nullable|string|max:500',
             'sequence' => 'required|integer|min:0|max:999',
             'is_active' => 'nullable|boolean',
         ];
