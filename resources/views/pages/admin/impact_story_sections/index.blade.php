@@ -37,9 +37,9 @@
                                 <th class="px-4 py-3 text-left font-semibold text-neutral-900 dark:text-neutral-50">
                                     {{ __('Title') }}</th>
                                 <th class="px-4 py-3 text-left font-semibold text-neutral-900 dark:text-neutral-50">
-                                    {{ __('Image') }}</th>
-                                <th class="px-4 py-3 text-left font-semibold text-neutral-900 dark:text-neutral-50">
                                     {{ __('Pages') }}</th>
+                                <th class="px-4 py-3 text-left font-semibold text-neutral-900 dark:text-neutral-50">
+                                    {{ __('Image') }}</th>
                                 <th class="px-4 py-3 text-left font-semibold text-neutral-900 dark:text-neutral-50">
                                     {{ __('Sort Order') }}</th>
                                 <th class="px-4 py-3 text-left font-semibold text-neutral-900 dark:text-neutral-50">
