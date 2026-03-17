@@ -18,6 +18,7 @@ class ContentSectionResource extends JsonResource
             'id' => $this->id,
             'section_key' => $this->section_key,
             'title' => $this->title,
+            'external_link' => $this->external_link,
             'subtitle' => $this->subtitle,
             'description' => $this->description,
         ];

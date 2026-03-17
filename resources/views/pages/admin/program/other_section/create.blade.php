@@ -4,9 +4,11 @@
         <div class="flex items-center justify-between">
             <div>
                 <h1 class="text-3xl font-semibold text-neutral-900 dark:text-neutral-50">
-                    {{ __('Create Content Section') }}</h1>
+                    {{ __('Create Content Section') }}
+                </h1>
                 <p class="text-sm text-neutral-600 dark:text-neutral-400 mt-1">
-                    {{ __('Add a new content section to your website') }}</p>
+                    {{ __('Add a new content section to your website') }}
+                </p>
             </div>
             <a href="{{ route('admin.other_sections.index') }}" wire:navigate
                 class="inline-flex items-center gap-2 px-4 py-2 text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-50 transition-colors">
@@ -37,7 +39,8 @@
                             <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
                         @enderror
                         <p class="mt-1 text-xs text-neutral-600 dark:text-neutral-400">
-                            {{ __('Unique identifier for this section (lowercase)') }}</p>
+                            {{ __('Unique identifier for this section (lowercase)') }}
+                        </p>
                     </div>
 
                     <!-- Title Field with Quill Editor -->
@@ -55,7 +58,8 @@
                             <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
                         @enderror
                         <p class="mt-1 text-xs text-neutral-600 dark:text-neutral-400">
-                            {{ __('Rich HTML editor for section title') }}</p>
+                            {{ __('Rich HTML editor for section title') }}
+                        </p>
                     </div>
 
                     <!-- Subtitle Field with Quill Editor -->
@@ -73,7 +77,8 @@
                             <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
                         @enderror
                         <p class="mt-1 text-xs text-neutral-600 dark:text-neutral-400">
-                            {{ __('Rich HTML editor for section subtitle (optional)') }}</p>
+                            {{ __('Rich HTML editor for section subtitle (optional)') }}
+                        </p>
                     </div>
 
                     <!-- Description Field with Quill Editor -->
@@ -92,12 +97,12 @@
                             <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
                         @enderror
                         <p class="mt-1 text-xs text-neutral-600 dark:text-neutral-400">
-                            {{ __('Rich HTML editor for detailed content') }}</p>
+                            {{ __('Rich HTML editor for detailed content') }}
+                        </p>
                     </div>
                 </div>
                 <div>
-                    <label for="page"
-                        class="block text-sm font-semibold text-neutral-900 dark:text-neutral-50 mb-2">
+                    <label for="page" class="block text-sm font-semibold text-neutral-900 dark:text-neutral-50 mb-2">
                         {{ __('Page') }} <span class="text-red-500">*</span>
                     </label>
                     <select id="page" name="page"
@@ -105,8 +110,7 @@
                         required>
                         <option value="">{{ __('Select a page') }}</option>
                         @foreach (App\Enums\SitePage::cases() as $pageCase)
-                            <option value="{{ $pageCase->value }}"
-                                {{ old('page') === $pageCase->value ? 'selected' : '' }}>
+                            <option value="{{ $pageCase->value }}" {{ old('page') === $pageCase->value ? 'selected' : '' }}>
                                 {{ $pageCase->label() }}
                             </option>
                         @endforeach
@@ -116,6 +120,24 @@
                     @enderror
                     <p class="mt-1 text-xs text-neutral-600 dark:text-neutral-400">
                         {{ __('Choose which page this slider appears on') }}
+                    </p>
+                </div>
+
+                <!-- External Link Field -->
+                <div>
+                    <label for="external_link"
+                        class="block text-sm font-semibold text-neutral-900 dark:text-neutral-50 mb-2">
+                        {{ __('External Link Text') }}
+                    </label>
+                    <input type="text" id="external_link" name="external_link"
+                        class="w-full px-4 py-2 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-zinc-900 text-neutral-900 dark:text-neutral-50 focus:outline-none focus:ring-2 focus:ring-blue-500 @error('external_link') border-red-500 @enderror"
+                        placeholder="{{ __('e.g., Learn More, Visit Site, Read More') }}"
+                        value="{{ old('external_link') }}" />
+                    @error('external_link')
+                        <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
+                    @enderror
+                    <p class="mt-1 text-xs text-neutral-600 dark:text-neutral-400">
+                        {{ __('Text to display for the external link (optional)') }}
                     </p>
                 </div>
 
@@ -242,7 +264,7 @@
             }
 
             // Update all editors on form submit
-            document.addEventListener('submit', function(e) {
+            document.addEventListener('submit', function (e) {
                 if (e.target.tagName === 'FORM') {
                     if (window.quillTitle) document.getElementById('title').value = window.quillTitle.root.innerHTML
                     if (window.quillSubtitle) document.getElementById('subtitle').value = window.quillSubtitle.root

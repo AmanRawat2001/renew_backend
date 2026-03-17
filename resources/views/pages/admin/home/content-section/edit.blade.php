@@ -85,6 +85,25 @@
                             value="{{ old('description', $section->description) }}">
                     </div>
 
+                    <!-- External Link Field -->
+                    <div>
+                        <label for="external_link" class="block text-sm font-semibold text-neutral-900 dark:text-neutral-50 mb-2">
+                            {{ __('External Link Text') }}
+                        </label>
+                        <input
+                            type="text"
+                            id="external_link"
+                            name="external_link"
+                            class="w-full px-4 py-2 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-zinc-900 text-neutral-900 dark:text-neutral-50 focus:outline-none focus:ring-2 focus:ring-blue-500 @error('external_link') border-red-500 @enderror"
+                            placeholder="{{ __('e.g., Learn More, Visit Site, Read More') }}"
+                            value="{{ old('external_link', $section->external_link) }}"
+                        />
+                        @error('external_link')
+                            <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
+                        @enderror
+                        <p class="mt-1 text-xs text-neutral-600 dark:text-neutral-400">{{ __('Text to display for the external link (optional)') }}</p>
+                    </div>
+
                 </div>
 
 

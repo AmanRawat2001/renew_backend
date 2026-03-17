@@ -12,6 +12,7 @@ class ContentSection extends Model
         'title',
         'subtitle',
         'description',
+        'external_link',
         'page',
     ];
 

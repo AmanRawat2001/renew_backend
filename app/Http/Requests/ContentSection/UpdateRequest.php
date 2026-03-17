@@ -17,6 +17,7 @@ class UpdateRequest extends FormRequest
             'title' => 'required|string|max:500',
             'subtitle' => 'nullable|string|max:500',
             'description' => 'required|string|max:5000',
+            'external_link' => 'nullable|string|max:500',
         ];
     }
 
@@ -31,6 +32,8 @@ class UpdateRequest extends FormRequest
             'description.required' => 'Description is required',
             'description.string' => 'Description must be a string',
             'description.max' => 'Description cannot exceed 5000 characters',
+            'external_link.string' => 'External link must be a string',
+            'external_link.max' => 'External link cannot exceed 500 characters',
         ];
     }
 }
