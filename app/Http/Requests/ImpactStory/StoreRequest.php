@@ -3,6 +3,8 @@
 namespace App\Http\Requests\ImpactStory;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Enums\SitePage;
+use Illuminate\Validation\Rules\Enum;
 
 class StoreRequest extends FormRequest
 {
@@ -22,11 +24,12 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'section_id' => 'required|exists:impact_story_sections,id',
             'name' => 'required|string|max:255',
             'designation' => 'required|string|max:255',
             'location' => 'required|string|max:255',
+            'image' => 'nullable|image',
             'description' => 'required|string',
+            'page' => ['required', new Enum(SitePage::class)],
             'sort_order' => 'required|integer|min:0',
             'status' => 'boolean',
         ];

@@ -39,7 +39,7 @@
                                 <th class="px-4 py-3 text-left font-semibold text-neutral-900 dark:text-neutral-50">
                                     {{ __('Pages') }}</th>
                                 <th class="px-4 py-3 text-left font-semibold text-neutral-900 dark:text-neutral-50">
-                                    {{ __('Image') }}</th>
+                                    {{ __('External URL') }}</th>
                                 <th class="px-4 py-3 text-left font-semibold text-neutral-900 dark:text-neutral-50">
                                     {{ __('Sort Order') }}</th>
                                 <th class="px-4 py-3 text-left font-semibold text-neutral-900 dark:text-neutral-50">
@@ -60,10 +60,15 @@
                                             {{ $section->page?->label() }}
                                         </span>
                                     </td>
-                                    <td class="px-4 py-3">
-                                        @if ($section->main_image)
-                                            <img src="{{ asset('storage/' . $section->main_image) }}"
-                                                alt="{{ $section->title }}" class="h-10 object-cover rounded" />
+                                    <td class="px-4 py-3 text-neutral-600 dark:text-neutral-400 max-w-xs truncate">
+                                        @if ($section->external_url)
+                                            <a href="{{ $section->external_url }}" target="_blank"
+                                                class="text-blue-600 dark:text-blue-400 hover:underline flex items-center gap-1">
+                                                {{ $section->external_url }}
+                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4m4-6h-8m4 0V4m0 6v8m0 0l-4-4m4 4l4-4" />
+                                                </svg>
+                                            </a>
                                         @else
                                             <span class="text-neutral-400">—</span>
                                         @endif

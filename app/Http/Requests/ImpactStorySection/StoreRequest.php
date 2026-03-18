@@ -20,7 +20,7 @@ class StoreRequest extends FormRequest
     {
         return [
             'title' => 'required|string|max:255',
-            'main_image' => 'required|image',
+            'external_url' => 'nullable|string|max:500',
             'sort_order' => 'required|integer|min:0',
             'status' => 'boolean',
             'page' => ['required', new Enum(SitePage::class)],

@@ -18,7 +18,7 @@ class ImpactStorySectionResource extends JsonResource
         return [
             'id' => $this->id,
             'title' => $this->title,
-            'main_image' => $this->main_image ? url(Storage::url($this->main_image)) : null,
+            'external_url' => $this->external_url,
             'sort_order' => $this->sort_order,
             'status' => $this->status,
             'stories' => ImpactStoryResource::collection($this->whenLoaded('stories')),

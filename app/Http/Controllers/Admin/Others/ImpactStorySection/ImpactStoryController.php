@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ImpactStory\StoreRequest;
 use App\Http\Requests\ImpactStory\UpdateRequest;
 use App\Models\ImpactStory;
-use App\Models\ImpactStorySection;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class ImpactStoryController extends Controller
@@ -17,7 +17,7 @@ class ImpactStoryController extends Controller
      */
     public function index(): View
     {
-        $stories = ImpactStory::with('section')->orderBy('sort_order', 'asc')->paginate(10);
+        $stories = ImpactStory::orderBy('sort_order', 'asc')->paginate(10);
 
         return view('pages.admin.impact_story_sections.stories.index', compact('stories'));
     }
@@ -27,10 +27,7 @@ class ImpactStoryController extends Controller
      */
     public function create(): View
     {
-        $sections = ImpactStorySection::orderBy('page', 'asc')->get();
-        $selectedSection = request('section_id');
-
-        return view('pages.admin.impact_story_sections.stories.create', compact('sections', 'selectedSection'));
+        return view('pages.admin.impact_story_sections.stories.create');
     }
 
     /**
@@ -39,6 +36,10 @@ class ImpactStoryController extends Controller
     public function store(StoreRequest $request): RedirectResponse
     {
         $validated = $request->validated();
+
+        if ($request->hasFile('image')) {
+            $validated['image'] = $request->file('image')->store('impact_stories', 'public');
+        }
 
         ImpactStory::create($validated);
 
@@ -50,9 +51,7 @@ class ImpactStoryController extends Controller
      */
     public function edit(ImpactStory $impact_story): View
     {
-        $sections = ImpactStorySection::orderBy('page', 'asc')->get();
-
-        return view('pages.admin.impact_story_sections.stories.edit', compact('impact_story', 'sections'));
+        return view('pages.admin.impact_story_sections.stories.edit', compact('impact_story'));
     }
 
     /**
@@ -61,6 +60,15 @@ class ImpactStoryController extends Controller
     public function update(UpdateRequest $request, ImpactStory $impact_story): RedirectResponse
     {
         $validated = $request->validated();
+
+        if ($request->hasFile('image')) {
+            if ($impact_story->image && Storage::disk('public')->exists($impact_story->image)) {
+                Storage::disk('public')->delete($impact_story->image);
+            }
+            $validated['image'] = $request->file('image')->store('impact_stories', 'public');
+        } else {
+            unset($validated['image']);
+        }
 
         $impact_story->update($validated);
 
@@ -72,6 +80,10 @@ class ImpactStoryController extends Controller
      */
     public function destroy(ImpactStory $impact_story): RedirectResponse
     {
+        if ($impact_story->image && Storage::disk('public')->exists($impact_story->image)) {
+            Storage::disk('public')->delete($impact_story->image);
+        }
+
         $impact_story->delete();
 
         return redirect()->route('admin.impact_stories.index')->with('success', 'Impact story deleted successfully');

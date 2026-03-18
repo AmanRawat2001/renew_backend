@@ -25,7 +25,7 @@ class UpdateRequest extends FormRequest
     {
         return [
             'title' => 'string|max:255',
-            'main_image' => 'nullable|image',
+            'external_url' => 'nullable|string|max:500',
             'sort_order' => 'integer|min:0',
             'status' => 'boolean',
             'page' => ['required', new Enum(SitePage::class)],

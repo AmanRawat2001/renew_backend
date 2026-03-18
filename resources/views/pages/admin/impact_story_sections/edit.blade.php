@@ -20,7 +20,7 @@
         <!-- Form -->
         <div class="rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-zinc-800 p-8">
             <form action="{{ route('admin.impact_story_sections.update', $impact_story_section) }}" method="POST"
-                enctype="multipart/form-data" class="space-y-8">
+                class="space-y-8">
                 @csrf
                 @method('PUT')
 
@@ -39,48 +39,22 @@
                     @enderror
                 </div>
 
-                <!-- Main Image Field -->
+                <!-- External URL Field -->
                 <div>
-                    <label for="main_image"
+                    <label for="external_url"
                         class="block text-sm font-semibold text-neutral-900 dark:text-neutral-50 mb-2">
-                        {{ __('Main Image') }}
+                        {{ __('External URL') }}
                     </label>
-                    <p class="text-xs text-neutral-600 dark:text-neutral-400 mb-2">
-                        {{ __('Leave empty to keep current image') }}</p>
-                    <div class="flex flex-col gap-4">
-                        <div class="flex-1">
-                            <input type="file" id="main_image" name="main_image" accept="image/*"
-                                class="w-full px-4 py-3 rounded-lg border-2 border-dashed border-neutral-300 dark:border-neutral-600 bg-neutral-50 dark:bg-zinc-900 text-neutral-900 dark:text-neutral-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('main_image') border-red-500 @enderror cursor-pointer file:mr-2 file:py-2 file:px-4 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700" />
-                            @error('main_image')
-                                <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
-                            @enderror
-                            <p class="mt-2 text-xs text-neutral-600 dark:text-neutral-400">
-                                {{ __('Drag and drop or click to select new image') }}
-                            </p>
-                        </div>
-
-                        @if ($impact_story_section->main_image)
-                            <div>
-                                <p class="text-xs font-medium text-neutral-600 dark:text-neutral-400 mb-2">
-                                    {{ __('Current Image') }}</p>
-                                <div class="rounded-lg overflow-hidden border border-neutral-200 dark:border-neutral-700">
-                                    <img src="{{ asset('storage/' . $impact_story_section->main_image) }}"
-                                        alt="{{ $impact_story_section->title }}" class="w-auto h-40 object-cover" />
-                                </div>
-                            </div>
-                        @endif
-                    </div>
-
-                    <div id="imagePreview" class="mt-4 hidden">
-                        <p class="text-xs font-medium text-neutral-600 dark:text-neutral-400 mb-2">
-                            {{ __('New Image Preview') }}</p>
-                        <div class="rounded-lg overflow-hidden border border-neutral-200 dark:border-neutral-700">
-                            <img id="previewImg" src="" alt="Preview" class="w-auto  h-40 object-cover" />
-                        </div>
-                        <button type="button" id="removeImage" class="mt-2 text-xs text-red-600 dark:text-red-400 hover:underline">
-                            {{ __('Remove New Image') }}
-                        </button>
-                    </div>
+                    <input type="url" id="external_url" name="external_url"
+                        class="w-full px-4 py-2 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-zinc-900 text-neutral-900 dark:text-neutral-50 focus:outline-none focus:ring-2 focus:ring-blue-500 @error('external_url') border-red-500 @enderror"
+                        placeholder="{{ __('https://example.com') }}"
+                        value="{{ old('external_url', $impact_story_section->external_url) }}" />
+                    @error('external_url')
+                        <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
+                    @enderror
+                    <p class="mt-1 text-xs text-neutral-600 dark:text-neutral-400">
+                        {{ __('Optional: Link to external page or resource') }}
+                    </p>
                 </div>
                 <div>
                     <label for="page"
@@ -147,160 +121,8 @@
                 </div>
             </form>
         </div>
-
-        <!-- Stories Section -->
-        <div
-            class="rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-zinc-800 overflow-hidden">
-            <div class="p-8">
-                <div class="flex items-center justify-between mb-6">
-                    <h2 class="text-xl font-semibold text-neutral-900 dark:text-neutral-50">
-                        {{ __('Stories in this Section') }}</h2>
-                    <a href="{{ route('admin.impact_stories.create', ['section_id' => $impact_story_section->id]) }}"
-                        class="inline-flex items-center gap-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg font-medium transition-colors text-sm">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M12 4v16m8-8H4" />
-                        </svg>
-                        {{ __('Add Story') }}
-                    </a>
-                </div>
-
-                @if ($impact_story_section->stories->count() > 0)
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-sm">
-                            <thead>
-                                <tr
-                                    class="border-b border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-zinc-900">
-                                    <th
-                                        class="px-4 py-3 text-left font-semibold text-neutral-900 dark:text-neutral-50">
-                                        {{ __('Name') }}</th>
-                                    <th
-                                        class="px-4 py-3 text-left font-semibold text-neutral-900 dark:text-neutral-50">
-                                        {{ __('Designation') }}</th>
-                                    <th
-                                        class="px-4 py-3 text-left font-semibold text-neutral-900 dark:text-neutral-50">
-                                        {{ __('Location') }}</th>
-                                    <th
-                                        class="px-4 py-3 text-left font-semibold text-neutral-900 dark:text-neutral-50">
-                                        {{ __('Sort Order') }}</th>
-                                    <th
-                                        class="px-4 py-3 text-left font-semibold text-neutral-900 dark:text-neutral-50">
-                                        {{ __('Status') }}</th>
-                                    <th
-                                        class="px-4 py-3 text-right font-semibold text-neutral-900 dark:text-neutral-50">
-                                        {{ __('Actions') }}</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($impact_story_section->stories->sortBy('sort_order') as $story)
-                                    <tr
-                                        class="border-b border-neutral-200 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-zinc-700/50">
-                                        <td class="px-4 py-3 text-neutral-900 dark:text-neutral-50 max-w-xs truncate">
-                                            {{ $story->name }}</td>
-                                        <td class="px-4 py-3 text-neutral-600 dark:text-neutral-400">
-                                            {{ $story->designation }}</td>
-                                        <td class="px-4 py-3 text-neutral-600 dark:text-neutral-400">
-                                            {{ $story->location }}</td>
-                                        <td class="px-4 py-3 text-neutral-600 dark:text-neutral-400">
-                                            {{ $story->sort_order }}</td>
-                                        <td class="px-4 py-3">{{ $story->status ? '✓' : '—' }}</td>
-                                        <td class="px-4 py-3 text-right">
-                                            <div class="flex items-center justify-end gap-2">
-                                                <a href="{{ route('admin.impact_stories.edit', $story) }}" wire:navigate
-                                                    class="inline-flex items-center gap-1 px-3 py-1.5 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 hover:bg-blue-100 dark:hover:bg-blue-900/50 rounded font-medium text-xs transition-colors">
-                                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                                                    </svg>
-                                                    {{ __('Edit') }}
-                                                </a>
-                                                <form action="{{ route('admin.impact_stories.destroy', $story) }}"
-                                                    method="POST" class="inline">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit"
-                                                        class="inline-flex items-center gap-1 px-3 py-1.5 bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400 hover:bg-red-100 dark:hover:bg-red-900/50 rounded font-medium text-xs transition-colors"
-                                                        onclick="return confirm('{{ __('Are you sure you want to delete this story?') }}')">
-                                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                                        </svg>
-                                                        {{ __('Delete') }}
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                @else
-                    <div class="p-8 text-center text-neutral-600 dark:text-neutral-400">
-                        <p>{{ __('No stories added yet.') }}</p>
-                        <a href="{{ route('admin.impact_stories.create', ['section_id' => $impact_story_section->id]) }}"
-                            class="inline-flex items-center gap-2 mt-3 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg font-medium transition-colors text-sm">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M12 4v16m8-8H4" />
-                            </svg>
-                            {{ __('Add First Story') }}
-                        </a>
-                    </div>
-                @endif
-            </div>
-        </div>
     </div>
 
     @push('scripts')
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                const imageInput = document.getElementById('main_image');
-                const imagePreview = document.getElementById('imagePreview');
-                const previewImg = document.getElementById('previewImg');
-                const removeImageBtn = document.getElementById('removeImage');
-
-                imageInput.addEventListener('change', function(e) {
-                    const file = e.target.files[0];
-                    if (file) {
-                        const reader = new FileReader();
-                        reader.onload = function(event) {
-                            previewImg.src = event.target.result;
-                            imagePreview.classList.remove('hidden');
-                        }
-                        reader.readAsDataURL(file);
-                    } else {
-                        imagePreview.classList.add('hidden');
-                    }
-                });
-
-                removeImageBtn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    imageInput.value = '';
-                    imagePreview.classList.add('hidden');
-                });
-
-                // Drag and drop support
-                const inputWrapper = imageInput.parentElement;
-                inputWrapper.addEventListener('dragover', function(e) {
-                    e.preventDefault();
-                    inputWrapper.classList.add('bg-blue-50', 'dark:bg-blue-900/20');
-                });
-
-                inputWrapper.addEventListener('dragleave', function(e) {
-                    e.preventDefault();
-                    inputWrapper.classList.remove('bg-blue-50', 'dark:bg-blue-900/20');
-                });
-
-                inputWrapper.addEventListener('drop', function(e) {
-                    e.preventDefault();
-                    inputWrapper.classList.remove('bg-blue-50', 'dark:bg-blue-900/20');
-                    const files = e.dataTransfer.files;
-                    if (files.length > 0) {
-                        imageInput.files = files;
-                        const event = new Event('change', { bubbles: true });
-                        imageInput.dispatchEvent(event);
-                    }
-                });
-            });
-        </script>
     @endpush
 </x-layouts::app>

@@ -2,20 +2,17 @@
 
 namespace App\Models;
 
+use App\Enums\SitePage;
 use Illuminate\Database\Eloquent\Model;
 
 class ImpactStory extends Model
 {
-    protected $fillable = ['section_id', 'name', 'designation', 'location', 'description', 'sort_order', 'status'];
+    protected $fillable = ['name', 'designation', 'location', 'image', 'description', 'page', 'sort_order', 'status'];
 
     protected $casts = [
         'status' => 'boolean',
+        'page' => SitePage::class,
     ];
-
-    public function section()
-    {
-        return $this->belongsTo(ImpactStorySection::class, 'section_id');
-    }
 
     public function scopeOrdered($query)
     {

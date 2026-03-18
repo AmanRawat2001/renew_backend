@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ImpactStorySection extends Model
 {
-    protected $fillable = ['title', 'main_image', 'page', 'sort_order', 'status'];
+    protected $fillable = ['title', 'external_url', 'page', 'sort_order', 'status'];
 
     protected $casts = [
         'status' => 'boolean',

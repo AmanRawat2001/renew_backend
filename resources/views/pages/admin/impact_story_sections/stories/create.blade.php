@@ -18,27 +18,27 @@
 
         <!-- Form -->
         <div class="rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-zinc-800 p-8">
-            <form action="{{ route('admin.impact_stories.store') }}" method="POST" class="space-y-8">
+            <form action="{{ route('admin.impact_stories.store') }}" method="POST" enctype="multipart/form-data" class="space-y-8">
                 @csrf
 
-                <!-- Section Field -->
+                <!-- Page Field -->
                 <div>
-                    <label for="section_id"
+                    <label for="page"
                         class="block text-sm font-semibold text-neutral-900 dark:text-neutral-50 mb-2">
-                        {{ __('Section') }} <span class="text-red-500">*</span>
+                        {{ __('Page') }} <span class="text-red-500">*</span>
                     </label>
-                    <select id="section_id" name="section_id"
-                        class="w-full px-4 py-2 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-zinc-900 text-neutral-900 dark:text-neutral-50 focus:outline-none focus:ring-2 focus:ring-blue-500 @error('section_id') border-red-500 @enderror"
+                    <select id="page" name="page"
+                        class="w-full px-4 py-2 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-zinc-900 text-neutral-900 dark:text-neutral-50 focus:outline-none focus:ring-2 focus:ring-blue-500 @error('page') border-red-500 @enderror"
                         required>
-                        <option value="">{{ __('Select a section') }}</option>
-                        @foreach ($sections as $section)
-                            <option value="{{ $section->id }}"
-                                @if (old('section_id') == $section->id) selected @elseif($selectedSection == $section->id) selected @endif>
-                                {{ $section->title }} ({{ $section->page->label() }})
+                        <option value="">{{ __('Select a page') }}</option>
+                        @foreach (App\Enums\SitePage::cases() as $pageCase)
+                            <option value="{{ $pageCase->value }}"
+                                {{ old('page') === $pageCase->value ? 'selected' : '' }}>
+                                {{ $pageCase->label() }}
                             </option>
                         @endforeach
                     </select>
-                    @error('section_id')
+                    @error('page')
                         <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
                     @enderror
                 </div>
@@ -84,6 +84,35 @@
                     @error('location')
                         <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
                     @enderror
+                </div>
+
+                <!-- Image Field -->
+                <div>
+                    <label for="image"
+                        class="block text-sm font-semibold text-neutral-900 dark:text-neutral-50 mb-2">
+                        {{ __('Image') }}
+                    </label>
+                    <div class="flex flex-col gap-4">
+                        <div class="flex-1">
+                            <input type="file" id="image" name="image" accept="image/*"
+                                class="w-full px-4 py-3 rounded-lg border-2 border-dashed border-neutral-300 dark:border-neutral-600 bg-neutral-50 dark:bg-zinc-900 text-neutral-900 dark:text-neutral-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('image') border-red-500 @enderror cursor-pointer file:mr-2 file:py-2 file:px-4 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700" />
+                            @error('image')
+                                <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
+                            @enderror
+                            <p class="mt-2 text-xs text-neutral-600 dark:text-neutral-400">
+                                {{ __('Drag and drop or click to select image') }}
+                            </p>
+                        </div>
+                        <div id="imagePreview" class="hidden">
+                            <div class="rounded-lg overflow-hidden border border-neutral-200 dark:border-neutral-700">
+                                <img id="previewImg" src="" alt="Preview" class="w-auto h-40 object-cover" />
+                            </div>
+                            <button type="button" id="removeImage"
+                                class="mt-2 text-xs text-red-600 dark:text-red-400 hover:underline">
+                                {{ __('Remove Image') }}
+                            </button>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Description Field -->
@@ -157,11 +186,65 @@
 
             document.addEventListener('DOMContentLoaded', function() {
                 initDescriptionEditor();
+                initImagePreview();
             });
 
             document.addEventListener('livewire:navigated', function() {
                 initDescriptionEditor();
+                initImagePreview();
             });
+
+            function initImagePreview() {
+                const imageInput = document.getElementById('image');
+                const imagePreview = document.getElementById('imagePreview');
+                const previewImg = document.getElementById('previewImg');
+                const removeImageBtn = document.getElementById('removeImage');
+
+                if (!imageInput) return;
+
+                imageInput.addEventListener('change', function(e) {
+                    const file = e.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = function(event) {
+                            previewImg.src = event.target.result;
+                            imagePreview.classList.remove('hidden');
+                        }
+                        reader.readAsDataURL(file);
+                    } else {
+                        imagePreview.classList.add('hidden');
+                    }
+                });
+
+                removeImageBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    imageInput.value = '';
+                    imagePreview.classList.add('hidden');
+                });
+
+                // Drag and drop support
+                const inputWrapper = imageInput.parentElement;
+                inputWrapper.addEventListener('dragover', function(e) {
+                    e.preventDefault();
+                    inputWrapper.classList.add('bg-blue-50', 'dark:bg-blue-900/20');
+                });
+
+                inputWrapper.addEventListener('dragleave', function(e) {
+                    e.preventDefault();
+                    inputWrapper.classList.remove('bg-blue-50', 'dark:bg-blue-900/20');
+                });
+
+                inputWrapper.addEventListener('drop', function(e) {
+                    e.preventDefault();
+                    inputWrapper.classList.remove('bg-blue-50', 'dark:bg-blue-900/20');
+                    const files = e.dataTransfer.files;
+                    if (files.length > 0) {
+                        imageInput.files = files;
+                        const event = new Event('change', { bubbles: true });
+                        imageInput.dispatchEvent(event);
+                    }
+                });
+            }
 
             function initDescriptionEditor() {
                 const editor = document.getElementById('descriptionEditor');
