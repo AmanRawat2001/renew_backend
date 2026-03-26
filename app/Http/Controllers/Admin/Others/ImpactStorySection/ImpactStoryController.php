@@ -62,7 +62,7 @@ class ImpactStoryController extends Controller
         $validated = $request->validated();
 
         if ($request->hasFile('image')) {
-            if ($impact_story->image && Storage::disk('public')->exists($impact_story->image)) {
+            if ($impact_story->image) {
                 Storage::disk('public')->delete($impact_story->image);
             }
             $validated['image'] = $request->file('image')->store('impact_stories', 'public');

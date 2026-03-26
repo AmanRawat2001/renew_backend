@@ -6,7 +6,6 @@ use App\Enums\SitePage;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Enum;
 
-
 class UpdateRequest extends FormRequest
 {
     /**
@@ -28,7 +27,6 @@ class UpdateRequest extends FormRequest
             'name' => 'string|max:255',
             'designation' => 'string|max:255',
             'location' => 'string|max:255',
-            'image' => 'nullable|image',
             'description' => 'string',
             'page' => ['required', new Enum(SitePage::class)],
             'sort_order' => 'integer|min:0',
