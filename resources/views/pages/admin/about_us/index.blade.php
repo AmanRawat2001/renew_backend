@@ -13,57 +13,59 @@
             <div>
                 <h2 class="text-2xl font-bold text-neutral-900 dark:text-neutral-50">{{ __('Sliders') }}</h2>
             </div>
-            <div
-                class="rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-zinc-800 overflow-hidden">
-                @if ($sliders->count() > 0)
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-sm">
-                            <thead>
-                                <tr
-                                    class="border-b border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-zinc-900">
-                                    <th class="px-4 py-3 text-left font-semibold text-neutral-900 dark:text-neutral-50">
-                                        {{ __('Title') }}</th>
-                                    <th class="px-4 py-3 text-left font-semibold text-neutral-900 dark:text-neutral-50">
-                                        {{ __('Image') }}</th>
-                                    <th class="px-4 py-3 text-left font-semibold text-neutral-900 dark:text-neutral-50">
-                                        {{ __('Sequence') }}</th>
-                                    <th class="px-4 py-3 text-left font-semibold text-neutral-900 dark:text-neutral-50">
-                                        {{ __('Status') }}</th>
-                                    <th
-                                        class="px-4 py-3 text-right font-semibold text-neutral-900 dark:text-neutral-50">
-                                        {{ __('Actions') }}</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($sliders as $slider)
-                                    <tr
-                                        class="border-b border-neutral-200 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-zinc-700/50">
-                                        <td class="px-4 py-3 text-neutral-900 dark:text-neutral-50 max-w-xs truncate">
-                                            {!! $slider->title !!}</td>
-                                        <td class="px-4 py-3">
-                                            @if ($slider->image)
-                                                <img src="{{ $slider->image ? asset('storage/' . $slider->image) : asset('images/default.png') }}"
-                                                    alt="{{ $slider->title }}" class="h-10 object-cover rounded" />
-                                            @else
-                                                <span class="text-neutral-400">—</span>
-                                            @endif
-                                        <td class="px-4 py-3 text-neutral-600 dark:text-neutral-400">
-                                            {{ $slider->sequence }}</td>
-                                        <td class="px-4 py-3">{{ $slider->is_active ? '✓' : '—' }}</td>
-                                        <td class="px-4 py-3 text-right"><a
-                                                href="{{ route('admin.main_sliders.edit', $slider) }}"
-                                                class="text-blue-600 dark:text-blue-400 hover:underline text-xs">{{ __('Edit') }}</a>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                @else
-                    <div class="p-8 text-center text-neutral-600 dark:text-neutral-400">{{ __('No sliders yet') }}
-                    </div>
-                @endif
-            </div>
+            @if ($sliders->count() > 0)
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    @foreach ($sliders as $slider)
+                        <div class="group rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-zinc-800 overflow-hidden hover:shadow-lg transition-all">
+                            <!-- Image -->
+                            <div class="relative h-48 overflow-hidden bg-gray-100 dark:bg-gray-900">
+                                @if ($slider->image)
+                                    <img src="{{ asset('storage/' . $slider->image) }}" alt="{{ $slider->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                                @else
+                                    <div class="w-full h-full flex items-center justify-center text-gray-400">
+                                        <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                        </svg>
+                                    </div>
+                                @endif
+                                <div class="absolute inset-0 bg-black/40"></div>
+                                <!-- Badge -->
+                                <div class="absolute top-3 right-3 inline-block px-3 py-1 rounded-full text-xs font-semibold 
+                                    {{ $slider->is_active ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300' : 'bg-gray-100 dark:bg-gray-900/30 text-gray-700 dark:text-gray-300' }}">
+                                    {{ $slider->is_active ? __('Active') : __('Inactive') }}
+                                </div>
+                            </div>
+
+                            <!-- Content -->
+                            <div class="p-4">
+                                <!-- Title -->
+                                <h3 class="text-base font-semibold text-neutral-900 dark:text-neutral-50 line-clamp-2">
+                                    {!! $slider->title !!}
+                                </h3>
+
+                                <!-- Sequence -->
+                                <p class="mt-3 text-xs text-neutral-500 dark:text-neutral-400">
+                                    {{ __('Sequence') }}: <span class="font-semibold">{{ $slider->sequence }}</span>
+                                </p>
+
+                                <!-- Actions -->
+                                <div class="mt-4 flex items-center gap-2 pt-4 border-t border-neutral-200 dark:border-neutral-700">
+                                    <a href="{{ route('admin.main_sliders.edit', $slider) }}" class="flex-1 inline-flex items-center justify-center gap-1 px-3 py-2 text-sm text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 border border-blue-200 dark:border-blue-900 rounded hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                        </svg>
+                                        {{ __('Edit') }}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            @else
+                <div class="rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-zinc-800 p-12 text-center">
+                    <p class="text-neutral-600 dark:text-neutral-400">{{ __('No sliders yet') }}</p>
+                </div>
+            @endif
         </div>
 
 
@@ -72,54 +74,53 @@
             <div>
                 <h2 class="text-2xl font-bold text-neutral-900 dark:text-neutral-50">{{ __('Feature Cards') }}</h2>
             </div>
-            <div
-                class="rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-zinc-800 overflow-hidden">
-                @if ($featureCards->count() > 0)
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-sm">
-                            <thead>
-                                <tr
-                                    class="border-b border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-zinc-900">
-                                    <th class="px-4 py-3 text-left font-semibold text-neutral-900 dark:text-neutral-50">
-                                        {{ __('Icon') }}</th>
-                                    <th class="px-4 py-3 text-left font-semibold text-neutral-900 dark:text-neutral-50">
-                                        {{ __('Title') }}</th>
-                                    <th class="px-4 py-3 text-left font-semibold text-neutral-900 dark:text-neutral-50">
-                                        {{ __('Sequence') }}</th>
-                                    <th
-                                        class="px-4 py-3 text-right font-semibold text-neutral-900 dark:text-neutral-50">
-                                        {{ __('Actions') }}</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($featureCards as $card)
-                                    <tr
-                                        class="border-b border-neutral-200 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-zinc-700/50">
-                                        <td class="px-4 py-3">
-                                            @if ($card->image)
-                                                <img src="{{ asset('storage/' . $card->image) }}" alt="{{ $card->title }}" class="h-8 w-8" />
-                                            @else
-                                                <span class="text-neutral-400">—</span>
-                                            @endif
-                                        </td>
-                                        <td class="px-4 py-3 text-neutral-900 dark:text-neutral-50 max-w-xs truncate">
-                                            {!! $card->title !!}</td>
-                                        <td class="px-4 py-3 text-neutral-600 dark:text-neutral-400">
-                                            {{ $card->sequence }}</td>
-                                        <td class="px-4 py-3 text-right"><a
-                                                href="{{ route('admin.other_feature_cards.edit', $card) }}"
-                                                class="text-blue-600 dark:text-blue-400 hover:underline text-xs">{{ __('Edit') }}</a>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                @else
-                    <div class="p-8 text-center text-neutral-600 dark:text-neutral-400">
-                        {{ __('No feature cards yet') }}</div>
-                @endif
-            </div>
+            @if ($featureCards->count() > 0)
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    @foreach ($featureCards as $card)
+                        <div class="group rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-zinc-800 overflow-hidden hover:shadow-lg transition-all">
+                            <!-- Icon Header -->
+                            <div class="bg-gradient-to-r from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 p-6 flex items-center justify-center">
+                                @if ($card->image)
+                                     <img src="{{ asset('storage/' . $card->image) }}"  />
+                                @else
+                                    <div class="h-16 w-16 flex items-center justify-center text-gray-400">
+                                        <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                        </svg>
+                                    </div>
+                                @endif
+                            </div>
+
+                            <!-- Content -->
+                            <div class="p-4">
+                                <!-- Title -->
+                                <h3 class="text-base font-semibold text-neutral-900 dark:text-neutral-50 line-clamp-2">
+                                    {!! $card->title !!}
+                                </h3>
+
+                                <!-- Sequence -->
+                                <p class="mt-3 text-xs text-neutral-500 dark:text-neutral-400">
+                                    {{ __('Sequence') }}: <span class="font-semibold">{{ $card->sequence }}</span>
+                                </p>
+
+                                <!-- Actions -->
+                                <div class="mt-4 flex items-center gap-2 pt-4 border-t border-neutral-200 dark:border-neutral-700">
+                                    <a href="{{ route('admin.other_feature_cards.edit', $card) }}" class="flex-1 inline-flex items-center justify-center gap-1 px-3 py-2 text-sm text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 border border-blue-200 dark:border-blue-900 rounded hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                        </svg>
+                                        {{ __('Edit') }}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            @else
+                <div class="rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-zinc-800 p-12 text-center">
+                    <p class="text-neutral-600 dark:text-neutral-400">{{ __('No feature cards yet') }}</p>
+                </div>
+            @endif
         </div>
 
         <!-- Content Sections Section -->

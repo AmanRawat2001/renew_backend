@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Models\ContentSection;
 use App\Models\FeatureCard;
 use App\Models\Impact;
+use App\Models\ImpactStory;
+use App\Models\ImpactStorySection;
 use App\Models\MissionSlide;
 use App\Models\Slider;
 use Illuminate\View\View;
@@ -25,13 +27,17 @@ class ProgramController extends Controller
         $impacts = Impact::where('page', SitePage::EMPOWERING_LIVES)->orderBy('sequence')->get();
         $featureCards = FeatureCard::where('page', SitePage::EMPOWERING_LIVES)->orderBy('sequence')->get();
         $contentSections = ContentSection::where('page', SitePage::EMPOWERING_LIVES)->get();
+        $impactStories = ImpactStory::where('page', SitePage::EMPOWERING_LIVES)->orderBy('sequence')->get();
+        $impactStorySections = ImpactStorySection::where('page', SitePage::EMPOWERING_LIVES)->get();
 
         return view('pages.admin.program.empowering', compact(
             'sliders',
             'missionSlides',
             'impacts',
             'featureCards',
-            'contentSections'
+            'contentSections',
+            'impactStories',
+            'impactStorySections'
         ));
     }
 
@@ -42,13 +48,17 @@ class ProgramController extends Controller
         $impacts = Impact::where('page', SitePage::ACCELERATING_INNOVATION)->orderBy('sequence')->get();
         $featureCards = FeatureCard::where('page', SitePage::ACCELERATING_INNOVATION)->orderBy('sequence')->get();
         $contentSections = ContentSection::where('page', SitePage::ACCELERATING_INNOVATION)->get();
+        $impactStories = ImpactStory::where('page', SitePage::ACCELERATING_INNOVATION)->orderBy('sequence')->get();
+        $impactStorySections = ImpactStorySection::where('page', SitePage::ACCELERATING_INNOVATION)->get();
 
         return view('pages.admin.program.accelerating', compact(
             'sliders',
             'missionSlides',
             'impacts',
             'featureCards',
-            'contentSections'
+            'contentSections',
+            'impactStories',
+            'impactStorySections'
         ));
     }
 
@@ -59,13 +69,17 @@ class ProgramController extends Controller
         $impacts = Impact::where('page', SitePage::POWERING_EDUCATION)->orderBy('sequence')->get();
         $featureCards = FeatureCard::where('page', SitePage::POWERING_EDUCATION)->orderBy('sequence')->get();
         $contentSections = ContentSection::where('page', SitePage::POWERING_EDUCATION)->get();
+        $impactStories = ImpactStory::where('page', SitePage::POWERING_EDUCATION)->orderBy('sequence')->get();
+        $impactStorySections = ImpactStorySection::where('page', SitePage::POWERING_EDUCATION)->get();
 
         return view('pages.admin.program.powering', compact(
             'sliders',
             'missionSlides',
             'impacts',
             'featureCards',
-            'contentSections'
+            'contentSections',
+            'impactStories',
+            'impactStorySections'
         ));
     }
 }
