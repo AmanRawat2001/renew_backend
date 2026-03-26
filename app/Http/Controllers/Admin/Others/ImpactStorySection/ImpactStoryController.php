@@ -66,8 +66,6 @@ class ImpactStoryController extends Controller
                 Storage::disk('public')->delete($impact_story->image);
             }
             $validated['image'] = $request->file('image')->store('impact_stories', 'public');
-        } else {
-            unset($validated['image']);
         }
 
         $impact_story->update($validated);
