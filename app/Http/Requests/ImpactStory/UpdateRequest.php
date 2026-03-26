@@ -28,6 +28,7 @@ class UpdateRequest extends FormRequest
             'designation' => 'string|max:255',
             'location' => 'string|max:255',
             'description' => 'string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
             'page' => ['required', new Enum(SitePage::class)],
             'sort_order' => 'integer|min:0',
             'status' => 'boolean',
