@@ -164,26 +164,17 @@
 
                 <!-- Actions -->
                 <div class="mt-8 flex items-center gap-3 pt-8 border-t border-neutral-200 dark:border-neutral-700">
-                    <form action="{{ route('admin.other_feature_cards.update', $other_feature_card) }}" method="POST"
-                        enctype="multipart/form-data">
-                        @csrf
-                        @method('PUT')
+                    <!-- Update -->
+                    <button type="submit"
+                        class="inline-flex items-center gap-2 px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg">
+                        Update Card
+                    </button>
 
-                        <!-- form fields -->
-
-
-                        <!-- Update -->
-                        <button type="submit"
-                            class="inline-flex items-center gap-2 px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg">
-                            Update Card
-                        </button>
-
-                        <!-- Cancel -->
-                        <a href="{{ route('admin.other_feature_cards.index') }}" wire:navigate
-                            class="px-6 py-2 text-neutral-600">
-                            Cancel
-                        </a>
-                    </form>
+                    <!-- Cancel -->
+                    <a href="{{ route('admin.other_feature_cards.index') }}" wire:navigate
+                        class="px-6 py-2 text-neutral-600">
+                        Cancel
+                    </a>
                 </div>
             </form>
         </div>
@@ -278,6 +269,10 @@
                 if (descriptionInput.value) {
                     quillDescription.root.innerHTML = descriptionInput.value
                 }
+
+                quillDescription.on('text-change', function() {
+                    descriptionInput.value = quillDescription.root.innerHTML
+                })
 
                 const form = document.querySelector('form')
                 if (form) {
