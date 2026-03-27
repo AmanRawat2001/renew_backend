@@ -12,6 +12,7 @@ enum SitePage: string
     case ABOUT_US = 'about_us';
     case GET_INVOLVED = 'get_involved';
     case ACE2026 = 'ace2026';
+    case CLIMATE_SOLUTIONS = 'climate_solutions';
 
     public function label(): string
     {
@@ -24,6 +25,8 @@ enum SitePage: string
             self::ABOUT_US => 'About Us',
             self::GET_INVOLVED => 'Get Involved',
             self::ACE2026 => 'ReNew Awards for Climate Entrepreneurs 2026',
+            self::CLIMATE_SOLUTIONS => 'Climate Solutions',
+
         };
     }
 }
