@@ -129,8 +129,6 @@
                         @enderror
                         <p class="mt-1 text-xs text-neutral-600 dark:text-neutral-400">{{ __('Text to display for the external link (optional)') }}</p>
                     </div>
-                </div>
-
 
                 </div>
 
@@ -168,24 +166,12 @@
                     theme: 'snow',
                     modules: {
                         toolbar: [
-                            [{
-                                'header': [1, 2, 3, false]
-                            }],
+                            [{ 'header': [1, 2, 3, false] }],
                             ['bold', 'italic', 'underline', 'strike'],
                             ['blockquote', 'code-block'],
-                            [{
-                                'list': 'ordered'
-                            }, {
-                                'list': 'bullet'
-                            }],
-                            [{
-                                'color': []
-                            }, {
-                                'background': []
-                            }],
-                            [{
-                                'align': []
-                            }],
+                            [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+                            [{ 'color': [] }, { 'background': [] }],
+                            [{ 'align': [] }],
                             ['link', 'image'],
                             ['clean']
                         ]
@@ -260,10 +246,8 @@
             document.addEventListener('submit', function(e) {
                 if (e.target.tagName === 'FORM') {
                     if (window.quillTitle) document.getElementById('title').value = window.quillTitle.root.innerHTML
-                    if (window.quillSubtitle) document.getElementById('subtitle').value = window.quillSubtitle.root
-                        .innerHTML
-                    if (window.quillDescription) document.getElementById('description').value = window.quillDescription
-                        .root.innerHTML
+                    if (window.quillSubtitle) document.getElementById('subtitle').value = window.quillSubtitle.root.innerHTML
+                    if (window.quillDescription) document.getElementById('description').value = window.quillDescription.root.innerHTML
                 }
             }, true)
         </script>
