@@ -30,6 +30,7 @@ class AboutUsController extends Controller
             $groupedSections,
             [
                 'feature_cards' => FeatureCardResource::collection($feature_cards),
+                'mission_slider' => SliderResource::collection($mission_slider),
             ]
         ));
     }
