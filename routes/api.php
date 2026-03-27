@@ -3,6 +3,7 @@
 use App\Http\Controllers\API\AboutUsController;
 use App\Http\Controllers\API\AcceleratingInnovationController;
 use App\Http\Controllers\API\Ace2026Controller;
+use App\Http\Controllers\API\ClimateSolutionsController;
 use App\Http\Controllers\API\EmpoweringLivesController;
 use App\Http\Controllers\API\GetInvolvedController;
 use App\Http\Controllers\API\HomeController;
@@ -18,3 +19,4 @@ Route::get('/publications', [PublicationsController::class, 'index']);
 Route::get('/about-us', [AboutUsController::class, 'index']);
 Route::get('/get-involved', [GetInvolvedController::class, 'index']);
 Route::get('/ace2026', [Ace2026Controller::class, 'index']);
+Route::get('/climate-solutions', [ClimateSolutionsController::class, 'index']);

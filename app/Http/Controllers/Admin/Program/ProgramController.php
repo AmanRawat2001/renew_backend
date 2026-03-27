@@ -82,4 +82,19 @@ class ProgramController extends Controller
             'impactStorySections'
         ));
     }
+
+    public function climate(): View
+    {
+        $sliders = Slider::where('page', SitePage::CLIMATE_SOLUTIONS)->orderBy('sequence')->get();
+        $missionSlides = MissionSlide::where('page', SitePage::CLIMATE_SOLUTIONS)->orderBy('page')->get();
+        $featureCards = FeatureCard::where('page', SitePage::CLIMATE_SOLUTIONS)->orderBy('sequence')->get();
+        $contentSections = ContentSection::where('page', SitePage::CLIMATE_SOLUTIONS)->get();
+
+        return view('pages.admin.program.climate', compact(
+            'sliders',
+            'missionSlides',
+            'featureCards',
+            'contentSections',
+        ));
+    }
 }

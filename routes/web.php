@@ -55,6 +55,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::get('accelerating-innovation', [ProgramController::class, 'accelerating'])->name('program.innovation');
             Route::get('powering-education', [ProgramController::class, 'powering'])->name('program.education');
             Route::get('ace-2026', [Ace2026Controller::class, 'index'])->name('program.ace_2026');
+            Route::get('climate-solutions', [ProgramController::class, 'climate'])->name('program.climate_solutions');
             Route::resource('main_sliders', MainSliderController::class);
             Route::resource('other_sections', OthersContentSectionController::class);
             Route::resource('other_impacts', OthersImpactController::class);

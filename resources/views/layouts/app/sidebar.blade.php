@@ -51,6 +51,10 @@
                     :current="request()->routeIs('admin.program.ace_2026')" wire:navigate>
                     {{ __('ACE 2026') }}
                 </flux:sidebar.item>
+                <flux:sidebar.item icon="globe-alt" :href="route('admin.program.climate_solutions')"
+                    :current="request()->routeIs('admin.program.climate_solutions')" wire:navigate>
+                    {{ __('Climate Solutions') }}
+                </flux:sidebar.item>
             </flux:sidebar.group>
         </flux:sidebar.nav>
 
