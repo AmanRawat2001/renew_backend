@@ -6,6 +6,7 @@ use App\Enums\SitePage;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ContentSectionResource;
 use App\Http\Resources\FeatureCardResource;
+use App\Http\Resources\MissionSlideResource;
 use App\Http\Resources\SliderResource;
 use App\Models\ContentSection;
 use App\Models\FeatureCard;
@@ -30,7 +31,7 @@ class AboutUsController extends Controller
             $groupedSections,
             [
                 'feature_cards' => FeatureCardResource::collection($feature_cards),
-                'mission_slider' => SliderResource::collection($mission_slider),
+                'mission_slider' => MissionSlideResource::collection($mission_slider),
             ]
         ));
     }
