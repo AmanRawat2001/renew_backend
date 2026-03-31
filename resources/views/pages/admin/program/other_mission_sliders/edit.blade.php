@@ -24,9 +24,9 @@
                     <!-- Image Field -->
                     <div>
                         <label for="image" class="block text-sm font-semibold text-neutral-900 dark:text-neutral-50 mb-2">
-                            {{ __('Image') }}
+                            {{ __('Image/Attachment') }}
                         </label>
-                        <p class="text-xs text-neutral-600 dark:text-neutral-400 mb-2">{{ __('Leave empty to keep current image') }}</p>
+                        <p class="text-xs text-neutral-600 dark:text-neutral-400 mb-2">{{ __('Leave empty to keep current image/attachment') }}</p>
                         <input
                             type="file"
                             id="image"
