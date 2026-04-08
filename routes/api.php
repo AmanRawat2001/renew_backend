@@ -11,6 +11,12 @@ use App\Http\Controllers\API\PoweringEducationController;
 use App\Http\Controllers\API\PublicationsController;
 use Illuminate\Support\Facades\Route;
 
+// Health check endpoint (no rate limiting)
+Route::get('/health', function () {
+    return response()->json(['status' => 'ok']);
+});
+
+// Your API routes with security middleware applied
 Route::get('/home', [HomeController::class, 'index']);
 Route::get('/empowering-lives', [EmpoweringLivesController::class, 'index']);
 Route::get('/accelerating-innovation', [AcceleratingInnovationController::class, 'index']);
