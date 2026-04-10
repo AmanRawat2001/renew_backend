@@ -48,7 +48,7 @@ class ProgramController extends Controller
         $impacts = Impact::where('page', SitePage::ACCELERATING_INNOVATION)->orderBy('sequence')->get();
         $featureCards = FeatureCard::where('page', SitePage::ACCELERATING_INNOVATION)->orderBy('sequence')->get();
         $contentSections = ContentSection::where('page', SitePage::ACCELERATING_INNOVATION)->get();
-        $impactStories = ImpactStory::where('page', SitePage::ACCELERATING_INNOVATION)->orderBy('sequence')->get();
+        $impactStories = ImpactStory::where('page', SitePage::ACCELERATING_INNOVATION)->orderBy('sort_order')->get();
         $impactStorySections = ImpactStorySection::where('page', SitePage::ACCELERATING_INNOVATION)->get();
 
         return view('pages.admin.program.accelerating', compact(
