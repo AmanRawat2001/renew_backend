@@ -19,7 +19,7 @@ class MissionSliderController extends Controller
         if (request()->filled('site_page')) {
             $query->where('page', request('site_page'));
         }
-        $slides = $query->orderBy('sort_order', 'asc')->paginate(12)->withQueryString();
+        $slides = $query->orderBy('sequence', 'asc')->paginate(12)->withQueryString();
 
         return view('pages.admin.program.other_mission_sliders.index', compact('slides'));
     }
