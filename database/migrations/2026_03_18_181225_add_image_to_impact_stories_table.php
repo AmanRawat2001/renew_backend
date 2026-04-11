@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::table('impact_stories', function (Blueprint $table) {
             $table->dropForeign(['section_id']);
             $table->dropColumn('section_id');
-            $table->string('page')->default('home')->after('is_active');
+            $table->string('page')->default('home')->after('id');
             $table->string('image')->nullable()->after('location');
         });
     }

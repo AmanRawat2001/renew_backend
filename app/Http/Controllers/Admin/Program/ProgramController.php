@@ -27,7 +27,7 @@ class ProgramController extends Controller
         $impacts = Impact::where('page', SitePage::EMPOWERING_LIVES)->orderBy('sequence')->get();
         $featureCards = FeatureCard::where('page', SitePage::EMPOWERING_LIVES)->orderBy('sequence')->get();
         $contentSections = ContentSection::where('page', SitePage::EMPOWERING_LIVES)->get();
-        $impactStories = ImpactStory::where('page', SitePage::EMPOWERING_LIVES)->orderBy('sequence')->get();
+        $impactStories = ImpactStory::where('page', SitePage::EMPOWERING_LIVES)->orderBy('sort_order')->get();
         $impactStorySections = ImpactStorySection::where('page', SitePage::EMPOWERING_LIVES)->get();
 
         return view('pages.admin.program.empowering', compact(
@@ -69,7 +69,7 @@ class ProgramController extends Controller
         $impacts = Impact::where('page', SitePage::POWERING_EDUCATION)->orderBy('sequence')->get();
         $featureCards = FeatureCard::where('page', SitePage::POWERING_EDUCATION)->orderBy('sequence')->get();
         $contentSections = ContentSection::where('page', SitePage::POWERING_EDUCATION)->get();
-        $impactStories = ImpactStory::where('page', SitePage::POWERING_EDUCATION)->orderBy('sequence')->get();
+        $impactStories = ImpactStory::where('page', SitePage::POWERING_EDUCATION)->orderBy('sort_order')->get();
         $impactStorySections = ImpactStorySection::where('page', SitePage::POWERING_EDUCATION)->get();
 
         return view('pages.admin.program.powering', compact(
