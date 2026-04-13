@@ -35,9 +35,20 @@ class CorsRestrictDomain
             'allowed_origin' => $this->allowedOrigin,
             'is_allowed' => $isAllowed,
             'method' => $request->getMethod(),
+            'user_agent' => $request->header('User-Agent'),
         ]);
 
-        if ($hasOrigin && ! $isAllowed) {
+        if (! $hasOrigin) {
+            Log::warning('Request rejected: missing Origin header (likely from Postman/curl/VPN)');
+
+            return response()->json([
+                'error' => 'Forbidden',
+                'message' => 'API requests must come from an allowed browser origin',
+            ], 403)
+                ->header('Vary', 'Origin');
+        }
+
+        if (! $isAllowed) {
             Log::warning('CORS request rejected for origin: '.$origin);
 
             return response()->json([
@@ -46,32 +57,23 @@ class CorsRestrictDomain
             ], 403)
                 ->header('Vary', 'Origin');
         }
-
-        // Handle preflight OPTIONS requests
         if ($request->isMethod('OPTIONS')) {
-            if ($isAllowed) {
-                return response()->noContent()
-                    ->header('Access-Control-Allow-Origin', $origin)
-                    ->header('Access-Control-Allow-Credentials', 'true')
-                    ->header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, PATCH')
-                    ->header('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With')
-                    ->header('Access-Control-Max-Age', '86400')
-                    ->header('Vary', 'Origin');
-            }
-            // Disallowed preflight already rejected above
-        }
-
-        // Process the actual request
-        $response = $next($request);
-
-        // Add CORS headers only for allowed origins
-        if ($isAllowed) {
-            $response->header('Access-Control-Allow-Origin', $origin)
+            return response()->noContent()
+                ->header('Access-Control-Allow-Origin', $origin)
                 ->header('Access-Control-Allow-Credentials', 'true')
                 ->header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, PATCH')
                 ->header('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With')
+                ->header('Access-Control-Max-Age', '86400')
                 ->header('Vary', 'Origin');
         }
+
+        $response = $next($request);
+
+        $response->header('Access-Control-Allow-Origin', $origin)
+            ->header('Access-Control-Allow-Credentials', 'true')
+            ->header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, PATCH')
+            ->header('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With')
+            ->header('Vary', 'Origin');
 
         return $response;
     }
