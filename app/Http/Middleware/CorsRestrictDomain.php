@@ -43,7 +43,7 @@ class CorsRestrictDomain
 
             return response()->json([
                 'error' => 'Forbidden',
-                'message' => 'API requests must come from an allowed browser origin',
+                'message' => 'API requests rejected',
             ], 403)
                 ->header('Vary', 'Origin');
         }
@@ -53,7 +53,7 @@ class CorsRestrictDomain
 
             return response()->json([
                 'error' => 'Forbidden',
-                'message' => 'Origin not allowed to access this API',
+                'message' => 'API requests rejected',
             ], 403)
                 ->header('Vary', 'Origin');
         }
