@@ -22,8 +22,11 @@ return [
     'allowed_methods' => ['*'],
 
     // Origins allowed - IMPORTANT: Be very restrictive
-    'allowed_origins' => [env('FRONTEND_DOMAIN', 'http://localhost:3000')],
-
+    'allowed_origins' => [
+        env('FRONTEND_DOMAIN', 'http://localhost:3000'),
+        'http://localhost:5173',
+        'http://localhost:5174',
+    ],
     // Origin patterns (regex)
     'allowed_origins_patterns' => [],
 
