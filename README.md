@@ -1,7 +1,7 @@
 # 🌱 Renew Foundation Backend
 
 <div align="center">
-  <img src="https://www.renewfoundation.org/logo.png" alt="Renew Foundation Logo" width="200" height="auto" />
+  <img src="https://api.renewfoundation.in/images/renew-foundation-logo.png" alt="Renew Foundation Logo" width="200" height="auto" />
   
   **A modern Laravel backend powering the Renew Foundation digital presence**
   
