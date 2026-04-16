@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin\Miscellaneous;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class MiscellaneousController extends Controller
 {
@@ -20,10 +19,16 @@ class MiscellaneousController extends Controller
         // Get original name
         $fileName = $file->getClientOriginalName();
 
-        // Store with original name
-        $path = $file->storeAs('miscellaneous', $fileName, 'public');
+        // Create directory if it doesn't exist
+        $uploadDir = public_path('uploads/miscellaneous');
+        if (!is_dir($uploadDir)) {
+            mkdir($uploadDir, 0755, true);
+        }
 
-        $url = Storage::disk('public')->url($path);
+        // Move file to public/uploads/miscellaneous
+        $file->move($uploadDir, $fileName);
+
+        $url = url('uploads/miscellaneous/' . $fileName);
 
         return redirect()->back()->with([
             'success' => 'File uploaded successfully',
