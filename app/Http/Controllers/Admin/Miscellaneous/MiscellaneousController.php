@@ -15,10 +15,6 @@ class MiscellaneousController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'file' => 'required|file|max:51200',
-        ]);
-
         $file = $request->file('file');
 
         // Get original name
