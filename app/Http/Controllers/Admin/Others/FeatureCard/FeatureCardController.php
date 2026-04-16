@@ -7,8 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\FeatureCard\StoreRequest;
 use App\Http\Requests\FeatureCard\UpdateRequest;
 use App\Models\FeatureCard;
+use App\Services\ImageService;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class FeatureCardController extends Controller
@@ -34,7 +34,11 @@ class FeatureCardController extends Controller
         $validated = $request->validated();
 
         if ($request->hasFile('image')) {
-            $validated['image'] = $request->file('image')->store('other_feature_cards', 'public');
+            $imageService = new ImageService;
+            $validated['image'] = $imageService->storeOptimized(
+                $request->file('image'),
+                'other_feature_cards'
+            );
         }
 
         $validated['page'] = $request->input('page', SitePage::HOME->value);
@@ -53,10 +57,14 @@ class FeatureCardController extends Controller
         $validated = $request->validated();
 
         if ($request->hasFile('image')) {
+            $imageService = new ImageService;
             if ($other_feature_card->image) {
-                Storage::disk('public')->delete($other_feature_card->image);
+                $imageService->delete($other_feature_card->image);
             }
-            $validated['image'] = $request->file('image')->store('other_feature_cards', 'public');
+            $validated['image'] = $imageService->storeOptimized(
+                $request->file('image'),
+                'other_feature_cards'
+            );
         }
 
         $validated['page'] = $request->input('page', SitePage::HOME->value);

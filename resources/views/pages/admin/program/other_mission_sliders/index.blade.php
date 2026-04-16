@@ -53,7 +53,7 @@
                         class="group rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-zinc-800 overflow-hidden hover:shadow-lg transition-all">
                         <!-- Image -->
                         <div class="relative h-48 overflow-hidden bg-gray-100 dark:bg-gray-900">
-                            <img src="{{ asset('storage/' . $slide->image) }}"
+                            <img src="{{ asset('uploads/' . $slide->image) }}"
                                 onerror="this.src='{{ asset('images/default-image.png') }}'" alt="{{ $slide->title }}"
                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
                             <div class="absolute inset-0 bg-black/40"></div>
@@ -64,7 +64,7 @@
                                 {{ $slide->is_active ? __('Active') : __('Inactive') }}
                             </div>
                             <div class="absolute bottom-2 right-3">
-                                <a href="{{ asset('storage/' . $slide->image) }}" target="_blank"
+                                <a href="{{ asset('uploads/' . $slide->image) }}" target="_blank"
                                     class="px-3 py-1 text-xs font-semibold rounded-full  bg-white/80 dark:bg-black/50 backdrop-blur-md  text-gray-800 dark:text-white shadow">
                                     {{ __('Link') }}
                             </a>

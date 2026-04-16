@@ -28,7 +28,7 @@
                     <div class="group rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-zinc-800 overflow-hidden hover:shadow-lg transition-all">
                         <!-- Image -->
                         <div class="relative h-48 overflow-hidden bg-gray-100 dark:bg-gray-900">
-                            <img src="{{ asset('storage/' . $slide->image) }}" alt="{{ $slide->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                            <img src="{{ asset('uploads/' . $slide->image) }}" alt="{{ $slide->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
                             <div class="absolute inset-0 bg-black/40"></div>
                             <!-- Badge -->
                             <div class="absolute top-3 right-3 inline-block px-3 py-1 rounded-full text-xs font-semibold 

@@ -20,7 +20,7 @@
                             <!-- Image -->
                             <div class="relative h-48 overflow-hidden bg-gray-100 dark:bg-gray-900">
                                 @if ($slider->image)
-                                    <img src="{{ asset('storage/' . $slider->image) }}" alt="{{ $slider->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                                    <img src="{{ asset('uploads/' . $slider->image) }}" alt="{{ $slider->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
                                 @else
                                     <div class="w-full h-full flex items-center justify-center text-gray-400">
                                         <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -81,7 +81,7 @@
                             <!-- Icon Header -->
                             <div class="bg-gradient-to-r from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 p-6 flex items-center justify-center">
                                 @if ($card->image)
-                                     <img src="{{ asset('storage/' . $card->image) }}"  />
+                                     <img src="{{ asset('uploads/' . $card->image) }}"  />
                                 @else
                                     <div class="h-16 w-16 flex items-center justify-center text-gray-400">
                                         <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">

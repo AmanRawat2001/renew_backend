@@ -115,7 +115,7 @@
                                 <p class="text-xs font-medium text-neutral-600 dark:text-neutral-400 mb-2">
                                     {{ __('Current Image') }}</p>
                                 <div class="rounded-lg overflow-hidden border border-neutral-200 dark:border-neutral-700">
-                                    <img src="{{ asset('storage/' . $impact_story->image) }}"
+                                    <img src="{{ asset('uploads/' . $impact_story->image) }}"
                                         alt="{{ $impact_story->name }}" class="w-auto h-40 object-cover" />
                                 </div>
                             </div>

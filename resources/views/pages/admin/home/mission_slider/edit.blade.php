@@ -42,7 +42,7 @@
                             <div class="mt-4">
                                 <p class="text-xs font-medium text-neutral-600 dark:text-neutral-400 mb-2">{{ __('Current Image') }}</p>
                                 <div class="rounded-lg overflow-hidden max-w-sm">
-                                    <img src="{{ asset('storage/' . $mission_slider->image) }}" alt="{{ $mission_slider->title }}" class="w-full h-48 object-cover" />
+                                    <img src="{{ asset('uploads/' . $mission_slider->image) }}" alt="{{ $mission_slider->title }}" class="w-full h-48 object-cover" />
                                 </div>
                             </div>
                         @endif

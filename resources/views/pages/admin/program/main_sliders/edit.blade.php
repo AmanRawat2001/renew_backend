@@ -76,7 +76,7 @@
                             <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
                         @enderror
                         <div id="imagePreview" class="mt-4 rounded-lg overflow-hidden max-w-sm">
-                            <img id="previewImg" src="{{ asset('storage/' . $main_slider->image) }}" alt="Preview"
+                            <img id="previewImg" src="{{ asset('uploads/' . $main_slider->image) }}" alt="Preview"
                                 class="w-full h-48 object-cover" />
                         </div>
                     </div>

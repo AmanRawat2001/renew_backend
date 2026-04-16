@@ -7,8 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\FeatureCard\StoreRequest;
 use App\Http\Requests\FeatureCard\UpdateRequest;
 use App\Models\FeatureCard;
+use App\Services\ImageService;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class FeatureCardController extends Controller
@@ -30,7 +30,11 @@ class FeatureCardController extends Controller
         $validated = $request->validated();
 
         if ($request->hasFile('image')) {
-            $validated['image'] = $request->file('image')->store('feature-cards', 'public');
+            $imageService = new ImageService;
+            $validated['image'] = $imageService->storeOptimized(
+                $request->file('image'),
+                'feature-cards'
+            );
         }
 
         FeatureCard::create($validated);
@@ -48,10 +52,14 @@ class FeatureCardController extends Controller
         $validated = $request->validated();
 
         if ($request->hasFile('image')) {
+            $imageService = new ImageService;
             if ($featureCard->image) {
-                Storage::disk('public')->delete($featureCard->image);
+                $imageService->delete($featureCard->image);
             }
-            $validated['image'] = $request->file('image')->store('feature-cards', 'public');
+            $validated['image'] = $imageService->storeOptimized(
+                $request->file('image'),
+                'feature-cards'
+            );
         }
 
         $featureCard->update($validated);
