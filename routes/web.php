@@ -29,6 +29,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::redirect('/', '/login');
+Route::get('phpinfo', function () {
+    phpinfo();
+});
 Route::redirect('/register', '/login');
 Route::redirect('/forgot-password', '/login');
 
