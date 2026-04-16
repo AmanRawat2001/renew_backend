@@ -39,6 +39,7 @@ jobs:
 
             echo "Link shared storage"
             rm -rf storage
+            ln -sfn $BASE/renew-shared/uploads public/uploads
             ln -sfn $BASE/renew-shared/storage storage
 
             echo "Install composer dependencies"
@@ -47,6 +48,12 @@ jobs:
               --no-interaction \
               --prefer-dist \
               --optimize-autoloader
+
+            # echo "Install Node dependencies"
+            # npm install
+
+            # echo "Build frontend assets"
+            # npm run build
 
             echo "Laravel optimize"
             php artisan config:clear
