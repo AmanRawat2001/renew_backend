@@ -81,7 +81,7 @@
                                 <p class="text-xs font-medium text-neutral-600 dark:text-neutral-400 mb-2">
                                     {{ __('Current Image') }}</p>
                                 <div class="rounded-lg overflow-hidden max-w-sm">
-                                    <img src="{{ asset('storage/' . $other_feature_card->image) }}"
+                                    <img src="{{ asset('uploads/' . $other_feature_card->image) }}"
                                         alt="{{ $other_feature_card->title }}" class="w-full h-48 object-cover" />
                                 </div>
                             </div>

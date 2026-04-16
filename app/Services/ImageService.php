@@ -4,7 +4,6 @@ namespace App\Services;
 
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Intervention\Image\Format;
 use Intervention\Image\Laravel\Facades\Image;
@@ -33,8 +32,14 @@ class ImageService
             $filename = Str::uuid().'.webp';
             $storagePath = $path.'/'.$filename;
 
-            // Store to public disk
-            Storage::disk('public')->put($storagePath, $encoded);
+            // Create directory if it doesn't exist
+            $uploadDir = public_path('uploads/'.$path);
+            if (!is_dir($uploadDir)) {
+                mkdir($uploadDir, 0755, true);
+            }
+
+            // Store to public/uploads folder
+            $encoded->save(public_path('uploads/'.$storagePath));
 
             return $storagePath;
         } catch (\Exception $e) {
@@ -43,8 +48,14 @@ class ImageService
                 'path' => $path,
             ]);
 
-            // Fallback to original storage if processing fails
-            return $file->store($path, 'public');
+            // Fallback: save original file to public/uploads
+            $uploadDir = public_path('uploads/'.$path);
+            if (!is_dir($uploadDir)) {
+                mkdir($uploadDir, 0755, true);
+            }
+            $filename = Str::uuid().'.'.$file->getClientOriginalExtension();
+            $file->move($uploadDir, $filename);
+            return $path.'/'.$filename;
         }
     }
 
@@ -59,7 +70,11 @@ class ImageService
             return false;
         }
 
-        return Storage::disk('public')->delete($path);
+        $filePath = public_path('uploads/'.$path);
+        if (file_exists($filePath)) {
+            return unlink($filePath);
+        }
+        return false;
     }
 
     /**
@@ -73,6 +88,6 @@ class ImageService
             return null;
         }
 
-        return asset('storage/'.$path);
+        return asset('uploads/'.$path);
     }
 }

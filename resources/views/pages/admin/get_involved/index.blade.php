@@ -20,7 +20,7 @@
                             <!-- Image -->
                             <div class="relative h-48 overflow-hidden bg-gray-100 dark:bg-gray-900">
                                 @if ($slider->image)
-                                    <img src="{{ asset('storage/' . $slider->image) }}" alt="{{ $slider->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                                    <img src="{{ asset('uploads/' . $slider->image) }}" alt="{{ $slider->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
                                 @else
                                     <div class="w-full h-full flex items-center justify-center text-gray-400">
                                         <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -79,7 +79,7 @@
                         <div class="group rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-zinc-800 overflow-hidden hover:shadow-lg transition-all">
                             <!-- Image -->
                             <div class="relative h-48 overflow-hidden bg-gray-100 dark:bg-gray-900">
-                                <img src="{{ asset('storage/' . $slide->image) }}" alt="{{ $slide->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                                <img src="{{ asset('uploads/' . $slide->image) }}" alt="{{ $slide->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
                                 <div class="absolute inset-0 bg-black/40"></div>
                                 <!-- Badge -->
                                 <div class="absolute top-3 right-3 inline-block px-3 py-1 rounded-full text-xs font-semibold 
@@ -188,7 +188,7 @@
                             <!-- Icon Header -->
                             <div class="bg-gradient-to-r from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 p-6 flex items-center justify-center">
                                 @if ($card->image)
-                                    <img src="{{ asset('storage/' . $card->image) }}"  />
+                                    <img src="{{ asset('uploads/' . $card->image) }}"  />
                                 @else
                                     <div class="h-16 w-16 flex items-center justify-center text-gray-400">
                                         <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">

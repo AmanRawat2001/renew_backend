@@ -27,7 +27,7 @@
                     <div class="group rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-zinc-800 overflow-hidden hover:shadow-lg transition-shadow">
                         <!-- Image -->
                         <div class="relative h-48 overflow-hidden bg-neutral-100 dark:bg-zinc-700">
-                            <img src="{{ asset('storage/' . $card->image) }}" alt="{!! $card->title !!}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                            <img src="{{ asset('uploads/' . $card->image) }}" alt="{!! $card->title !!}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
                             <div class="absolute inset-0 bg-black/40"></div>
                             <!-- Overlay text -->
                             <div class="absolute inset-0 flex flex-col justify-end p-4">

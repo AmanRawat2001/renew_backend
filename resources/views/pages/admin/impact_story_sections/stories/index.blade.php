@@ -57,7 +57,7 @@
                                     <td class="px-4 py-3">
                                         @if ($story->image)
                                             <div class="w-12 h-12 rounded-lg overflow-hidden border border-neutral-200 dark:border-neutral-700">
-                                                <img src="{{ asset('storage/' . $story->image) }}"
+                                                <img src="{{ asset('uploads/' . $story->image) }}"
                                                     alt="{{ $story->name }}" class="w-full h-full object-cover" />
                                             </div>
                                         @else
