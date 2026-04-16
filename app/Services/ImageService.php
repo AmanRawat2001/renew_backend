@@ -6,19 +6,16 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Intervention\Image\Laravel\Facades\Image;
 use Intervention\Image\Format;
-
-
+use Intervention\Image\Laravel\Facades\Image;
 
 class ImageService
 {
     /**
      * Store an optimized WebP image without resizing
      *
-     * @param UploadedFile $file
-     * @param string $path Directory path within public disk
-     * @param int $quality Quality level (1-100, default 90)
+     * @param  string  $path  Directory path within public disk
+     * @param  int  $quality  Quality level (1-100, default 90)
      * @return string Path to stored image
      */
     public function storeOptimized(
@@ -33,15 +30,15 @@ class ImageService
             $encoded = $image->encodeUsingFormat(Format::WEBP, quality: $quality);
 
             // Generate unique filename
-            $filename = Str::uuid() . '.webp';
-            $storagePath = $path . '/' . $filename;
+            $filename = Str::uuid().'.webp';
+            $storagePath = $path.'/'.$filename;
 
             // Store to public disk
             Storage::disk('public')->put($storagePath, $encoded);
 
             return $storagePath;
         } catch (\Exception $e) {
-            Log::error('Image processing failed: ' . $e->getMessage(), [
+            Log::error('Image processing failed: '.$e->getMessage(), [
                 'file' => $file->getClientOriginalName(),
                 'path' => $path,
             ]);
@@ -54,8 +51,7 @@ class ImageService
     /**
      * Delete image from storage
      *
-     * @param string $path Path to image
-     * @return bool
+     * @param  string  $path  Path to image
      */
     public function delete(string $path): bool
     {
@@ -69,8 +65,7 @@ class ImageService
     /**
      * Get full URL for an image
      *
-     * @param string $path Path to image
-     * @return string|null
+     * @param  string  $path  Path to image
      */
     public function url(string $path): ?string
     {
@@ -78,6 +73,6 @@ class ImageService
             return null;
         }
 
-        return asset('storage/' . $path);
+        return asset('storage/'.$path);
     }
 }

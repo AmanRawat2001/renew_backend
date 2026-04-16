@@ -9,7 +9,6 @@ use App\Http\Requests\MainSlider\UpdateRequest;
 use App\Models\Slider;
 use App\Services\ImageService;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class MainSliderController extends Controller
@@ -35,7 +34,7 @@ class MainSliderController extends Controller
         $validated = $request->validated();
 
         if ($request->hasFile('image')) {
-            $imageService = new ImageService();
+            $imageService = new ImageService;
             $validated['image'] = $imageService->storeOptimized(
                 $request->file('image'),
                 'main_sliders'
@@ -55,7 +54,7 @@ class MainSliderController extends Controller
     {
         $validated = $request->validated();
         if ($request->hasFile('image')) {
-            $imageService = new ImageService();
+            $imageService = new ImageService;
             if ($main_slider->image) {
                 $imageService->delete($main_slider->image);
             }

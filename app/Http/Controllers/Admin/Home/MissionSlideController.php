@@ -9,7 +9,6 @@ use App\Http\Requests\MissionSlider\UpdateRequest;
 use App\Models\MissionSlide;
 use App\Services\ImageService;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class MissionSlideController extends Controller
@@ -31,7 +30,7 @@ class MissionSlideController extends Controller
         $validated = $request->validated();
 
         if ($request->hasFile('image')) {
-            $imageService = new ImageService();
+            $imageService = new ImageService;
             $validated['image'] = $imageService->storeOptimized(
                 $request->file('image'),
                 'mission_sliders'
@@ -53,7 +52,7 @@ class MissionSlideController extends Controller
         $validated = $request->validated();
 
         if ($request->hasFile('image')) {
-            $imageService = new ImageService();
+            $imageService = new ImageService;
             // Delete old image
             if ($mission_slider->image) {
                 $imageService->delete($mission_slider->image);

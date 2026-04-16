@@ -42,5 +42,5 @@ return [
         'decodeAnimation' => true,
         'backgroundColor' => 'ffffff',
         'strip' => true,  // Remove metadata for better optimization and security
-    ]
+    ],
 ];

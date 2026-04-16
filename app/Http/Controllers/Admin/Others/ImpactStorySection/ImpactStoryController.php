@@ -39,7 +39,7 @@ class ImpactStoryController extends Controller
         $validated = $request->validated();
 
         if ($request->hasFile('image')) {
-            $imageService = new ImageService();
+            $imageService = new ImageService;
             $validated['image'] = $imageService->storeOptimized(
                 $request->file('image'),
                 'impact_stories'
@@ -67,7 +67,7 @@ class ImpactStoryController extends Controller
         $validated = $request->validated();
 
         if ($request->hasFile('image')) {
-            $imageService = new ImageService();
+            $imageService = new ImageService;
             if ($impact_story->image) {
                 $imageService->delete($impact_story->image);
             }
@@ -91,7 +91,7 @@ class ImpactStoryController extends Controller
     public function destroy(ImpactStory $impact_story): RedirectResponse
     {
         if ($impact_story->image) {
-            $imageService = new ImageService();
+            $imageService = new ImageService;
             $imageService->delete($impact_story->image);
         }
 

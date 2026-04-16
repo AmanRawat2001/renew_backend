@@ -9,7 +9,6 @@ use App\Http\Requests\FeatureCard\UpdateRequest;
 use App\Models\FeatureCard;
 use App\Services\ImageService;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class FeatureCardController extends Controller
@@ -35,7 +34,7 @@ class FeatureCardController extends Controller
         $validated = $request->validated();
 
         if ($request->hasFile('image')) {
-            $imageService = new ImageService();
+            $imageService = new ImageService;
             $validated['image'] = $imageService->storeOptimized(
                 $request->file('image'),
                 'other_feature_cards'
@@ -58,7 +57,7 @@ class FeatureCardController extends Controller
         $validated = $request->validated();
 
         if ($request->hasFile('image')) {
-            $imageService = new ImageService();
+            $imageService = new ImageService;
             if ($other_feature_card->image) {
                 $imageService->delete($other_feature_card->image);
             }
