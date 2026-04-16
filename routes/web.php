@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\Home\HomeController;
 use App\Http\Controllers\Admin\Home\ImpactController;
 use App\Http\Controllers\Admin\Home\MissionSlideController;
 use App\Http\Controllers\Admin\Home\SliderController;
+use App\Http\Controllers\Admin\Miscellaneous\MiscellaneousController;
 use App\Http\Controllers\Admin\Others\ContentSection\ContentSectionController as OthersContentSectionController;
 use App\Http\Controllers\Admin\Others\FeatureCard\FeatureCardController as OthersFeatureCardController;
 use App\Http\Controllers\Admin\Others\Impact\ImpactController as OthersImpactController;
@@ -68,6 +69,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/publications', [PublicationController::class, 'index'])->name('publications');
         Route::get('/about-us', [AboutUsController::class, 'index'])->name('about_us');
         Route::get('/get-involved', [GetInvolvedController::class, 'index'])->name('get_involved');
+        Route::resource('miscellaneous', MiscellaneousController::class);
     });
 
 });
