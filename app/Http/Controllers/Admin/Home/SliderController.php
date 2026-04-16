@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Slider\StoreRequest;
 use App\Http\Requests\Slider\UpdateRequest;
 use App\Models\Slider;
+use App\Services\ImageService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
@@ -30,7 +31,11 @@ class SliderController extends Controller
         $validated = $request->validated();
 
         if ($request->hasFile('image')) {
-            $validated['image'] = $request->file('image')->store('sliders', 'public');
+            $imageService = new ImageService();
+            $validated['image'] = $imageService->storeOptimized(
+                $request->file('image'),
+                'sliders'
+            );
         }
         $validated['page'] = SitePage::HOME->value;
         Slider::create($validated);
@@ -47,10 +52,14 @@ class SliderController extends Controller
     {
         $validated = $request->validated();
         if ($request->hasFile('image')) {
+            $imageService = new ImageService();
             if ($slider->image) {
-                Storage::disk('public')->delete($slider->image);
+                $imageService->delete($slider->image);
             }
-            $validated['image'] = $request->file('image')->store('sliders', 'public');
+            $validated['image'] = $imageService->storeOptimized(
+                $request->file('image'),
+                'sliders'
+            );
         }
 
         $validated['page'] = SitePage::HOME->value;

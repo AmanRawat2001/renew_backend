@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ImpactStory\StoreRequest;
 use App\Http\Requests\ImpactStory\UpdateRequest;
 use App\Models\ImpactStory;
+use App\Services\ImageService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
@@ -38,7 +39,11 @@ class ImpactStoryController extends Controller
         $validated = $request->validated();
 
         if ($request->hasFile('image')) {
-            $validated['image'] = $request->file('image')->store('impact_stories', 'public');
+            $imageService = new ImageService();
+            $validated['image'] = $imageService->storeOptimized(
+                $request->file('image'),
+                'impact_stories'
+            );
         }
 
         ImpactStory::create($validated);
@@ -62,10 +67,14 @@ class ImpactStoryController extends Controller
         $validated = $request->validated();
 
         if ($request->hasFile('image')) {
+            $imageService = new ImageService();
             if ($impact_story->image) {
-                Storage::disk('public')->delete($impact_story->image);
+                $imageService->delete($impact_story->image);
             }
-            $validated['image'] = $request->file('image')->store('impact_stories', 'public');
+            $validated['image'] = $imageService->storeOptimized(
+                $request->file('image'),
+                'impact_stories'
+            );
         } else {
             // Remove image from validated data if no file was uploaded
             unset($validated['image']);
@@ -81,8 +90,9 @@ class ImpactStoryController extends Controller
      */
     public function destroy(ImpactStory $impact_story): RedirectResponse
     {
-        if ($impact_story->image && Storage::disk('public')->exists($impact_story->image)) {
-            Storage::disk('public')->delete($impact_story->image);
+        if ($impact_story->image) {
+            $imageService = new ImageService();
+            $imageService->delete($impact_story->image);
         }
 
         $impact_story->delete();
